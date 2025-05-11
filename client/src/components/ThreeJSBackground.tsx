@@ -32,13 +32,13 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     containerRef.current.appendChild(renderer.domElement);
 
-    // Enhanced molecule colors with richer palette
+    // Enhanced molecule colors with vibrant palette that matches the hero design
     const colors = [
-      new THREE.Color(0x1a55b3),  // Primary Blue
-      new THREE.Color(0x0c4a9e),  // Darker Blue
-      new THREE.Color(0x4180d4),  // Lighter Blue
-      new THREE.Color(0x5c93e2),  // Light Blue
-      new THREE.Color(0x85b0ee)   // Very Light Blue
+      new THREE.Color(0x3b82f6),  // Blue-500
+      new THREE.Color(0x2563eb),  // Blue-600
+      new THREE.Color(0x1d4ed8),  // Blue-700
+      new THREE.Color(0x60a5fa),  // Blue-400
+      new THREE.Color(0x93c5fd)   // Blue-300
     ];
 
     // Groups
@@ -166,9 +166,9 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
           
           const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
           const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0xffffff,
+            color: 0x4d9fff,
             transparent: true,
-            opacity: 0.4
+            opacity: 0.6
           });
           
           const line = new THREE.Line(lineGeometry, lineMaterial);
@@ -190,11 +190,11 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         const endAtom = atoms[connection.userData.endIdx];
         
         // Create small particles
-        const particleGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+        const particleGeometry = new THREE.SphereGeometry(0.1, 8, 8);
         const particleMaterial = new THREE.MeshBasicMaterial({
-          color: 0xffffff,
+          color: 0x60a5fa, // Bright blue particle
           transparent: true,
-          opacity: 0.7
+          opacity: 0.9
         });
         
         const particle = new THREE.Mesh(particleGeometry, particleMaterial);
