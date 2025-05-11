@@ -63,7 +63,7 @@ export default function HeroSection() {
             >
               <Button 
                 size="lg" 
-                className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-6 py-5 text-base transition-all duration-300"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-5 text-base transition-all duration-300"
                 onClick={() => scrollToSection("products")}
               >
                 LEARN MORE
@@ -72,7 +72,7 @@ export default function HeroSection() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border border-amber-500/70 bg-transparent text-amber-500 hover:bg-amber-500/10 font-medium px-6 py-5 text-base transition-all duration-300"
+                className="border border-blue-500/70 bg-transparent text-blue-400 hover:bg-blue-500/10 font-medium px-6 py-5 text-base transition-all duration-300"
                 onClick={() => scrollToSection("contact")}
               >
                 CONTACT US
@@ -82,22 +82,7 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Scroll indicator - made more visible */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <span className="text-blue-100 font-medium text-sm mb-2">Scroll to Discover</span>
-        <motion.div
-          className="bg-blue-500/30 rounded-full p-2 border border-blue-400/30"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-        >
-          <ArrowDown className="h-5 w-5 text-blue-100" />
-        </motion.div>
-      </motion.div>
+
     </section>
   );
 }
