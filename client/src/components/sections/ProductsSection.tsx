@@ -59,7 +59,7 @@ const products: Product[] = [
 
 export default function ProductsSection() {
   return (
-    <section id="products" className="py-24 bg-gray-50">
+    <section id="products" className="py-24 bg-background">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"

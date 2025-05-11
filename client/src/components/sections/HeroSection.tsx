@@ -18,7 +18,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Innovating Chemical <span className="text-accent-light">Sustainability</span>
+          Hexachem <span className="text-accent-light">Singapore</span>
         </motion.h1>
         
         <motion.p 
@@ -27,8 +27,8 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          A Singapore-based leader in chemical recycling and trading, 
-          bringing sustainable solutions to global industries since 2011.
+          A leading chemical trading company established in 2011, 
+          providing high-quality chemicals to industries across Asia, Middle East, and Africa.
         </motion.p>
         
         <motion.div 

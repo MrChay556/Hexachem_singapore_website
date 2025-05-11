@@ -39,7 +39,7 @@ const industries: Industry[] = [
 
 export default function IndustriesSection() {
   return (
-    <section id="industries" className="py-24 bg-white">
+    <section id="industries" className="py-24 bg-card/50">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"

@@ -38,7 +38,7 @@ export default function Navbar() {
   return (
     <header className={cn(
       "fixed w-full z-50 transition-all duration-300",
-      isScrolled ? "bg-white shadow-md py-3" : "bg-white/80 backdrop-blur-md py-4"
+      isScrolled ? "bg-card shadow-md py-3" : "bg-card/90 backdrop-blur-md py-4"
     )}>
       <div className="container mx-auto px-4">
         <nav className="flex justify-between items-center">
@@ -66,7 +66,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className="text-gray-700 hover:text-primary font-medium transition-colors"
+                className="text-gray-300 hover:text-primary font-medium transition-colors"
               >
                 {link.name}
               </a>
