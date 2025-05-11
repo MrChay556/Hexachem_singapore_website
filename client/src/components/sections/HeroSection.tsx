@@ -63,8 +63,7 @@ export default function HeroSection() {
                 
                 <Button 
                   size="lg" 
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/20 font-bold px-8 py-6 text-base"
+                  className="bg-white text-primary hover:bg-white/90 font-bold px-8 py-6 text-base"
                   onClick={() => scrollToSection("contact")}
                 >
                   Contact Us
