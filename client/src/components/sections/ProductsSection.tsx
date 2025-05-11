@@ -110,12 +110,14 @@ export default function ProductsSection() {
                       </Badge>
                     ))}
                   </div>
-                  <a
-                    href={`#${product.id}`} 
+                  <button
+                    onClick={() => {
+                      document.getElementById(product.id)?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="text-primary font-semibold hover:text-primary-dark flex items-center cursor-pointer"
                   >
                     Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
+                  </button>
                 </CardContent>
               </Card>
             </motion.div>
