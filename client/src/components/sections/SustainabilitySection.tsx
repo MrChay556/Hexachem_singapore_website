@@ -14,25 +14,25 @@ interface Metric {
 const metrics: Metric[] = [
   {
     id: "recycled-metric",
-    value: 85,
+    value: 80,
     suffix: "%",
     description: "Waste reduction through our advanced recycling processes"
   },
   {
     id: "energy-metric",
-    value: 40,
+    value: 35,
     suffix: "%",
     description: "Less energy consumption compared to traditional methods"
   },
   {
     id: "carbon-metric",
-    value: 12,
+    value: 15,
     suffix: "K",
     description: "Tons of carbon emissions reduced annually"
   },
   {
     id: "projects-metric",
-    value: 25,
+    value: 20,
     suffix: "+",
     description: "Active sustainability research projects"
   }
@@ -96,8 +96,9 @@ export default function SustainabilitySection() {
             >
               <h3 className="text-2xl font-bold mb-6">Eco-Conscious Processes</h3>
               <p className="text-white/80 mb-8">
-                We've developed proprietary chemical recycling processes that minimize waste, 
-                reduce energy consumption, and utilize renewable resources wherever possible.
+                Hexachem has developed innovative chemical recycling technology that significantly
+                reduces waste, minimizes energy consumption, and leverages sustainable practices
+                to create a positive environmental impact.
               </p>
             </motion.div>
             
@@ -132,7 +133,7 @@ export default function SustainabilitySection() {
                 className="bg-white text-primary hover:bg-gray-100 font-semibold"
                 onClick={() => scrollToSection("contact")}
               >
-                Learn About Our Blue Initiatives
+                Learn About Our Sustainable Initiatives
               </Button>
             </motion.div>
           </div>

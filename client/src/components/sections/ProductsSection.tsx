@@ -73,8 +73,8 @@ export default function ProductsSection() {
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We offer a comprehensive range of chemical products and recycling 
-            solutions tailored to meet the specific needs of various industries.
+            Hexachem offers premium chemical products and solutions tailored for 
+            diverse industries including coatings, adhesives, plastics, and automotive sectors.
           </p>
         </motion.div>
         
