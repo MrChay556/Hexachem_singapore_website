@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <section 
       id="home" 
-      className="relative h-screen flex items-center justify-center bg-primary overflow-hidden"
+      className="relative h-screen flex items-center justify-center bg-gradient-primary overflow-hidden"
     >
       <ThreeJSBackground canvasId="molecule-animation" />
       
@@ -18,7 +18,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Hexachem <span className="text-accent-light">Singapore</span>
+          Hexachem Singapore
         </motion.h1>
         
         <motion.p 

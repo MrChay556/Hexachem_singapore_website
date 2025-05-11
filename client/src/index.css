@@ -47,9 +47,9 @@
   --card-foreground: 210 40% 98%;
   --border: 213 28% 20%;
   --input: 213 28% 20%;
-  --primary: 213 68% 33%;
-  --primary-light: 213 74% 42%;
-  --primary-dark: 213 80% 27%;
+  --primary: 215 60% 28%;
+  --primary-light: 215 55% 35%;
+  --primary-dark: 215 65% 20%;
   --primary-foreground: 210 40% 98%;
   --secondary: 196 80% 30%;
   --secondary-light: 196 75% 40%;
@@ -61,7 +61,7 @@
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
-  --ring: 213 68% 33%;
+  --ring: 215 60% 28%;
 }
 
 @layer base {
@@ -80,7 +80,7 @@
 }
 
 .bg-gradient-primary {
-  @apply bg-gradient-to-r from-[#1F4B8A] to-[#1A6AA2];
+  @apply bg-gradient-to-r from-[#1a4679] to-[#2a5188];
 }
 
 .card-hover {

@@ -28,8 +28,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
 
     // Molecule colors
     const colors = [
-      new THREE.Color(0x1F4B8A), // Deep Navy
-      new THREE.Color(0x1A6AA2), // Royal Blue
+      new THREE.Color(0x1a4679), // Deep Navy
+      new THREE.Color(0x2a5188), // Royal Blue
       new THREE.Color(0x0EA5E9)  // Sky blue
     ];
 
