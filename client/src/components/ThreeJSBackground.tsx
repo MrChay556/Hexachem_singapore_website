@@ -110,7 +110,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         const material = new THREE.MeshBasicMaterial({
           color: atomColor,
           transparent: true,
-          opacity: 0.85
+          opacity: 0.3
         });
         
         const atom = new THREE.Mesh(geometry, material);
@@ -168,7 +168,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
           const lineMaterial = new THREE.LineBasicMaterial({
             color: 0x60a5fa,
             transparent: true,
-            opacity: 0.7
+            opacity: 0.2
           });
           
           const line = new THREE.Line(lineGeometry, lineMaterial);
@@ -194,7 +194,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         const particleMaterial = new THREE.MeshBasicMaterial({
           color: 0x60a5fa, // Bright blue particle
           transparent: true,
-          opacity: 0.9
+          opacity: 0.25
         });
         
         const particle = new THREE.Mesh(particleGeometry, particleMaterial);
