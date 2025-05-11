@@ -16,44 +16,44 @@ const products: Product[] = [
   {
     id: "alcohols",
     title: "Alcohols",
-    description: "Premium-grade alcohols including Iso Propyl Alcohol (IPA), n-Butanol, Methanol, and Ethanol for various industrial applications.",
-    image: "https://pixabay.com/get/g6c8865397059929aae8312b57b221d10bf8a415f24867db050303059ead9c364cfc9902306ee3b12b1aa3fda5514c247a41fe568a9016c1c1c782d95075d2383_1280.jpg",
+    description: "Premium-grade alcohols including Isopropyl Alcohol (IPA), n-Butanol, Methanol, and Ethanol for various industrial applications.",
+    image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
     tags: ["Chemical", "Industrial"]
   },
   {
     id: "aromatics",
-    title: "Aromatics & Aliphatics",
-    description: "High-quality aromatic chemicals including Toluene, Xylene, and aliphatic solutions for coatings, plastics, and other industrial needs.",
-    image: "https://pixabay.com/get/ge866de1873d38a091e9f27091bea05a6e3488036169ac8f1157daa8d50494e5145a193cd130ebe8b475a7f9afdf65c4b20a0c54a234a224356395914223a1d9a_1280.jpg",
-    tags: ["Aromatics", "Aliphatics"]
+    title: "Aromatics",
+    description: "High-quality aromatic chemicals including Toluene, Xylene, and Benzene for coatings, plastics, and pharmaceutical applications.",
+    image: "https://images.unsplash.com/photo-1614935151651-0bea6508db74?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    tags: ["Aromatics", "Chemical"]
   },
   {
-    id: "monomers",
-    title: "Monomers & Polymers",
-    description: "Specialized monomers and polymers for manufacturing, adhesives, and industrial applications to ensure high product quality.",
+    id: "aliphatics",
+    title: "Aliphatics",
+    description: "Premium aliphatic hydrocarbons including Hexane, Heptane, and specialty aliphatic solvents for industrial applications.",
     image: "https://images.unsplash.com/photo-1616458964840-5108e4d3adb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Polymer", "Chemical"]
+    tags: ["Aliphatics", "Chemical"]
   },
   {
     id: "glycols",
-    title: "Glycols & Ketones",
-    description: "Premium glycols and ketones for diverse industrial applications including MEG, DEG, TEG, and Acetone solutions.",
+    title: "Glycols",
+    description: "High-quality glycols including Mono Ethylene Glycol (MEG), Di Ethylene Glycol (DEG), and Tri Ethylene Glycol (TEG).",
     image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Glycols", "Ketones"]
+    tags: ["Glycols", "Industrial"]
+  },
+  {
+    id: "ketones",
+    title: "Ketones & Esters",
+    description: "Premium ketones including Acetone, MEK, and MIBK, along with specialty esters for industrial solvent applications.",
+    image: "https://images.unsplash.com/photo-1629461461658-d7ec10b73161?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    tags: ["Ketones", "Esters"]
   },
   {
     id: "amines",
-    title: "Amines & Esters",
-    description: "High-quality amine chemicals including MEA, DEA, TEA and specialty esters for various industrial processes.",
-    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Amines", "Chemicals"]
-  },
-  {
-    id: "automotive",
-    title: "Automotive Products",
-    description: "Specialized automotive chemical solutions including brake fluids, antifreeze, and engine oil additives for optimal performance.",
-    image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Automotive", "Chemicals"]
+    title: "Amines",
+    description: "High-quality amine chemicals including Mono Ethanol Amine (MEA), Di Ethanol Amine (DEA), and Tri Ethanol Amine (TEA).",
+    image: "https://images.unsplash.com/photo-1581093458791-9cd6747f5948?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    tags: ["Amines", "Chemical"]
   }
 ];
 
@@ -73,8 +73,8 @@ export default function ProductsSection() {
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Hexachem offers premium chemical products and solutions tailored for 
-            diverse industries including coatings, adhesives, plastics, and automotive sectors.
+            Hexachem offers high-quality chemical products including alcohols, aromatics, aliphatics, 
+            glycols, ketones, esters, and amines for various industrial applications.
           </p>
         </motion.div>
         
@@ -110,7 +110,7 @@ export default function ProductsSection() {
                     ))}
                   </div>
                   <button 
-                    onClick={() => scrollToSection("contact")}
+                    onClick={() => scrollToSection("products")}
                     className="text-primary font-semibold hover:text-primary-dark flex items-center"
                   >
                     Learn More <ArrowRight className="ml-2 h-4 w-4" />
