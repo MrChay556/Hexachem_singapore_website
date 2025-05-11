@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section 
       id="home" 
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-primary-dark to-primary"
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#0c2d5e] to-[#1a4679]"
     >
       {/* Positioned in the center of the hero section */}
       <div className="absolute inset-0 flex items-center justify-center z-0">
@@ -67,7 +67,7 @@ export default function HeroSection() {
               >
                 <Button 
                   size="lg" 
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl rounded-full group"
+                  className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl rounded-full group"
                   onClick={() => scrollToSection("products")}
                 >
                   Explore Our Products 
@@ -117,10 +117,10 @@ export default function HeroSection() {
             >
               {/* Product Cards with glass effect but no blur */}
               <motion.div 
-                className="bg-blue-900/30 p-7 rounded-2xl border border-blue-500/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
+                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
                 whileHover={{ y: -12, scale: 1.03 }}
               >
-                <div className="p-4 rounded-full bg-gradient-to-br from-blue-500/40 to-blue-700/40 mb-5 shadow-inner">
+                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
                   <FlaskRound className="w-10 h-10 text-blue-100" />
                 </div>
                 <span className="text-white font-bold text-xl">Alcohols</span>
@@ -131,10 +131,10 @@ export default function HeroSection() {
               </motion.div>
               
               <motion.div 
-                className="bg-blue-900/30 p-7 rounded-2xl border border-blue-500/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
+                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
                 whileHover={{ y: -12, scale: 1.03 }}
               >
-                <div className="p-4 rounded-full bg-gradient-to-br from-blue-500/40 to-blue-700/40 mb-5 shadow-inner">
+                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
                   <Droplets className="w-10 h-10 text-blue-100" />
                 </div>
                 <span className="text-white font-bold text-xl">Aromatics</span>
@@ -145,10 +145,10 @@ export default function HeroSection() {
               </motion.div>
               
               <motion.div 
-                className="bg-blue-900/30 p-7 rounded-2xl border border-blue-500/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
+                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
                 whileHover={{ y: -12, scale: 1.03 }}
               >
-                <div className="p-4 rounded-full bg-gradient-to-br from-blue-500/40 to-blue-700/40 mb-5 shadow-inner">
+                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
                   <Beaker className="w-10 h-10 text-blue-100" />
                 </div>
                 <span className="text-white font-bold text-xl">Glycols</span>
@@ -159,10 +159,10 @@ export default function HeroSection() {
               </motion.div>
               
               <motion.div 
-                className="bg-blue-900/30 p-7 rounded-2xl border border-blue-500/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
+                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
                 whileHover={{ y: -12, scale: 1.03 }}
               >
-                <div className="p-4 rounded-full bg-gradient-to-br from-blue-500/40 to-blue-700/40 mb-5 shadow-inner">
+                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
                   <Atom className="w-10 h-10 text-blue-100" />
                 </div>
                 <span className="text-white font-bold text-xl">Amines</span>
