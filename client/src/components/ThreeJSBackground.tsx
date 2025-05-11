@@ -17,8 +17,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
 
     // Create scene
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    camera.position.z = 20;
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    camera.position.z = 30;
 
     // Create renderer with transparent background
     const renderer = new THREE.WebGLRenderer({ 
@@ -35,180 +35,182 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     const animationGroup = new THREE.Group();
     scene.add(animationGroup);
 
-    // Simple, elegant color scheme with blue tones
-    const colors = [
-      new THREE.Color(0x2563eb),  // Blue-600
-      new THREE.Color(0x3b82f6),  // Blue-500
+    // Chemical-themed color scheme with blue tones
+    const moleculeColors = [
+      new THREE.Color(0x1d4ed8),  // Deep blue for water molecules
+      new THREE.Color(0x3b82f6),  // Blue for basic molecules
+    ];
+    
+    // Different colors for different chemical bonds
+    const bondColors = [
+      new THREE.Color(0x60a5fa),  // Lighter blue for single bonds
+      new THREE.Color(0x93c5fd),  // Very light blue for energized molecules
     ];
 
-    // Create a raycaster for mouse interaction
-    const raycaster = new THREE.Raycaster();
+    // Mouse interaction variables
     const mouse = new THREE.Vector2();
     let mousePosition = new THREE.Vector3();
     
-    // Track dynamic connections that respond to mouse movement
-    const dynamicLines: THREE.Line[] = [];
-    const dynamicLinesGroup = new THREE.Group();
-    animationGroup.add(dynamicLinesGroup);
+    // Create chemical compound structures
+    const molecules: THREE.Group[] = [];
+    const bonds: THREE.Line[] = [];
+    const compoundCount = 8; // Create several chemical compounds
 
-    // Create elegant flowing particles system
-    const particles: THREE.Mesh[] = [];
-    const particlesCount = 120;  // Reduced particle count for a cleaner look
-    
-    // Create a field of particles that will move in a wavy pattern
-    for (let i = 0; i < particlesCount; i++) {
-      // Create a small sphere with random size
-      const size = 0.05 + Math.random() * 0.1; // Smaller particles
-      const geometry = new THREE.SphereGeometry(size, 12, 12);
+    // Create chemical structures that represent actual molecules
+    function createChemicalCompound(position: THREE.Vector3, size: number, complexity: number) {
+      const compound = new THREE.Group();
+      compound.position.copy(position);
       
-      // Select a color from our palette
-      const color = colors[Math.floor(Math.random() * colors.length)];
+      // Create a molecular structure based on common chemical arrangements
+      // Complexity determines how many atoms in the structure
+      const atomPositions: THREE.Vector3[] = [];
+      const atomCount = 3 + Math.floor(Math.random() * complexity);
       
-      // Create a material with transparency
-      const material = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 0.2 + Math.random() * 0.3 // More subtle opacity
+      // Create center atom
+      atomPositions.push(new THREE.Vector3(0, 0, 0));
+      
+      // Add surrounding atoms in a 3D arrangement
+      if (complexity <= 4) {
+        // Simple tetrahedral structure (like methane CH4)
+        const tetrahedralAngles = [
+          new THREE.Vector3(1, 1, 1).normalize(),
+          new THREE.Vector3(-1, -1, 1).normalize(),
+          new THREE.Vector3(1, -1, -1).normalize(),
+          new THREE.Vector3(-1, 1, -1).normalize()
+        ];
+        
+        for (let i = 0; i < Math.min(atomCount - 1, 4); i++) {
+          const pos = tetrahedralAngles[i].clone().multiplyScalar(size);
+          atomPositions.push(pos);
+        }
+      } else {
+        // More complex structure (like benzene ring)
+        // Create a ring in the XY plane
+        const ringAtomCount = Math.min(6, atomCount - 1);
+        for (let i = 0; i < ringAtomCount; i++) {
+          const angle = (Math.PI * 2 / ringAtomCount) * i;
+          const x = Math.cos(angle) * size;
+          const y = Math.sin(angle) * size;
+          atomPositions.push(new THREE.Vector3(x, y, 0));
+        }
+        
+        // Add some atoms above/below the ring for 3D effect
+        if (atomCount > 7) {
+          atomPositions.push(new THREE.Vector3(0, 0, size));
+          atomPositions.push(new THREE.Vector3(0, 0, -size));
+        }
+      }
+      
+      // Create atoms (spheres) for each position
+      const atoms: THREE.Mesh[] = [];
+      atomPositions.forEach((pos, idx) => {
+        // First atom is usually larger (carbon or central atom)
+        const atomSize = idx === 0 ? size * 0.4 : size * 0.3;
+        const geometry = new THREE.SphereGeometry(atomSize, 16, 16);
+        
+        // Choose color based on position (simulating different elements)
+        const color = idx === 0 ? 
+          moleculeColors[0] : 
+          moleculeColors[Math.floor(Math.random() * moleculeColors.length)];
+        
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.3 + Math.random() * 0.3
+        });
+        
+        const atom = new THREE.Mesh(geometry, material);
+        atom.position.copy(pos);
+        
+        // Animation parameters
+        atom.userData = {
+          originalPosition: pos.clone(),
+          phase: Math.random() * Math.PI * 2,
+          frequency: 0.2 + Math.random() * 0.2,
+          amplitude: size * 0.05,
+          element: idx === 0 ? 'C' : (Math.random() > 0.5 ? 'O' : 'H'),
+          originalColor: color.clone()
+        };
+        
+        compound.add(atom);
+        atoms.push(atom);
       });
       
-      // Create the particle
-      const particle = new THREE.Mesh(geometry, material);
+      // Create bonds between atoms
+      for (let i = 1; i < atoms.length; i++) {
+        // Connect each atom to the center atom
+        createBond(atoms[0], atoms[i], compound);
+        
+        // Create some bonds between outer atoms for ring structures
+        if (complexity > 4 && i < atoms.length - 1 && i % 2 === 1) {
+          createBond(atoms[i], atoms[i + 1], compound);
+        }
+      }
       
-      // Position within a spherical field
-      const radius = 12 + Math.random() * 8;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.random() * Math.PI;
-      
-      particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
-      particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
-      particle.position.z = radius * Math.cos(phi) - 10; // Offset to bring closer to camera
-      
-      // Store animation parameters
-      particle.userData = {
-        originalPosition: particle.position.clone(),
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.1 + Math.random() * 0.3, // Slower movement for a calmer effect
-        amplitude: 0.2 + Math.random() * 0.3, // Less movement
-        originalColor: color.clone(),
-        originalSize: size
+      // Store animation parameters for the compound
+      compound.userData = {
+        rotationAxis: new THREE.Vector3(
+          Math.random() - 0.5,
+          Math.random() - 0.5,
+          Math.random() - 0.5
+        ).normalize(),
+        rotationSpeed: 0.1 + Math.random() * 0.2,
+        originalPosition: position.clone(),
+        driftPhase: Math.random() * Math.PI * 2,
+        driftSpeed: 0.1 + Math.random() * 0.1,
+        driftAmplitude: 0.5 + Math.random() * 0.5
       };
       
-      // Add to scene and store reference
-      animationGroup.add(particle);
-      particles.push(particle);
+      molecules.push(compound);
+      animationGroup.add(compound);
+      
+      return compound;
     }
     
-    // Create connecting lines for a network effect
-    const lines: THREE.Line[] = [];
-    const lineCount = 50;  // Fewer connections for a cleaner look
-    
-    for (let i = 0; i < lineCount; i++) {
-      // Select two random particles to connect, but only if they're close enough
-      const p1Index = Math.floor(Math.random() * particles.length);
-      
-      // Find particles that are within a reasonable distance
-      const possibleConnections = particles
-        .map((p, idx) => ({ 
-          idx, 
-          distance: particles[p1Index].position.distanceTo(p.position) 
-        }))
-        .filter(c => c.idx !== p1Index && c.distance < 10)
-        .sort((a, b) => a.distance - b.distance);
-      
-      // Skip if no nearby particles
-      if (possibleConnections.length === 0) continue;
-      
-      const p2Index = possibleConnections[0].idx;
-      
-      // Create the line connecting two particles
+    // Create a bond between two atoms
+    function createBond(atom1: THREE.Mesh, atom2: THREE.Mesh, parent: THREE.Group) {
       const points = [
-        particles[p1Index].position,
-        particles[p2Index].position
+        atom1.position,
+        atom2.position
       ];
       
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-      const lineMaterial = new THREE.LineBasicMaterial({ 
-        color: 0x3b82f6,
+      const bondColor = bondColors[Math.floor(Math.random() * bondColors.length)];
+      
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const material = new THREE.LineBasicMaterial({
+        color: bondColor,
         transparent: true,
-        opacity: 0.15 // More subtle opacity
+        opacity: 0.3
       });
       
-      const line = new THREE.Line(lineGeometry, lineMaterial);
-      
-      // Store references to connected particles
-      line.userData = {
-        pointIndex1: p1Index,
-        pointIndex2: p2Index
+      const bond = new THREE.Line(geometry, material);
+      bond.userData = {
+        atom1: atom1,
+        atom2: atom2,
+        originalColor: bondColor.clone()
       };
       
-      animationGroup.add(line);
-      lines.push(line);
+      parent.add(bond);
+      bonds.push(bond);
+      
+      return bond;
     }
     
-    // Function to create more visible dynamic connections from mouse to nearby particles
-    const createDynamicConnections = (mousePos: THREE.Vector3) => {
-      // Clear previous dynamic connections
-      dynamicLinesGroup.clear();
-      dynamicLines.length = 0;
+    // Create chemical compounds at random positions
+    for (let i = 0; i < compoundCount; i++) {
+      // Position randomly in 3D space with some separation
+      const x = (Math.random() - 0.5) * 30;
+      const y = (Math.random() - 0.5) * 15;
+      const z = (Math.random() - 0.5) * 10;
       
-      // Find particles within a wider range of the mouse
-      const maxConnectDistance = 7; // Larger connection distance
-      const maxConnections = 8;     // More connections for better visibility
+      const position = new THREE.Vector3(x, y, z);
+      const size = 1 + Math.random() * 1.5;
+      const complexity = 3 + Math.floor(Math.random() * 5); // 3-7 atoms
       
-      const nearbyParticles = particles
-        .map((particle, index) => ({
-          index,
-          distance: mousePos.distanceTo(particle.position)
-        }))
-        .filter(item => item.distance < maxConnectDistance)
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, maxConnections);
-      
-      // Create connections to nearby particles
-      nearbyParticles.forEach(nearby => {
-        const particle = particles[nearby.index];
-        
-        // Create line from mouse to particle
-        const points = [mousePos, particle.position];
-        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-        
-        // Fade opacity based on distance - more visible now
-        const opacity = 0.5 * (1 - nearby.distance / maxConnectDistance);
-        
-        const lineMaterial = new THREE.LineBasicMaterial({
-          color: 0x60a5fa,
-          transparent: true,
-          opacity: opacity
-        });
-        
-        const line = new THREE.Line(lineGeometry, lineMaterial);
-        dynamicLinesGroup.add(line);
-        dynamicLines.push(line);
-        
-        // More noticeable highlight for connected particles
-        const particleMaterial = particle.material as THREE.MeshBasicMaterial;
-        particleMaterial.color.set(0x93c5fd); // Lighter blue
-        particleMaterial.opacity = 0.7;       // More visible
-        particle.scale.set(1.5, 1.5, 1.5);    // Larger scale effect
-      });
-      
-      // Add a small pulsing effect to the mouse position
-      if (nearbyParticles.length > 0) {
-        const pulseGeometry = new THREE.SphereGeometry(0.2, 16, 16);
-        const pulseMaterial = new THREE.MeshBasicMaterial({
-          color: 0x2563eb,
-          transparent: true,
-          opacity: 0.5
-        });
-        
-        const pulse = new THREE.Mesh(pulseGeometry, pulseMaterial);
-        pulse.position.copy(mousePos);
-        
-        dynamicLinesGroup.add(pulse);
-      }
-    };
+      createChemicalCompound(position, size, complexity);
+    }
     
-    // Mouse move event handler
+    // Mouse move event handler for highlighting nearest molecule
     const onMouseMove = (event: MouseEvent) => {
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
@@ -220,10 +222,6 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       mouse.x = (x / rect.width) * 2 - 1;
       mouse.y = -(y / rect.height) * 2 + 1;
       
-      // Update the picking ray with the camera and mouse position
-      raycaster.setFromCamera(mouse, camera);
-      
-      // Project mouse into 3D space
       const vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
       vector.unproject(camera);
       
@@ -231,8 +229,41 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       const distance = -camera.position.z / dir.z;
       mousePosition = camera.position.clone().add(dir.multiplyScalar(distance));
       
-      // Create new dynamic connections
-      createDynamicConnections(mousePosition);
+      // Highlight nearest molecule to mouse position
+      let nearestMolecule = null;
+      let minDistance = Infinity;
+      
+      molecules.forEach(molecule => {
+        const dist = mousePosition.distanceTo(molecule.position);
+        if (dist < minDistance) {
+          minDistance = dist;
+          nearestMolecule = molecule;
+        }
+        
+        // Reset all molecules first
+        molecule.children.forEach(child => {
+          if (child instanceof THREE.Mesh) {
+            const material = child.material as THREE.MeshBasicMaterial;
+            material.opacity = 0.3 + Math.random() * 0.2;
+          } else if (child instanceof THREE.Line) {
+            const material = child.material as THREE.LineBasicMaterial;
+            material.opacity = 0.3;
+          }
+        });
+      });
+      
+      // Highlight the nearest molecule if it's close enough
+      if (nearestMolecule && minDistance < 10) {
+        nearestMolecule.children.forEach(child => {
+          if (child instanceof THREE.Mesh) {
+            const material = child.material as THREE.MeshBasicMaterial;
+            material.opacity = 0.8; // Make atoms more visible
+          } else if (child instanceof THREE.Line) {
+            const material = child.material as THREE.LineBasicMaterial;
+            material.opacity = 0.7; // Make bonds more visible
+          }
+        });
+      }
     };
     
     // Animation loop
@@ -243,59 +274,51 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       
       const time = clock.getElapsedTime();
       
-      // Update particles with gentle wave motion
-      particles.forEach(particle => {
-        const { originalPosition, phase, speed, amplitude } = particle.userData;
+      // Animate each molecular compound
+      molecules.forEach(molecule => {
+        const { 
+          rotationAxis, 
+          rotationSpeed,
+          originalPosition,
+          driftPhase,
+          driftSpeed,
+          driftAmplitude
+        } = molecule.userData;
         
-        // Make particles move in a gentle wave pattern
-        const waveX = Math.sin(time * 0.2 + phase) * amplitude;
-        const waveY = Math.cos(time * 0.15 + phase) * amplitude;
-        const waveZ = Math.sin(time * 0.25 + phase * 2) * amplitude;
+        // Rotate the molecule around its axis
+        molecule.rotateOnAxis(rotationAxis, rotationSpeed * 0.01);
         
-        particle.position.x = originalPosition.x + waveX;
-        particle.position.y = originalPosition.y + waveY;
-        particle.position.z = originalPosition.z + waveZ;
+        // Gentle floating motion
+        const driftX = Math.sin(time * driftSpeed + driftPhase) * driftAmplitude;
+        const driftY = Math.cos(time * driftSpeed + driftPhase * 2) * driftAmplitude;
         
-        // Very subtle opacity pulsation
-        const material = particle.material as THREE.MeshBasicMaterial;
-        material.opacity = 0.15 + (Math.sin(time * speed + phase) + 1) * 0.15;
+        molecule.position.x = originalPosition.x + driftX;
+        molecule.position.y = originalPosition.y + driftY;
+        
+        // Animate individual atoms within each molecule
+        molecule.children.forEach(child => {
+          if (child instanceof THREE.Mesh) {
+            const { 
+              originalPosition, 
+              phase, 
+              frequency, 
+              amplitude 
+            } = child.userData;
+            
+            // Vibration effect for atoms (subtle)
+            const vibrationX = Math.sin(time * frequency + phase) * amplitude;
+            const vibrationY = Math.cos(time * frequency + phase * 2) * amplitude;
+            const vibrationZ = Math.sin(time * frequency * 1.5 + phase) * amplitude;
+            
+            child.position.x = originalPosition.x + vibrationX;
+            child.position.y = originalPosition.y + vibrationY;
+            child.position.z = originalPosition.z + vibrationZ;
+          }
+        });
       });
       
-      // Update connecting lines to match particle positions
-      lines.forEach(line => {
-        const { pointIndex1, pointIndex2 } = line.userData;
-        
-        // Update line positions
-        const positions = line.geometry.attributes.position.array as Float32Array;
-        
-        // Start point
-        positions[0] = particles[pointIndex1].position.x;
-        positions[1] = particles[pointIndex1].position.y;
-        positions[2] = particles[pointIndex1].position.z;
-        
-        // End point
-        positions[3] = particles[pointIndex2].position.x;
-        positions[4] = particles[pointIndex2].position.y;
-        positions[5] = particles[pointIndex2].position.z;
-        
-        line.geometry.attributes.position.needsUpdate = true;
-      });
-      
-      // Update dynamic lines connected to mouse position
-      dynamicLines.forEach(line => {
-        const positions = line.geometry.attributes.position.array as Float32Array;
-        
-        // Update the mouse position endpoint
-        positions[0] = mousePosition.x;
-        positions[1] = mousePosition.y;
-        positions[2] = mousePosition.z;
-        
-        line.geometry.attributes.position.needsUpdate = true;
-      });
-      
-      // Very gentle rotation of the entire animation group
-      animationGroup.rotation.y = Math.sin(time * 0.05) * 0.1;
-      animationGroup.rotation.x = Math.sin(time * 0.04) * 0.05;
+      // Very subtle overall animation effect
+      animationGroup.rotation.y = Math.sin(time * 0.05) * 0.05;
       
       // Render scene
       renderer.render(scene, camera);
@@ -303,7 +326,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     
     animate();
     
-    // Register mouse event listeners
+    // Register mouse event listener
     window.addEventListener('mousemove', onMouseMove);
     
     // Handle window resize
@@ -331,19 +354,16 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       window.removeEventListener('mousemove', onMouseMove);
       
       // Dispose geometries and materials
-      particles.forEach(particle => {
-        particle.geometry.dispose();
-        (particle.material as THREE.Material).dispose();
-      });
-      
-      lines.forEach(line => {
-        line.geometry.dispose();
-        (line.material as THREE.Material).dispose();
-      });
-      
-      dynamicLines.forEach(line => {
-        line.geometry.dispose();
-        (line.material as THREE.Material).dispose();
+      molecules.forEach(molecule => {
+        molecule.children.forEach(child => {
+          if (child instanceof THREE.Mesh) {
+            child.geometry.dispose();
+            (child.material as THREE.Material).dispose();
+          } else if (child instanceof THREE.Line) {
+            child.geometry.dispose();
+            (child.material as THREE.Material).dispose();
+          }
+        });
       });
     };
   }, [canvasId]);
@@ -351,7 +371,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
   return <div 
     id={canvasId} 
     ref={containerRef} 
-    className="molecule-canvas absolute inset-0 cursor-help"
-    title="Move the mouse to interact with the particles"
+    className="molecule-canvas absolute inset-0"
+    title="Chemical compounds animation"
   ></div>;
 }
