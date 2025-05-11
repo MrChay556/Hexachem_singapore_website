@@ -66,7 +66,7 @@ export default function SustainabilitySection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Our Commitment to <span className="text-secondary-light">Sustainability</span>
+            Our Commitment to <span className="text-accent-light">Sustainability</span>
           </h2>
           <div className="w-24 h-1 bg-white mx-auto mb-6"></div>
           <p className="text-lg text-white/80 max-w-3xl mx-auto">
@@ -111,7 +111,7 @@ export default function SustainabilitySection() {
                   transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
                 >
                   <div 
-                    className="text-3xl font-bold text-secondary-light mb-2"
+                    className="text-3xl font-bold text-accent-light mb-2"
                     ref={el => metricRefs.current[metric.id] = el}
                   >
                     0{metric.suffix}
@@ -129,10 +129,10 @@ export default function SustainabilitySection() {
               transition={{ duration: 0.5, delay: 0.8 }}
             >
               <Button 
-                className="bg-white text-secondary hover:bg-gray-100 font-semibold"
+                className="bg-white text-primary hover:bg-gray-100 font-semibold"
                 onClick={() => scrollToSection("contact")}
               >
-                Learn About Our Green Initiatives
+                Learn About Our Blue Initiatives
               </Button>
             </motion.div>
           </div>
