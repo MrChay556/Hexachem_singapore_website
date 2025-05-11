@@ -73,8 +73,11 @@ export default function ProductsSection() {
                     ))}
                   </div>
                   <button
-                    onClick={() => handleOpenModal(product)}
-                    className="text-primary font-semibold hover:text-primary-dark flex items-center cursor-pointer"
+                    onClick={() => {
+                      console.log("Opening modal for:", product.title);
+                      handleOpenModal(product);
+                    }}
+                    className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark flex items-center cursor-pointer"
                   >
                     Learn More <ArrowRight className="ml-2 h-4 w-4" />
                   </button>

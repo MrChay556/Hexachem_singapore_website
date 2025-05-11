@@ -1,12 +1,4 @@
-import React from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import React, { useEffect } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 
@@ -34,9 +26,31 @@ interface ProductDetailModalProps {
 }
 
 export default function ProductDetailModal({ isOpen, onClose, product }: ProductDetailModalProps) {
+  useEffect(() => {
+    // Disable body scroll when modal is open
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+  
+  if (!isOpen) return null;
+  
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[700px] max-h-[85vh] relative p-0 overflow-hidden border-0">
+    <div className="fixed inset-0 z-50 flex items-start justify-center" onClick={onClose}>
+      {/* Backdrop */}
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+      
+      {/* Modal */}
+      <div 
+        className="relative bg-white rounded-lg shadow-xl w-full max-w-[700px] mt-10 max-h-[85vh] flex flex-col overflow-hidden z-50"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Fixed Header with Close Button */}
         <div className="sticky top-0 z-50 w-full">
           <div className="relative w-full h-48 bg-gradient-to-br from-primary/90 to-primary">
@@ -69,7 +83,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
         </div>
         
         {/* Scrollable Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(85vh-12rem)]">
+        <div className="p-6 overflow-y-auto" style={{maxHeight: 'calc(85vh - 12rem)'}}>
           <p className="text-gray-700 mb-6 text-lg">
             {product.description}
           </p>
@@ -125,7 +139,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
             ))}
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
