@@ -27,7 +27,7 @@ export default function HeroSection() {
             className="p-2"
           >
             <motion.h1 
-              className="text-6xl lg:text-7xl font-bold tracking-tight mb-4 text-white"
+              className="text-7xl lg:text-8xl font-bold tracking-tight mb-4 text-white"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, type: "spring", stiffness: 50 }}
@@ -35,11 +35,11 @@ export default function HeroSection() {
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-blue-100">
                 Hexachem
               </span>
-              <div className="w-24 h-1.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mt-3 mb-5"></div>
+              <div className="w-32 h-2 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mt-4 mb-6"></div>
             </motion.h1>
             
             <motion.p 
-              className="text-xl md:text-2xl font-light tracking-wide text-blue-100 mb-6"
+              className="text-2xl md:text-3xl font-light tracking-wide text-blue-100 mb-8"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -48,13 +48,13 @@ export default function HeroSection() {
             </motion.p>
             
             <motion.p 
-              className="text-base md:text-lg font-light text-blue-200/90 mb-10 max-w-lg leading-relaxed"
+              className="text-lg md:text-xl font-light text-blue-200/90 mb-12 max-w-xl leading-relaxed"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
               Leading chemical distribution company with operations across 
-              <span className="text-blue-100 font-normal"> Southeast Asia</span>, 
+              <span className="text-blue-100 font-semibold"> Southeast Asia</span>, 
               providing innovative solutions and quality products to diverse industries.
             </motion.p>
             
@@ -66,17 +66,17 @@ export default function HeroSection() {
             >
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium px-8 py-6 text-base tracking-wide shadow-lg shadow-blue-700/20 transition-all duration-300 rounded-md"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium px-10 py-7 text-lg tracking-wide shadow-lg shadow-blue-700/20 transition-all duration-300 rounded-md"
                 onClick={() => scrollToSection("products")}
               >
                 <span>LEARN MORE</span>
-                <ChevronRight className="ml-2 h-4 w-4" />
+                <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
               
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-2 border-blue-400/50 bg-blue-900/20 backdrop-blur-sm text-blue-100 hover:bg-blue-800/40 hover:border-blue-400/80 font-medium px-8 py-6 text-base tracking-wide transition-all duration-300 rounded-md"
+                className="border-2 border-blue-400/50 bg-blue-900/20 backdrop-blur-sm text-blue-100 hover:bg-blue-800/40 hover:border-blue-400/80 font-medium px-10 py-7 text-lg tracking-wide transition-all duration-300 rounded-md"
                 onClick={() => scrollToSection("contact")}
               >
                 CONTACT US
