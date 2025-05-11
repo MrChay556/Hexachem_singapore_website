@@ -60,9 +60,9 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
           </p>
         </div>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {product.tags.map(tag => (
-            <Badge key={tag} variant="outline" className="bg-primary/10 text-primary">
+            <Badge key={tag} variant="outline" className="bg-primary/10 text-primary border-primary/20">
               {tag}
             </Badge>
           ))}

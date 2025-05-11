@@ -165,7 +165,7 @@ export const productData: ProductCategory[] = [
     id: "glycols",
     title: "Glycols",
     description: "High-quality glycols for diverse industrial applications and manufacturing processes.",
-    image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    image: glycolsImage,
     tags: ["Glycols", "Industrial"],
     details: [
       {
@@ -210,7 +210,7 @@ export const productData: ProductCategory[] = [
     id: "ketones",
     title: "Ketones & Esters",
     description: "Premium ketones and esters for industrial solvent applications and chemical processes.",
-    image: "https://images.unsplash.com/photo-1629461461658-d7ec10b73161?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    image: ketonesImage,
     tags: ["Ketones", "Esters"],
     details: [
       {
@@ -266,7 +266,7 @@ export const productData: ProductCategory[] = [
     id: "amines",
     title: "Amines",
     description: "High-quality amine chemicals for various industrial processes and applications.",
-    image: "https://images.unsplash.com/photo-1581093458791-9cd6747f5948?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    image: aminesImage,
     tags: ["Amines", "Chemical"],
     details: [
       {
