@@ -82,6 +82,7 @@ export default function ProductsSection() {
           {products.map((product, index) => (
             <motion.div
               key={product.id}
+              id={product.id}
               className="card-hover"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -109,12 +110,12 @@ export default function ProductsSection() {
                       </Badge>
                     ))}
                   </div>
-                  <button 
-                    onClick={() => scrollToSection("products")}
-                    className="text-primary font-semibold hover:text-primary-dark flex items-center"
+                  <a
+                    href={`#${product.id}`} 
+                    className="text-primary font-semibold hover:text-primary-dark flex items-center cursor-pointer"
                   >
                     Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
+                  </a>
                 </CardContent>
               </Card>
             </motion.div>
