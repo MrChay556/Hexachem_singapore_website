@@ -55,54 +55,81 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     const connections: THREE.Line[] = [];
     const movingParticles: THREE.Mesh[] = [];
     
-    // Create the geometric pattern for the molecular complex
+    // Create a hexagonal benzene ring network - perfect for Hexachem
     const createComplexMolecular = () => {
-      // Create a base pattern using a hex grid layout with 3D positioning
-      // This will form a complex hexagonal lattice structure
+      const structures = [];
       
-      // Create central structure (hexagon-inspired arrangement)
-      const centralPoints = [];
-      const radius = 5; // Smaller radius to keep structure more compact
-      const height = 3; // Reduced height for a more centered view
-      
-      // Generate central hexagonal pattern points
-      for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 3) * i;
-        centralPoints.push(new THREE.Vector3(
-          radius * Math.cos(angle),
-          radius * Math.sin(angle),
-          (Math.random() - 0.5) * height
-        ));
-      }
-      
-      // Add a center point
-      centralPoints.push(new THREE.Vector3(0, 0, 0));
-      
-      // Add more complex structure around the hexagon
-      const totalPoints = 20; // Total atoms
-      const structurePoints = [...centralPoints];
-      
-      // Add additional atoms to create a more complex structure
-      for (let i = centralPoints.length; i < totalPoints; i++) {
-        // Position new atoms relative to existing ones
-        const referenceIdx = Math.floor(Math.random() * structurePoints.length);
-        const referencePoint = structurePoints[referenceIdx];
+      // Create multiple hexagonal rings arranged in a visually interesting pattern
+      const createHexagonalRing = (centerX: number, centerY: number, centerZ: number, size: number, rotation = 0) => {
+        const ringPoints = [];
+        const hexRadius = size;
         
-        // Create new position with smaller random offset for more centralized structure
-        const newPos = new THREE.Vector3(
-          referencePoint.x + (Math.random() - 0.5) * 3.5,
-          referencePoint.y + (Math.random() - 0.5) * 3.5,
-          referencePoint.z + (Math.random() - 0.5) * 2
-        );
+        // Create hexagon vertices
+        for (let i = 0; i < 6; i++) {
+          const angle = (Math.PI / 3) * i + rotation;
+          ringPoints.push(new THREE.Vector3(
+            centerX + hexRadius * Math.cos(angle),
+            centerY + hexRadius * Math.sin(angle),
+            centerZ + (Math.random() - 0.5) * 0.5
+          ));
+        }
         
-        structurePoints.push(newPos);
-      }
+        // Add all points to the structure
+        structures.push(...ringPoints);
+        
+        return ringPoints;
+      };
+      
+      // Create a network of connected hexagonal structures
+      // Primary ring at center
+      const mainRing = createHexagonalRing(0, 0, 0, 7);
+      
+      // Create surrounding rings
+      const ringPositions = [
+        { x: 11, y: 0, z: 0, size: 5, rotation: Math.PI / 6 },
+        { x: -11, y: 0, z: 0, size: 5, rotation: Math.PI / 4 },
+        { x: 6, y: 9, z: 0, size: 4, rotation: Math.PI / 5 },
+        { x: -6, y: 9, z: 0, size: 4, rotation: Math.PI / 2 },
+        { x: 6, y: -9, z: 0, size: 4, rotation: Math.PI / 3 },
+        { x: -6, y: -9, z: 0, size: 4, rotation: Math.PI / 7 }
+      ];
+      
+      const secondaryRings = ringPositions.map(pos => 
+        createHexagonalRing(pos.x, pos.y, pos.z, pos.size, pos.rotation)
+      );
+      
+      // Add some smaller connecting rings
+      const minorRingPositions = [
+        { x: 3.5, y: 4.5, z: 0, size: 2, rotation: Math.PI / 8 },
+        { x: -3.5, y: 4.5, z: 0, size: 2, rotation: Math.PI / 9 },
+        { x: 3.5, y: -4.5, z: 0, size: 2, rotation: Math.PI / 10 },
+        { x: -3.5, y: -4.5, z: 0, size: 2, rotation: Math.PI / 11 }
+      ];
+      
+      const tertiaryRings = minorRingPositions.map(pos => 
+        createHexagonalRing(pos.x, pos.y, pos.z, pos.size, pos.rotation)
+      );
+      
+      // Add connection nodes at strategic points
+      const connectionNodes = [
+        new THREE.Vector3(14, 5, 0),
+        new THREE.Vector3(-14, -5, 0),
+        new THREE.Vector3(12, -7, 0),
+        new THREE.Vector3(-12, 7, 0),
+        new THREE.Vector3(0, 12, 0),
+        new THREE.Vector3(0, -12, 0)
+      ];
+      
+      structures.push(...connectionNodes);
+      
+      // Get all the structure points
+      const structurePoints = structures;
       
       // Create atoms at each point with varying sizes
       structurePoints.forEach((point, index) => {
-        // Core atoms are larger
-        const isCore = index < centralPoints.length;
-        const size = isCore ? 0.4 + Math.random() * 0.2 : 0.2 + Math.random() * 0.25;
+        // Main rings have larger atoms
+        const isMainRing = index < mainRing.length;
+        const size = isMainRing ? 0.4 + Math.random() * 0.2 : 0.2 + Math.random() * 0.25;
         const atomColor = colors[Math.floor(Math.random() * colors.length)];
         
         // Create sphere for each atom
@@ -133,52 +160,72 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         atoms.push(atom);
       });
       
-      // Create bonds between atoms
-      for (let i = 0; i < atoms.length; i++) {
-        // Each atom will connect to 2-4 nearby atoms
-        const connectionsCount = Math.floor(2 + Math.random() * 2);
+      // Create more deliberate, structured bonds that form a clear hexagonal pattern
+      // First, connect atoms within each ring to form complete hexagons
+      const connectedPairs = new Set(); // Track connections to avoid duplicates
+      
+      // Helper to create a unique key for a pair of indices
+      const getPairKey = (a: number, b: number) => (a < b) ? `${a}-${b}` : `${b}-${a}`;
+      
+      // Helper to create connections
+      const createConnection = (fromIdx: number, toIdx: number) => {
+        const pairKey = getPairKey(fromIdx, toIdx);
+        if (connectedPairs.has(pairKey)) return; // Skip if already connected
         
-        for (let c = 0; c < connectionsCount; c++) {
-          // Find a nearby atom to connect to
-          const distances = atoms.map((atom, idx) => {
-            if (idx === i) return Infinity; // Don't connect to self
-            return atoms[i].position.distanceTo(atom.position);
-          });
-          
-          // Get index of one of the closest atoms, but add some randomness
-          // so it's not always the absolute closest
-          const sortedIndices = distances
-            .map((dist, idx) => ({ dist, idx }))
-            .sort((a, b) => a.dist - b.dist)
-            .map(item => item.idx);
-          
-          // Pick from the closest 5 atoms or fewer if not enough atoms
-          const pickRange = Math.min(5, sortedIndices.length);
-          if (pickRange <= 0) continue;
-          
-          const targetIdx = sortedIndices[Math.floor(Math.random() * pickRange)];
-          
-          // Create a line between atoms
-          const points = [
-            atoms[i].position,
-            atoms[targetIdx].position
-          ];
-          
-          const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-          const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x60a5fa,
-            transparent: true,
-            opacity: 0.15
-          });
-          
-          const line = new THREE.Line(lineGeometry, lineMaterial);
-          line.userData = {
-            startIdx: i,
-            endIdx: targetIdx
-          };
-          
-          linesGroup.add(line);
-          connections.push(line);
+        connectedPairs.add(pairKey);
+        
+        // Create a line between atoms
+        const points = [
+          atoms[fromIdx].position,
+          atoms[toIdx].position
+        ];
+        
+        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+        const lineMaterial = new THREE.LineBasicMaterial({
+          color: 0x60a5fa,
+          transparent: true,
+          opacity: 0.35 // Make lines more visible
+        });
+        
+        const line = new THREE.Line(lineGeometry, lineMaterial);
+        line.userData = {
+          startIdx: fromIdx,
+          endIdx: toIdx
+        };
+        
+        linesGroup.add(line);
+        connections.push(line);
+      };
+      
+      // Connect atoms in each ring to form hexagons
+      // Each atom in a hexagon connects to its two neighbors
+      for (let i = 0; i < atoms.length; i++) {
+        // Find closest two neighbors for rings
+        const distances = atoms.map((atom, idx) => {
+          if (idx === i) return Infinity; // Don't connect to self
+          return atoms[i].position.distanceTo(atom.position);
+        });
+        
+        const sortedIndices = distances
+          .map((dist, idx) => ({ dist, idx }))
+          .sort((a, b) => a.dist - b.dist)
+          .map(item => item.idx);
+        
+        // Connect to the two closest points to form ring segments
+        if (sortedIndices.length >= 2) {
+          createConnection(i, sortedIndices[0]);
+          createConnection(i, sortedIndices[1]);
+        }
+        
+        // Create connections between rings - connect to a third point if it's not too far
+        if (sortedIndices.length >= 3 && distances[sortedIndices[2]] < 10) {
+          createConnection(i, sortedIndices[2]);
+        }
+        
+        // Add some long-distance connections for network effect
+        if (Math.random() < 0.1 && sortedIndices.length > 5) {
+          const farIdx = sortedIndices[Math.floor(sortedIndices.length * 0.7 + Math.random() * 0.3)];
+          createConnection(i, farIdx);
         }
       }
       
