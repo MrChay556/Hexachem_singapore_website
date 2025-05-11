@@ -38,7 +38,7 @@ export default function Navbar() {
   return (
     <header className={cn(
       "fixed w-full z-50 transition-all duration-300",
-      isScrolled ? "bg-card shadow-md py-3" : "bg-card/90 backdrop-blur-md py-4"
+      isScrolled ? "bg-primary shadow-md py-3" : "bg-primary/95 backdrop-blur-md py-4"
     )}>
       <div className="container mx-auto px-4">
         <nav className="flex justify-between items-center">
@@ -50,10 +50,10 @@ export default function Navbar() {
             }}
             className="flex items-center space-x-2 z-50"
           >
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">H</span>
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+              <span className="text-primary font-bold text-xl">H</span>
             </div>
-            <span className="text-xl font-bold text-gray-800">Hexachem</span>
+            <span className="text-xl font-bold text-white">Hexachem</span>
           </a>
 
           {/* Desktop navigation */}
@@ -66,7 +66,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className="text-gray-300 hover:text-primary font-medium transition-colors"
+                className="text-white hover:text-accent-light font-medium transition-colors"
               >
                 {link.name}
               </a>
@@ -101,7 +101,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className="text-gray-700 hover:text-primary font-medium px-4 py-2 rounded-md hover:bg-gray-100"
+                className="text-white hover:text-accent-light font-medium px-4 py-2 rounded-md hover:bg-primary-dark"
               >
                 {link.name}
               </a>

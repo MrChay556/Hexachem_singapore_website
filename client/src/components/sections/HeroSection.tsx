@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <section 
       id="home" 
-      className="relative h-screen flex items-center justify-center bg-gradient-primary overflow-hidden"
+      className="relative h-screen flex items-center justify-center bg-primary overflow-hidden"
     >
       <ThreeJSBackground canvasId="molecule-animation" />
       
@@ -39,8 +39,8 @@ export default function HeroSection() {
         >
           <Button 
             size="lg" 
-            variant="secondary" 
-            className="bg-white text-primary hover:bg-gray-100 font-bold px-8 py-6 text-base"
+            variant="outline" 
+            className="bg-white/10 text-white border-white hover:bg-white/20 font-bold px-8 py-6 text-base"
             onClick={() => scrollToSection("products")}
           >
             Explore Products
