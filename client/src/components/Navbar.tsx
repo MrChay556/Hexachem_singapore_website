@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToSection } from "@/lib/utils";
+import hexachemLogo from "@/assets/images/hexachem-logo-v3.svg";
 
 interface NavLink {
   name: string;
@@ -48,12 +49,14 @@ export default function Navbar() {
               e.preventDefault();
               handleNavClick("home");
             }}
-            className="flex items-center space-x-2 z-50"
+            className="flex items-center z-50"
           >
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-              <span className="text-primary font-bold text-xl">H</span>
-            </div>
-            <span className="text-xl font-bold text-white">Hexachem</span>
+            <img 
+              src={hexachemLogo} 
+              alt="Hexachem Logo" 
+              className="h-10 md:h-12 transition-all duration-300"
+              style={{ filter: "drop-shadow(0px 1px 2px rgba(0,0,0,0.15))" }}
+            />
           </a>
 
           {/* Desktop navigation */}
@@ -101,7 +104,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className="text-white hover:text-accent-light font-medium px-4 py-2 rounded-md hover:bg-primary-dark"
+                className="text-primary hover:text-white font-medium px-4 py-2 rounded-md hover:bg-primary transition-colors"
               >
                 {link.name}
               </a>

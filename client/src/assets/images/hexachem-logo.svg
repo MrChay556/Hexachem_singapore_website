@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320" height="80" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient for logo area (optional, can be removed) -->
+  <rect width="320" height="80" rx="8" fill="url(#paint0_linear)" fill-opacity="0" />
+  
+  <!-- Icon: Hexagon with molecular structure -->
+  <g id="icon">
+    <!-- Outer Hexagon -->
+    <path d="M40 10L65 25V55L40 70L15 55V25L40 10Z" fill="url(#paint1_linear)" stroke="#1A55B3" stroke-width="1.5"/>
+    
+    <!-- Inner Molecular Structure -->
+    <circle cx="40" cy="25" r="4" fill="#1A55B3"/>
+    <circle cx="55" cy="40" r="4" fill="#1A55B3"/>
+    <circle cx="40" cy="55" r="4" fill="#1A55B3"/>
+    <circle cx="25" cy="40" r="4" fill="#1A55B3"/>
+    <circle cx="40" cy="40" r="6" fill="#1A55B3"/>
+    
+    <!-- Connecting Lines -->
+    <path d="M40 25L55 40L40 55L25 40L40 25Z" stroke="white" stroke-width="1.5"/>
+    <path d="M40 25L40 40" stroke="white" stroke-width="1.5"/>
+    <path d="M55 40L40 40" stroke="white" stroke-width="1.5"/>
+    <path d="M40 55L40 40" stroke="white" stroke-width="1.5"/>
+    <path d="M25 40L40 40" stroke="white" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Company Name: Hexachem -->
+  <g id="company-name">
+    <!-- "Hexa" Part -->
+    <path d="M85 30V50H90V42H100V50H105V30H100V37H90V30H85Z" fill="#1A55B3"/>
+    <path d="M110 30V50H125V45H115V42H123V37H115V35H125V30H110Z" fill="#1A55B3"/>
+    <path d="M135 35L130 30L126 34L131 38L126 42L130 46L135 41L140 46L144 42L139 38L144 34L140 30L135 35Z" fill="#1A55B3"/>
+    <path d="M150 30V50H155V42L161 50H168L160 40L167 30H161L155 38V30H150Z" fill="#1A55B3"/>
+    
+    <!-- "chem" Part -->
+    <path d="M176 35C173 35 170 38 170 40C170 42 173 45 176 45C177.5 45 179 44.2 180 43V45C180 47 177 47 175 45L172 48C175 51 180 51 183 48C184 47 185 45 185 43V35H180V37C179 36 177.5 35 176 35ZM177 40C176 40 175 39 175 38C175 37 176 36 177 36C178 36 180 37 180 38C180 39 178 40 177 40Z" fill="#4F87D6"/>
+    <path d="M195 35C192 35 190 37 190 40C190 43 192 45 195 45C197 45 198 44 199 43V45H204V35H199V37C198 36 197 35 195 35ZM196 40C195 40 194 39 194 38C194 37 195 36 196 36C197 36 198 37 198 38C198 39 197 40 196 40Z" fill="#4F87D6"/>
+    <path d="M211 35C208 35 205 37 205 40C205 43 208 45 211 45C214 45 217 43 217 40C217 37 214 35 211 35ZM211 40C210 40 209 39 209 38C209 37 210 36 211 36C212 36 213 37 213 38C213 39 212 40 211 40Z" fill="#4F87D6"/>
+    <path d="M224 35C221 35 218 37 218 40C218 43 221 45 224 45C227 45 230 43 230 40V33H225V37C224 36 226 35 224 35ZM225 40C224 40 223 39 223 38C223 37 224 36 225 36C226 36 227 37 227 38C227 39 226 40 225 40Z" fill="#4F87D6"/>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="92" y="60" font-family="Arial, sans-serif" font-size="8" font-weight="300" fill="#6493D2">INNOVATIVE CHEMICAL SOLUTIONS</text>
+  
+  <!-- Definitions -->
+  <defs>
+    <!-- Background Gradient (Optional) -->
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="320" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F9FA"/>
+      <stop offset="1" stop-color="#E9ECEF"/>
+    </linearGradient>
+    
+    <!-- Icon Gradient -->
+    <linearGradient id="paint1_linear" x1="15" y1="10" x2="65" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F87D6"/>
+      <stop offset="1" stop-color="#1A55B3"/>
+    </linearGradient>
+  </defs>
+</svg>

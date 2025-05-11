@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="480" height="120" viewBox="0 0 480 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent background -->
+  <rect width="480" height="120" fill="none"/>
+  
+  <!-- Logo Group -->
+  <g id="hexachem-logo">
+    <!-- Icon: Modern Hexagon with 3D effect -->
+    <g id="icon" filter="url(#iconShadow)">
+      <!-- Hexagonal Structure with layered effect -->
+      <path d="M55 20L95 42.5V87.5L55 110L15 87.5V42.5L55 20Z" fill="url(#hexFill)"/>
+      <path d="M55 25L90 45V85L55 105L20 85V45L55 25Z" fill="url(#innerHexFill)" stroke-opacity="0.1" stroke="#000000" stroke-width="0.5"/>
+      <path d="M55 35L80 50V80L55 95L30 80V50L55 35Z" fill="url(#coreHexFill)" stroke-opacity="0.1" stroke="#000000" stroke-width="0.5"/>
+      
+      <!-- Molecular Diagram Overlay -->
+      <g id="molecule">
+        <!-- Bonds -->
+        <path d="M55 45L75 65L55 85L35 65L55 45Z" stroke="white" stroke-width="1.8" stroke-opacity="0.9"/>
+        <path d="M55 45V65" stroke="white" stroke-width="1.8" stroke-opacity="0.9"/>
+        <path d="M75 65H55" stroke="white" stroke-width="1.8" stroke-opacity="0.9"/>
+        <path d="M55 85V65" stroke="white" stroke-width="1.8" stroke-opacity="0.9"/>
+        <path d="M35 65H55" stroke="white" stroke-width="1.8" stroke-opacity="0.9"/>
+        
+        <!-- Atoms -->
+        <circle cx="55" cy="45" r="5" fill="white" filter="url(#atomGlow)"/>
+        <circle cx="75" cy="65" r="5" fill="white" filter="url(#atomGlow)"/>
+        <circle cx="55" cy="85" r="5" fill="white" filter="url(#atomGlow)"/>
+        <circle cx="35" cy="65" r="5" fill="white" filter="url(#atomGlow)"/>
+        <circle cx="55" cy="65" r="6.5" fill="white" filter="url(#atomGlow)"/>
+      </g>
+    </g>
+    
+    <!-- Logo Text Group -->
+    <g id="text-group" filter="url(#textShadow)">
+      <!-- HEXA in Bold Primary Blue -->
+      <path d="M128 35H138V52H157V35H167V88H157V62H138V88H128V35Z" fill="#0F3572"/>
+      
+      <!-- X with Special Styling -->
+      <path d="M178 35H188L198 50L208 35H218L203 57L220 88H210L198 70L186 88H176L193 57L178 35Z" fill="#0F3572"/>
+      
+      <!-- A with Special Styling -->
+      <path d="M230 35H240L258 88H248L245 80H225L222 88H212L230 35ZM235 70H235.5L230 55L224.5 70H235Z" fill="#0F3572"/>
+      
+      <!-- CHEM in Gradient Blue -->
+      <path d="M268 45C263 45 259 47 257 50V45H247V88H257V70C259 73 263 75 268 75C278 75 285 66 285 60C285 54 278 45 268 45ZM265 65C262 65 257 63 257 60C257 57 262 55 265 55C268 55 273 57 273 60C273 63 268 65 265 65Z" fill="url(#chemGradient)"/>
+      
+      <path d="M295 45H305V50C307 47 311 45 315 45C325 45 332 54 332 60C332 66 325 75 315 75C311 75 307 73 305 70V88H295V45ZM312 65C309 65 305 63 305 60C305 57 309 55 312 55C315 55 320 57 320 60C320 63 315 65 312 65Z" fill="url(#chemGradient)"/>
+      
+      <path d="M342 60C342 54 349 45 359 45C369 45 376 54 376 60C376 66 369 75 359 75C349 75 342 66 342 60ZM359 65C362 65 366 63 366 60C366 57 362 55 359 55C356 55 352 57 352 60C352 63 356 65 359 65Z" fill="url(#chemGradient)"/>
+      
+      <path d="M386 45H396V50C398 47 401 45 406 45C411 45 415 47 417 50C419 47 423 45 428 45C436 45 443 50 443 59V88H433V61C433 57 429 55 426 55C423 55 419 57 419 61V88H409V61C409 57 405 55 402 55C399 55 396 57 396 61V88H386V45Z" fill="url(#chemGradient)"/>
+    </g>
+    
+    <!-- Tagline with clean typography -->
+    <g id="tagline" filter="url(#taglineShadow)">
+      <text x="140" y="100" font-family="Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="2" fill="#4F87D6">
+        INNOVATIVE CHEMICAL SOLUTIONS
+      </text>
+    </g>
+  </g>
+  
+  <!-- Definitions for Gradients and Effects -->
+  <defs>
+    <!-- Main Hexagon Gradient -->
+    <linearGradient id="hexFill" x1="15" y1="20" x2="95" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4F87D6"/>
+      <stop offset="1" stop-color="#0A2B63"/>
+    </linearGradient>
+    
+    <!-- Secondary Hexagon Gradient -->
+    <linearGradient id="innerHexFill" x1="20" y1="25" x2="90" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5E94DF"/>
+      <stop offset="1" stop-color="#0D3475"/>
+    </linearGradient>
+    
+    <!-- Core Hexagon Gradient -->
+    <linearGradient id="coreHexFill" x1="30" y1="35" x2="80" y2="95" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6AA1EA"/>
+      <stop offset="1" stop-color="#1142A3"/>
+    </linearGradient>
+    
+    <!-- CHEM Text Gradient -->
+    <linearGradient id="chemGradient" x1="247" y1="45" x2="443" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#467ACC"/>
+      <stop offset="1" stop-color="#2A5DB3"/>
+    </linearGradient>
+    
+    <!-- Icon Shadow Effect -->
+    <filter id="iconShadow" x="10" y="15" width="90" height="100" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dy="2"/>
+      <feGaussianBlur stdDeviation="2.5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    
+    <!-- Atom Glow Effect -->
+    <filter id="atomGlow" x="-4" y="-4" width="18" height="18" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur"/>
+    </filter>
+    
+    <!-- Text Shadow Effect -->
+    <filter id="textShadow" x="125" y="33" width="320" height="57" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dy="1"/>
+      <feGaussianBlur stdDeviation="0.5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    
+    <!-- Tagline Shadow Effect -->
+    <filter id="taglineShadow" x="138" y="98" width="300" height="15" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dy="1"/>
+      <feGaussianBlur stdDeviation="0.5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+</svg>
