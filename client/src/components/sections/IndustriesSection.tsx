@@ -13,14 +13,14 @@ interface Industry {
 const industries: Industry[] = [
   {
     id: "coatings",
-    title: "Coatings & Adhesives",
-    description: "High-performance solvents and monomers for paints, coatings, and adhesive applications.",
+    title: "Paint & Coating",
+    description: "High-performance solvents and chemicals for paints, coatings, and related applications.",
     icon: <PaintBucket className="h-8 w-8 text-primary" />
   },
   {
-    id: "food",
-    title: "Food & Beverage",
-    description: "Safe, food-grade chemical solutions for processing, preservation, and packaging needs.",
+    id: "adhesives",
+    title: "Adhesive Manufacturing",
+    description: "Specialized chemical solutions for adhesive production with optimal bonding properties.",
     icon: <Utensils className="h-8 w-8 text-primary" />
   },
   {
@@ -31,8 +31,8 @@ const industries: Industry[] = [
   },
   {
     id: "construction",
-    title: "Construction",
-    description: "Durable chemical solutions for construction materials, adhesives, and structural applications.",
+    title: "Construction Chemicals",
+    description: "Durable chemical solutions for construction materials, additives, and applications.",
     icon: <Building className="h-8 w-8 text-primary" />
   }
 ];

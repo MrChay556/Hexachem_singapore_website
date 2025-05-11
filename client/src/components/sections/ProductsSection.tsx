@@ -14,46 +14,46 @@ interface Product {
 
 const products: Product[] = [
   {
-    id: "industrial-solvents",
-    title: "Industrial Solvents",
-    description: "High-purity solvents for industrial applications, including cleaning, extraction, and synthesis processes.",
+    id: "alcohols",
+    title: "Alcohols",
+    description: "Premium-grade alcohols including Iso Propyl Alcohol (IPA), n-Butanol, Methanol, and Ethanol for various industrial applications.",
     image: "https://pixabay.com/get/g6c8865397059929aae8312b57b221d10bf8a415f24867db050303059ead9c364cfc9902306ee3b12b1aa3fda5514c247a41fe568a9016c1c1c782d95075d2383_1280.jpg",
     tags: ["Chemical", "Industrial"]
   },
   {
-    id: "fuel-oil",
-    title: "Fuel Oil Products",
-    description: "Refined fuel oil solutions designed for maximum efficiency and minimal environmental impact.",
+    id: "aromatics",
+    title: "Aromatics & Aliphatics",
+    description: "High-quality aromatic chemicals including Toluene, Xylene, and aliphatic solutions for coatings, plastics, and other industrial needs.",
     image: "https://pixabay.com/get/ge866de1873d38a091e9f27091bea05a6e3488036169ac8f1157daa8d50494e5145a193cd130ebe8b475a7f9afdf65c4b20a0c54a234a224356395914223a1d9a_1280.jpg",
-    tags: ["Energy", "Fuel"]
+    tags: ["Aromatics", "Aliphatics"]
   },
   {
     id: "monomers",
-    title: "Specialized Monomers",
-    description: "Custom monomer solutions for polymer production, adhesives, and specialized chemical applications.",
+    title: "Monomers & Polymers",
+    description: "Specialized monomers and polymers for manufacturing, adhesives, and industrial applications to ensure high product quality.",
     image: "https://images.unsplash.com/photo-1616458964840-5108e4d3adb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Polymer", "Research"]
+    tags: ["Polymer", "Chemical"]
   },
   {
-    id: "recycling",
-    title: "Chemical Recycling",
-    description: "Innovative processes for reclaiming and repurposing chemical waste into valuable products.",
+    id: "glycols",
+    title: "Glycols & Ketones",
+    description: "Premium glycols and ketones for diverse industrial applications including MEG, DEG, TEG, and Acetone solutions.",
     image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Recycling", "Sustainable"]
+    tags: ["Glycols", "Ketones"]
   },
   {
-    id: "technical-consult",
-    title: "Technical Consultation",
-    description: "Expert advisory services for chemical processes, safety protocols, and optimization strategies.",
+    id: "amines",
+    title: "Amines & Esters",
+    description: "High-quality amine chemicals including MEA, DEA, TEA and specialty esters for various industrial processes.",
     image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Consulting", "Technical"]
+    tags: ["Amines", "Chemicals"]
   },
   {
-    id: "distribution",
-    title: "Global Distribution",
-    description: "Efficient logistics and distribution networks ensuring timely delivery of products worldwide.",
+    id: "automotive",
+    title: "Automotive Products",
+    description: "Specialized automotive chemical solutions including brake fluids, antifreeze, and engine oil additives for optimal performance.",
     image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
-    tags: ["Logistics", "Global"]
+    tags: ["Automotive", "Chemicals"]
   }
 ];
 

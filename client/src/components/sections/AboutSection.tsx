@@ -41,9 +41,9 @@ export default function AboutSection() {
           >
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Our Expertise</h3>
             <p className="text-gray-600 mb-6">
-              Hexachem specializes in providing high-quality chemical products and 
-              innovative recycling solutions to diverse industries across the globe. 
-              Our comprehensive approach combines technical expertise with sustainable practices.
+              Hexachem (S) Pte Ltd is a Singapore-based chemical processing company established in 2011 
+              by industry experts with over two decades of experience in chemical processing and polymer industries.
+              We have significant export markets across South East Asia, Middle East, Africa and India.
             </p>
             
             <div className="space-y-4 mb-8">
@@ -52,8 +52,8 @@ export default function AboutSection() {
                   <FlaskRound className="h-6 w-6" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Solvents</h4>
-                  <p className="text-gray-600">Premium-grade industrial solvents for various applications.</p>
+                  <h4 className="text-lg font-semibold">Alcohols</h4>
+                  <p className="text-gray-600">Premium-grade alcohols including Isopropyl Alcohol, n-Butanol, and Ethanol.</p>
                 </div>
               </div>
               
@@ -62,8 +62,8 @@ export default function AboutSection() {
                   <Droplets className="h-6 w-6" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Fuel Oil</h4>
-                  <p className="text-gray-600">High-efficiency fuel solutions for industrial needs.</p>
+                  <h4 className="text-lg font-semibold">Aromatics & Aliphatics</h4>
+                  <p className="text-gray-600">High-quality aromatic and aliphatic chemical solutions for diverse industries.</p>
                 </div>
               </div>
               
@@ -72,8 +72,8 @@ export default function AboutSection() {
                   <Atom className="h-6 w-6" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Monomers</h4>
-                  <p className="text-gray-600">Custom monomer solutions for specialized applications.</p>
+                  <h4 className="text-lg font-semibold">Monomers & Polymers</h4>
+                  <p className="text-gray-600">Specialized monomer and polymer solutions for manufacturing needs.</p>
                 </div>
               </div>
             </div>

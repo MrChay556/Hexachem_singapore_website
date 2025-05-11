@@ -230,7 +230,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Our Location</h4>
-                  <p className="text-gray-600">123 Chemical Avenue, Singapore 123456</p>
+                  <p className="text-gray-600">PIONEER JUNCTION, #03-35, 3 SOON LEE STREET, SINGAPORE 627606</p>
                 </div>
               </div>
               
@@ -240,7 +240,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Phone Number</h4>
-                  <p className="text-gray-600">+65 1234 5678</p>
+                  <p className="text-gray-600">+65 6684 1780</p>
                 </div>
               </div>
               

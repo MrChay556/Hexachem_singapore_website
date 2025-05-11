@@ -96,7 +96,7 @@
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#4F46E5] to-[#38BDF8];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#1F4B8A] to-[#38BDF8];
 }
 
 .animate-float {
