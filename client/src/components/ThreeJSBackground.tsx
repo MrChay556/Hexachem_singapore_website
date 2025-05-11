@@ -35,19 +35,16 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     const animationGroup = new THREE.Group();
     scene.add(animationGroup);
 
-    // Professional color scheme with blue tones for a corporate feel
+    // Simple, elegant color scheme with blue tones
     const colors = [
       new THREE.Color(0x2563eb),  // Blue-600
       new THREE.Color(0x3b82f6),  // Blue-500
-      new THREE.Color(0x60a5fa),  // Blue-400
-      new THREE.Color(0x93c5fd),  // Blue-300
     ];
 
     // Create a raycaster for mouse interaction
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
     let mousePosition = new THREE.Vector3();
-    let intersectedParticle: THREE.Mesh | null = null;
     
     // Track dynamic connections that respond to mouse movement
     const dynamicLines: THREE.Line[] = [];
@@ -56,12 +53,12 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
 
     // Create elegant flowing particles system
     const particles: THREE.Mesh[] = [];
-    const particlesCount = 250;  // Increased particle count for more interactivity
+    const particlesCount = 120;  // Reduced particle count for a cleaner look
     
     // Create a field of particles that will move in a wavy pattern
     for (let i = 0; i < particlesCount; i++) {
       // Create a small sphere with random size
-      const size = 0.05 + Math.random() * 0.2;
+      const size = 0.05 + Math.random() * 0.1; // Smaller particles
       const geometry = new THREE.SphereGeometry(size, 12, 12);
       
       // Select a color from our palette
@@ -71,14 +68,14 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       const material = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
-        opacity: 0.3 + Math.random() * 0.5
+        opacity: 0.2 + Math.random() * 0.3 // More subtle opacity
       });
       
       // Create the particle
       const particle = new THREE.Mesh(geometry, material);
       
       // Position within a spherical field
-      const radius = 10 + Math.random() * 10;
+      const radius = 12 + Math.random() * 8;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI;
       
@@ -90,14 +87,10 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       particle.userData = {
         originalPosition: particle.position.clone(),
         phase: Math.random() * Math.PI * 2,
-        speed: 0.2 + Math.random() * 0.8,
-        amplitude: 0.3 + Math.random() * 0.7,
-        distance: particle.position.length(),
-        activated: false,
-        highlight: false,
+        speed: 0.1 + Math.random() * 0.3, // Slower movement for a calmer effect
+        amplitude: 0.2 + Math.random() * 0.3, // Less movement
         originalColor: color.clone(),
-        originalSize: size,
-        connections: [] as number[]
+        originalSize: size
       };
       
       // Add to scene and store reference
@@ -107,7 +100,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     
     // Create connecting lines for a network effect
     const lines: THREE.Line[] = [];
-    const lineCount = 120;  // Increased for more connections
+    const lineCount = 50;  // Fewer connections for a cleaner look
     
     for (let i = 0; i < lineCount; i++) {
       // Select two random particles to connect, but only if they're close enough
@@ -119,17 +112,13 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
           idx, 
           distance: particles[p1Index].position.distanceTo(p.position) 
         }))
-        .filter(c => c.idx !== p1Index && c.distance < 8)
+        .filter(c => c.idx !== p1Index && c.distance < 10)
         .sort((a, b) => a.distance - b.distance);
       
       // Skip if no nearby particles
       if (possibleConnections.length === 0) continue;
       
       const p2Index = possibleConnections[0].idx;
-      
-      // Store connection information in particles
-      particles[p1Index].userData.connections.push(p2Index);
-      particles[p2Index].userData.connections.push(p1Index);
       
       // Create the line connecting two particles
       const points = [
@@ -141,7 +130,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       const lineMaterial = new THREE.LineBasicMaterial({ 
         color: 0x3b82f6,
         transparent: true,
-        opacity: 0.2
+        opacity: 0.15 // More subtle opacity
       });
       
       const line = new THREE.Line(lineGeometry, lineMaterial);
@@ -149,23 +138,22 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       // Store references to connected particles
       line.userData = {
         pointIndex1: p1Index,
-        pointIndex2: p2Index,
-        defaultOpacity: 0.2
+        pointIndex2: p2Index
       };
       
       animationGroup.add(line);
       lines.push(line);
     }
     
-    // Function to create dynamic connections from mouse to nearby particles
+    // Function to create subtle dynamic connections from mouse to nearby particles
     const createDynamicConnections = (mousePos: THREE.Vector3) => {
       // Clear previous dynamic connections
       dynamicLinesGroup.clear();
       dynamicLines.length = 0;
       
       // Find particles within a certain range of the mouse
-      const maxConnectDistance = 7;
-      const maxConnections = 10; // Limit connections for performance
+      const maxConnectDistance = 5; // Shorter connection distance
+      const maxConnections = 5;     // Fewer connections for subtlety
       
       const nearbyParticles = particles
         .map((particle, index) => ({
@@ -185,11 +173,10 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
         
         // Fade opacity based on distance
-        const opacity = 0.6 * (1 - nearby.distance / maxConnectDistance);
-        const color = new THREE.Color(0x60a5fa);
+        const opacity = 0.3 * (1 - nearby.distance / maxConnectDistance); // More subtle
         
         const lineMaterial = new THREE.LineBasicMaterial({
-          color: color,
+          color: 0x60a5fa,
           transparent: true,
           opacity: opacity
         });
@@ -198,25 +185,10 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         dynamicLinesGroup.add(line);
         dynamicLines.push(line);
         
-        // Highlight the connected particle
+        // Subtle highlight for connected particles
         const particleMaterial = particle.material as THREE.MeshBasicMaterial;
-        particleMaterial.color.set(0x93c5fd);
-        particleMaterial.opacity = 0.8;
-        particle.scale.set(1.5, 1.5, 1.5);
-        particle.userData.highlight = true;
-      });
-    };
-    
-    // Reset highlights when mouse moves away
-    const resetHighlights = () => {
-      particles.forEach(particle => {
-        if (particle.userData.highlight) {
-          const particleMaterial = particle.material as THREE.MeshBasicMaterial;
-          particleMaterial.color.copy(particle.userData.originalColor);
-          particleMaterial.opacity = 0.3 + Math.random() * 0.5;
-          particle.scale.set(1, 1, 1);
-          particle.userData.highlight = false;
-        }
+        particleMaterial.opacity = 0.5;
+        particle.scale.set(1.2, 1.2, 1.2); // More subtle scale effect
       });
     };
     
@@ -237,53 +209,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       const distance = -camera.position.z / dir.z;
       mousePosition = camera.position.clone().add(dir.multiplyScalar(distance));
       
-      // Reset previous highlights
-      resetHighlights();
-      
       // Create new dynamic connections
       createDynamicConnections(mousePosition);
-    };
-    
-    // Mouse click event to activate particles and create connections
-    const onMouseClick = () => {
-      // Find particles close to the mouse position
-      const maxDistance = 5;
-      const clickedParticles = particles
-        .filter(particle => particle.position.distanceTo(mousePosition) < maxDistance);
-      
-      if (clickedParticles.length > 0) {
-        // Activate particle on click
-        const particle = clickedParticles[0];
-        particle.userData.activated = !particle.userData.activated;
-        
-        if (particle.userData.activated) {
-          // Scale up and brighten when activated
-          particle.scale.set(1.8, 1.8, 1.8);
-          (particle.material as THREE.MeshBasicMaterial).color.set(0x0ea5e9);
-          (particle.material as THREE.MeshBasicMaterial).opacity = 1.0;
-          
-          // Highlight all connected particles
-          particle.userData.connections.forEach((connectedIdx: number) => {
-            const connectedParticle = particles[connectedIdx];
-            (connectedParticle.material as THREE.MeshBasicMaterial).color.set(0x7dd3fc);
-            (connectedParticle.material as THREE.MeshBasicMaterial).opacity = 0.7;
-            connectedParticle.scale.set(1.4, 1.4, 1.4);
-          });
-        } else {
-          // Reset to original state
-          particle.scale.set(1, 1, 1);
-          (particle.material as THREE.MeshBasicMaterial).color.copy(particle.userData.originalColor);
-          (particle.material as THREE.MeshBasicMaterial).opacity = 0.3 + Math.random() * 0.5;
-          
-          // Reset connected particles
-          particle.userData.connections.forEach((connectedIdx: number) => {
-            const connectedParticle = particles[connectedIdx];
-            (connectedParticle.material as THREE.MeshBasicMaterial).color.copy(connectedParticle.userData.originalColor);
-            (connectedParticle.material as THREE.MeshBasicMaterial).opacity = 0.3 + Math.random() * 0.5;
-            connectedParticle.scale.set(1, 1, 1);
-          });
-        }
-      }
     };
     
     // Animation loop
@@ -294,29 +221,22 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       
       const time = clock.getElapsedTime();
       
-      // Update particles with wave motion
+      // Update particles with gentle wave motion
       particles.forEach(particle => {
-        if (particle.userData.highlight || particle.userData.activated) {
-          // Don't move highlighted or activated particles
-          return;
-        }
-        
         const { originalPosition, phase, speed, amplitude } = particle.userData;
         
         // Make particles move in a gentle wave pattern
-        const waveX = Math.sin(time * 0.3 + phase) * amplitude;
-        const waveY = Math.cos(time * 0.2 + phase) * amplitude;
-        const waveZ = Math.sin(time * 0.4 + phase * 2) * amplitude;
+        const waveX = Math.sin(time * 0.2 + phase) * amplitude;
+        const waveY = Math.cos(time * 0.15 + phase) * amplitude;
+        const waveZ = Math.sin(time * 0.25 + phase * 2) * amplitude;
         
         particle.position.x = originalPosition.x + waveX;
         particle.position.y = originalPosition.y + waveY;
         particle.position.z = originalPosition.z + waveZ;
         
-        // Pulsate opacity for subtle effect
-        if (!particle.userData.activated) {
-          const material = particle.material as THREE.MeshBasicMaterial;
-          material.opacity = 0.2 + (Math.sin(time * speed + phase) + 1) * 0.2;
-        }
+        // Very subtle opacity pulsation
+        const material = particle.material as THREE.MeshBasicMaterial;
+        material.opacity = 0.15 + (Math.sin(time * speed + phase) + 1) * 0.15;
       });
       
       // Update connecting lines to match particle positions
@@ -337,16 +257,6 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         positions[5] = particles[pointIndex2].position.z;
         
         line.geometry.attributes.position.needsUpdate = true;
-        
-        // Highlight lines connected to activated particles
-        const lineMaterial = line.material as THREE.LineBasicMaterial;
-        if (particles[pointIndex1].userData.activated || particles[pointIndex2].userData.activated) {
-          lineMaterial.opacity = 0.8;
-          lineMaterial.color.set(0x38bdf8);
-        } else {
-          lineMaterial.opacity = line.userData.defaultOpacity;
-          lineMaterial.color.set(0x3b82f6);
-        }
       });
       
       // Update dynamic lines connected to mouse position
@@ -361,9 +271,9 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         line.geometry.attributes.position.needsUpdate = true;
       });
       
-      // Gentle rotation of the entire animation group
-      animationGroup.rotation.y = Math.sin(time * 0.1) * 0.15;
-      animationGroup.rotation.x = Math.sin(time * 0.08) * 0.1;
+      // Very gentle rotation of the entire animation group
+      animationGroup.rotation.y = Math.sin(time * 0.05) * 0.1;
+      animationGroup.rotation.x = Math.sin(time * 0.04) * 0.05;
       
       // Render scene
       renderer.render(scene, camera);
@@ -373,7 +283,6 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     
     // Register mouse event listeners
     window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('click', onMouseClick);
     
     // Handle window resize
     const handleResize = () => {
@@ -398,7 +307,6 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('click', onMouseClick);
       
       // Dispose geometries and materials
       particles.forEach(particle => {
@@ -418,11 +326,5 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     };
   }, [canvasId]);
   
-  return (
-    <div id={canvasId} ref={containerRef} className="molecule-canvas absolute inset-0 cursor-pointer" title="Interact with the particles">
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-blue-100 text-xs bg-blue-900/30 rounded-full px-3 py-1 pointer-events-none">
-        Move mouse to interact • Click to highlight connections
-      </div>
-    </div>
-  );
+  return <div id={canvasId} ref={containerRef} className="molecule-canvas absolute inset-0"></div>;
 }
