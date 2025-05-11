@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#1A55B3"/>
+  
+  <!-- Background Pattern -->
+  <path d="M0 50L500 50" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M0 100L500 100" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M0 150L500 150" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M0 200L500 200" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M0 250L500 250" stroke="#2D6BC4" stroke-width="0.5"/>
+  
+  <path d="M50 0L50 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M100 0L100 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M150 0L150 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M200 0L200 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M250 0L250 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M300 0L300 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M350 0L350 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M400 0L400 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  <path d="M450 0L450 300" stroke="#2D6BC4" stroke-width="0.5"/>
+  
+  <!-- Ketone Molecule Representation -->
+  <path d="M180 140L220 140L220 160L260 160L260 140L300 140" stroke="white" stroke-width="3"/>
+  
+  <!-- Carbon Atoms -->
+  <circle cx="180" cy="140" r="8" fill="white"/>
+  <circle cx="220" cy="140" r="8" fill="white"/>
+  <circle cx="260" cy="160" r="8" fill="white"/>
+  <circle cx="300" cy="140" r="8" fill="white"/>
+  
+  <!-- Double Bond Oxygen -->
+  <path d="M260 120L260 160" stroke="white" stroke-width="3"/>
+  <circle cx="260" cy="120" r="8" fill="#FF9090"/>
+  
+  <!-- Hydrogen Atoms -->
+  <circle cx="180" cy="120" r="4" fill="#A0C6FF"/>
+  <circle cx="180" cy="160" r="4" fill="#A0C6FF"/>
+  <circle cx="220" cy="160" r="4" fill="#A0C6FF"/>
+  <circle cx="300" cy="120" r="4" fill="#A0C6FF"/>
+  <circle cx="300" cy="160" r="4" fill="#A0C6FF"/>
+</svg>

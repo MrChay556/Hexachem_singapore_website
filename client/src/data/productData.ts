@@ -1,11 +1,19 @@
 import { ProductCategory } from '@/components/ProductDetailModal';
 
+// Import SVG images
+import alcoholImage from '@/assets/images/alcohol.svg';
+import aromaticsImage from '@/assets/images/aromatics.svg';
+import aliphaticsImage from '@/assets/images/aliphatics.svg';
+import glycolsImage from '@/assets/images/glycols.svg';
+import ketonesImage from '@/assets/images/ketones.svg';
+import aminesImage from '@/assets/images/amines.svg';
+
 export const productData: ProductCategory[] = [
   {
     id: "alcohols",
     title: "Alcohols",
     description: "Premium-grade alcohols for various industrial applications including cleaning, extraction, and synthesis processes.",
-    image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    image: alcoholImage,
     tags: ["Chemical", "Industrial"],
     details: [
       {
@@ -68,7 +76,7 @@ export const productData: ProductCategory[] = [
     id: "aromatics",
     title: "Aromatics",
     description: "High-quality aromatic chemicals for coatings, plastics, and pharmaceutical applications.",
-    image: "https://images.unsplash.com/photo-1614935151651-0bea6508db74?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    image: aromaticsImage,
     tags: ["Aromatics", "Chemical"],
     details: [
       {
@@ -113,7 +121,7 @@ export const productData: ProductCategory[] = [
     id: "aliphatics",
     title: "Aliphatics",
     description: "Premium aliphatic hydrocarbons for industrial applications and manufacturing processes.",
-    image: "https://images.unsplash.com/photo-1616458964840-5108e4d3adb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    image: aliphaticsImage,
     tags: ["Aliphatics", "Chemical"],
     details: [
       {

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#1A55B3"/>
+  
+  <!-- Circular Gradient Background -->
+  <circle cx="250" cy="150" r="120" fill="url(#paint0_radial)"/>
+  
+  <!-- Glycol Molecule Representation -->
+  <path d="M190 150L230 130L270 130L310 150" stroke="white" stroke-width="3"/>
+  
+  <!-- Carbon Atoms -->
+  <circle cx="230" cy="130" r="8" fill="white"/>
+  <circle cx="270" cy="130" r="8" fill="white"/>
+  
+  <!-- Oxygen Atoms (Hydroxy Groups) -->
+  <circle cx="190" cy="150" r="8" fill="#FF9090"/>
+  <circle cx="310" cy="150" r="8" fill="#FF9090"/>
+  
+  <!-- Hydrogen Atoms -->
+  <circle cx="190" cy="170" r="4" fill="#A0C6FF"/>
+  <circle cx="230" cy="110" r="4" fill="#A0C6FF"/>
+  <circle cx="230" cy="150" r="4" fill="#A0C6FF"/>
+  <circle cx="270" cy="110" r="4" fill="#A0C6FF"/>
+  <circle cx="270" cy="150" r="4" fill="#A0C6FF"/>
+  <circle cx="310" cy="170" r="4" fill="#A0C6FF"/>
+  
+  <!-- Chemical Bonds -->
+  <path d="M190 150L190 170" stroke="white" stroke-width="1.5"/>
+  <path d="M230 130L230 110" stroke="white" stroke-width="1.5"/>
+  <path d="M230 130L230 150" stroke="white" stroke-width="1.5"/>
+  <path d="M270 130L270 110" stroke="white" stroke-width="1.5"/>
+  <path d="M270 130L270 150" stroke="white" stroke-width="1.5"/>
+  <path d="M310 150L310 170" stroke="white" stroke-width="1.5"/>
+  
+  <!-- Radial Gradient Definition -->
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(250 150) rotate(90) scale(120)">
+      <stop stop-color="#4285F4" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#1A55B3" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

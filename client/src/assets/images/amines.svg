@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#1A55B3"/>
+  
+  <!-- Background Pattern -->
+  <circle cx="250" cy="150" r="100" stroke="#4285F4" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="250" cy="150" r="80" stroke="#4285F4" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="250" cy="150" r="60" stroke="#4285F4" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="250" cy="150" r="40" stroke="#4285F4" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="250" cy="150" r="20" stroke="#4285F4" stroke-width="1" stroke-opacity="0.3"/>
+  
+  <!-- Amine Group Representation -->
+  <path d="M220 150L250 120L280 150" stroke="white" stroke-width="3"/>
+  
+  <!-- Carbon Atom -->
+  <circle cx="250" cy="150" r="8" fill="white"/>
+  
+  <!-- Nitrogen Atom -->
+  <circle cx="250" cy="120" r="10" fill="#90C4FF"/>
+  
+  <!-- Carbon Chain -->
+  <path d="M250 150L250 180" stroke="white" stroke-width="3"/>
+  <circle cx="250" cy="180" r="8" fill="white"/>
+  <path d="M250 180L280 210" stroke="white" stroke-width="3"/>
+  <circle cx="280" cy="210" r="8" fill="white"/>
+  <path d="M250 180L220 210" stroke="white" stroke-width="3"/>
+  <circle cx="220" cy="210" r="8" fill="white"/>
+  
+  <!-- Hydrogen Atoms -->
+  <circle cx="220" cy="150" r="4" fill="#A0C6FF"/>
+  <circle cx="280" cy="150" r="4" fill="#A0C6FF"/>
+  <circle cx="280" cy="190" r="4" fill="#A0C6FF"/>
+  <circle cx="280" cy="230" r="4" fill="#A0C6FF"/>
+  <circle cx="220" cy="190" r="4" fill="#A0C6FF"/>
+  <circle cx="220" cy="230" r="4" fill="#A0C6FF"/>
+</svg>

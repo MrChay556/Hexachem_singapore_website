@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#174EA6"/>
+  
+  <!-- Background Pattern -->
+  <rect x="0" y="0" width="500" height="300" fill="#174EA6"/>
+  <path d="M0 0L500 300" stroke="#2D6BC4" stroke-width="1"/>
+  <path d="M0 60L500 360" stroke="#2D6BC4" stroke-width="1"/>
+  <path d="M0 120L500 420" stroke="#2D6BC4" stroke-width="1"/>
+  <path d="M0 180L500 480" stroke="#2D6BC4" stroke-width="1"/>
+  <path d="M0 240L500 540" stroke="#2D6BC4" stroke-width="1"/>
+  <path d="M0 300L500 600" stroke="#2D6BC4" stroke-width="1"/>
+  
+  <!-- Aliphatic Chain Representation -->
+  <path d="M150 150L200 130L250 150L300 130L350 150" stroke="white" stroke-width="3"/>
+  
+  <!-- Carbon & Hydrogen Atoms -->
+  <circle cx="150" cy="150" r="8" fill="white"/>
+  <circle cx="200" cy="130" r="8" fill="white"/>
+  <circle cx="250" cy="150" r="8" fill="white"/>
+  <circle cx="300" cy="130" r="8" fill="white"/>
+  <circle cx="350" cy="150" r="8" fill="white"/>
+  
+  <!-- Hydrogen atoms -->
+  <circle cx="150" cy="130" r="4" fill="#A0C6FF"/>
+  <circle cx="150" cy="170" r="4" fill="#A0C6FF"/>
+  <circle cx="200" cy="110" r="4" fill="#A0C6FF"/>
+  <circle cx="200" cy="150" r="4" fill="#A0C6FF"/>
+  <circle cx="250" cy="130" r="4" fill="#A0C6FF"/>
+  <circle cx="250" cy="170" r="4" fill="#A0C6FF"/>
+  <circle cx="300" cy="110" r="4" fill="#A0C6FF"/>
+  <circle cx="300" cy="150" r="4" fill="#A0C6FF"/>
+  <circle cx="350" cy="130" r="4" fill="#A0C6FF"/>
+  <circle cx="350" cy="170" r="4" fill="#A0C6FF"/>
+</svg>
