@@ -49,14 +49,12 @@ export default function Navbar() {
               e.preventDefault();
               handleNavClick("home");
             }}
-            className="flex items-center z-50"
+            className="flex items-center space-x-2 z-50"
           >
-            <img 
-              src={hexachemLogo} 
-              alt="Hexachem Logo" 
-              className="h-10 md:h-12 transition-all duration-300"
-              style={{ filter: "drop-shadow(0px 1px 2px rgba(0,0,0,0.15))" }}
-            />
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+              <span className="text-primary font-bold text-xl">H</span>
+            </div>
+            <span className="text-xl font-bold text-white">Hexachem</span>
           </a>
 
           {/* Desktop navigation */}
