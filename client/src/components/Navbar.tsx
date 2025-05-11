@@ -49,12 +49,37 @@ export default function Navbar() {
               e.preventDefault();
               handleNavClick("home");
             }}
-            className="flex items-center space-x-2 z-50"
+            className="flex items-center space-x-3 z-50"
           >
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
-              <span className="text-primary font-bold text-xl">H</span>
+            <div className="relative w-12 h-12 bg-gradient-to-br from-blue-300 to-blue-700 rounded-md flex items-center justify-center shadow-md overflow-hidden transform rotate-45">
+              {/* Hexagon shape with molecule */}
+              <div className="absolute inset-0.5 bg-gradient-to-br from-blue-400 to-blue-600 rounded-sm flex items-center justify-center">
+                <div className="w-9 h-9 flex items-center justify-center relative transform -rotate-45">
+                  {/* Molecular structure */}
+                  <div className="absolute w-6 h-6 border-2 border-white/90"></div>
+                  
+                  {/* X-shaped connectors */}
+                  <div className="absolute w-7 h-0.5 bg-white/80 transform rotate-45"></div>
+                  <div className="absolute w-7 h-0.5 bg-white/80 transform -rotate-45"></div>
+                  
+                  {/* Center atom */}
+                  <div className="absolute w-2.5 h-2.5 bg-white rounded-full"></div>
+                  
+                  {/* Corner atoms */}
+                  <div className="absolute w-1.5 h-1.5 bg-white rounded-full transform translate-x-3 translate-y-3"></div>
+                  <div className="absolute w-1.5 h-1.5 bg-white rounded-full transform translate-x-3 -translate-y-3"></div>
+                  <div className="absolute w-1.5 h-1.5 bg-white rounded-full transform -translate-x-3 translate-y-3"></div>
+                  <div className="absolute w-1.5 h-1.5 bg-white rounded-full transform -translate-x-3 -translate-y-3"></div>
+                </div>
+              </div>
             </div>
-            <span className="text-xl font-bold text-white">Hexachem</span>
+            
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold text-white leading-tight tracking-wide" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.15)' }}>
+                <span className="text-blue-200">HEXA</span><span>CHEM</span>
+              </span>
+              <span className="text-[10px] text-blue-200 font-light leading-tight tracking-[0.15em] pl-0.5">INNOVATIVE CHEMICAL SOLUTIONS</span>
+            </div>
           </a>
 
           {/* Desktop navigation */}
