@@ -2,6 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .rotate-30 {
+    transform: rotate(30deg);
+  }
+  .rotate-60 {
+    transform: rotate(60deg);
+  }
+  .rotate-90 {
+    transform: rotate(90deg);
+  }
+  .rotate-120 {
+    transform: rotate(120deg);
+  }
+  .-rotate-30 {
+    transform: rotate(-30deg);
+  }
+  
+  .h-5\.5 {
+    height: 1.375rem;
+  }
+  .h-6\.5 {
+    height: 1.625rem;
+  }
+  
+  .hexachem-logo-glow {
+    animation: logo-pulse 4s infinite alternate-reverse;
+  }
+  
+  @keyframes logo-pulse {
+    0% {
+      filter: drop-shadow(0 0 2px rgba(147, 197, 253, 0.3));
+    }
+    100% {
+      filter: drop-shadow(0 0 5px rgba(147, 197, 253, 0.7));
+    }
+  }
+  
+  .electron-orbit {
+    animation: orbit 15s linear infinite;
+  }
+  
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(9px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(9px) rotate(-360deg);
+    }
+  }
+}
+
 :root {
   --background: 210 40% 96.1%;
   --foreground: 222 47% 11%;
