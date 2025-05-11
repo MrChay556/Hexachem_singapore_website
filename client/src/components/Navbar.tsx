@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToSection } from "@/lib/utils";
-import hexachemLogo from "@/assets/images/hexachem-logo-v3.svg";
+import hexachemLogo from "@/assets/images/hexachem-logo-simple.svg";
 
 interface NavLink {
   name: string;
