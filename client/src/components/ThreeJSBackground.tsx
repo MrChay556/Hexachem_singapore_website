@@ -32,7 +32,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     containerRef.current.appendChild(renderer.domElement);
 
-    // Enhanced molecule colors with vibrant palette that matches the hero design
+    // Enhanced molecule colors with vibrant palette that matches the blue theme
     const colors = [
       new THREE.Color(0x3b82f6),  // Blue-500
       new THREE.Color(0x2563eb),  // Blue-600
@@ -168,7 +168,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
           const lineMaterial = new THREE.LineBasicMaterial({
             color: 0x60a5fa,
             transparent: true,
-            opacity: 0.2
+            opacity: 0.15
           });
           
           const line = new THREE.Line(lineGeometry, lineMaterial);
@@ -192,9 +192,9 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         // Create small particles
         const particleGeometry = new THREE.SphereGeometry(0.1, 8, 8);
         const particleMaterial = new THREE.MeshBasicMaterial({
-          color: 0x60a5fa, // Bright blue particle
+          color: 0x60a5fa, // Blue-400 particle
           transparent: true,
-          opacity: 0.25
+          opacity: 0.3
         });
         
         const particle = new THREE.Mesh(particleGeometry, particleMaterial);

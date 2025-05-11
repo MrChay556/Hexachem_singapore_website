@@ -19,160 +19,66 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-primary/20 z-[1]"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="p-2"
+        <div className="max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="p-2"
+          >
+            <motion.h1 
+              className="text-5xl lg:text-7xl font-bold mb-4 text-white"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center mb-6 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30"
-              >
-                <Sparkles className="h-4 w-4 text-blue-200 mr-2" />
-                <span className="text-sm font-medium text-blue-100">Chemical Excellence Since 2011</span>
-              </motion.div>
-              
-              <motion.h1 
-                className="text-5xl lg:text-7xl font-extrabold mb-8 leading-tight"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <span className="text-white">Next-Gen</span><br/>
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-100 via-blue-200 to-white">
-                  Chemical Solutions
-                </span>
-              </motion.h1>
-              
-              <motion.p 
-                className="text-xl text-blue-50 mb-10 leading-relaxed max-w-2xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                Pioneering sustainable chemical trading across Asia, Middle East, and Africa with 
-                innovative solutions that transform industries and protect our planet.
-              </motion.p>
-              
-              <motion.div 
-                className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.9 }}
-              >
-                <Button 
-                  size="lg" 
-                  className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl rounded-full group"
-                  onClick={() => scrollToSection("products")}
-                >
-                  Explore Our Products 
-                  <motion.div 
-                    className="ml-2 rounded-full bg-white/20 p-1"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.div>
-                </Button>
-                
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="border-2 border-[#3b82f6] bg-transparent text-white hover:bg-[#3b82f6]/10 font-semibold px-8 py-6 text-base transition-all duration-300 rounded-full"
-                  onClick={() => scrollToSection("contact")}
-                >
-                  Contact Us
-                </Button>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="mt-12 inline-flex items-center"
-              >
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 border-2 border-white"></div>
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 border-2 border-white"></div>
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 border-2 border-white"></div>
-                </div>
-                <div className="ml-4 text-blue-100 text-sm">
-                  Trusted by <span className="font-bold">300+</span> industries worldwide
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-          
-          <div className="lg:col-span-6 hidden lg:block">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="grid grid-cols-2 gap-6"
+              Hexachem
+              <div className="w-20 h-1 bg-blue-500 mt-2 mb-4"></div>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg text-gray-300 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
             >
-              {/* Product Cards with glass effect but no blur */}
-              <motion.div 
-                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
-                whileHover={{ y: -12, scale: 1.03 }}
+              Quality Chemical Distribution
+            </motion.p>
+            
+            <motion.p 
+              className="text-base text-gray-400 mb-10 max-w-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              Leading chemical distribution company with operations across Southeast Asia, 
+              providing innovative solutions and quality products to diverse industries.
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-row space-x-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+            >
+              <Button 
+                size="lg" 
+                className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-6 py-5 text-base transition-all duration-300"
+                onClick={() => scrollToSection("products")}
               >
-                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
-                  <FlaskRound className="w-10 h-10 text-blue-100" />
-                </div>
-                <span className="text-white font-bold text-xl">Alcohols</span>
-                <div className="mt-3 flex items-center text-blue-300 text-xs">
-                  <span>Learn more</span>
-                  <ChevronRight className="h-3 w-3 ml-1" />
-                </div>
-              </motion.div>
+                LEARN MORE
+              </Button>
               
-              <motion.div 
-                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
-                whileHover={{ y: -12, scale: 1.03 }}
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border border-amber-500/70 bg-transparent text-amber-500 hover:bg-amber-500/10 font-medium px-6 py-5 text-base transition-all duration-300"
+                onClick={() => scrollToSection("contact")}
               >
-                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
-                  <Droplets className="w-10 h-10 text-blue-100" />
-                </div>
-                <span className="text-white font-bold text-xl">Aromatics</span>
-                <div className="mt-3 flex items-center text-blue-300 text-xs">
-                  <span>Learn more</span>
-                  <ChevronRight className="h-3 w-3 ml-1" />
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
-                whileHover={{ y: -12, scale: 1.03 }}
-              >
-                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
-                  <Beaker className="w-10 h-10 text-blue-100" />
-                </div>
-                <span className="text-white font-bold text-xl">Glycols</span>
-                <div className="mt-3 flex items-center text-blue-300 text-xs">
-                  <span>Learn more</span>
-                  <ChevronRight className="h-3 w-3 ml-1" />
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-[#193b6a]/40 p-7 rounded-2xl border border-[#3b82f6]/20 flex flex-col items-center h-[180px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.2)] transition-all duration-500"
-                whileHover={{ y: -12, scale: 1.03 }}
-              >
-                <div className="p-4 rounded-full bg-gradient-to-br from-[#3b82f6]/40 to-[#1d4ed8]/40 mb-5 shadow-inner">
-                  <Atom className="w-10 h-10 text-blue-100" />
-                </div>
-                <span className="text-white font-bold text-xl">Amines</span>
-                <div className="mt-3 flex items-center text-blue-300 text-xs">
-                  <span>Learn more</span>
-                  <ChevronRight className="h-3 w-3 ml-1" />
-                </div>
-              </motion.div>
+                CONTACT US
+              </Button>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
       
