@@ -166,9 +166,9 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
           
           const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
           const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x4d9fff,
+            color: 0x60a5fa,
             transparent: true,
-            opacity: 0.6
+            opacity: 0.7
           });
           
           const line = new THREE.Line(lineGeometry, lineMaterial);
