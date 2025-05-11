@@ -57,7 +57,7 @@ export default function SustainabilitySection() {
   }, [isInView]);
 
   return (
-    <section id="sustainability" className="py-24 bg-secondary text-white" ref={sectionRef}>
+    <section id="sustainability" className="py-24 bg-primary text-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"
