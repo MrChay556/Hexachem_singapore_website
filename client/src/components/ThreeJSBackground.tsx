@@ -17,8 +17,9 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
 
     // Create scene
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(65, width / height, 0.1, 1000);
-    camera.position.z = 20;
+    const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
+    camera.position.z = 15;
+    camera.position.y = 1; // Slight offset to center the view better
 
     // Create renderer with transparent background
     const renderer = new THREE.WebGLRenderer({ 
@@ -61,8 +62,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       
       // Create central structure (hexagon-inspired arrangement)
       const centralPoints = [];
-      const radius = 8;
-      const height = 5;
+      const radius = 5; // Smaller radius to keep structure more compact
+      const height = 3; // Reduced height for a more centered view
       
       // Generate central hexagonal pattern points
       for (let i = 0; i < 6; i++) {
@@ -78,7 +79,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       centralPoints.push(new THREE.Vector3(0, 0, 0));
       
       // Add more complex structure around the hexagon
-      const totalPoints = 25; // Total atoms
+      const totalPoints = 20; // Total atoms
       const structurePoints = [...centralPoints];
       
       // Add additional atoms to create a more complex structure
@@ -87,11 +88,11 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         const referenceIdx = Math.floor(Math.random() * structurePoints.length);
         const referencePoint = structurePoints[referenceIdx];
         
-        // Create new position with small random offset
+        // Create new position with smaller random offset for more centralized structure
         const newPos = new THREE.Vector3(
-          referencePoint.x + (Math.random() - 0.5) * 5,
-          referencePoint.y + (Math.random() - 0.5) * 5,
-          referencePoint.z + (Math.random() - 0.5) * 3
+          referencePoint.x + (Math.random() - 0.5) * 3.5,
+          referencePoint.y + (Math.random() - 0.5) * 3.5,
+          referencePoint.z + (Math.random() - 0.5) * 2
         );
         
         structurePoints.push(newPos);
@@ -217,9 +218,10 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     // Create the complex molecular structure
     createComplexMolecular();
     
-    // Initial placement of the complex
-    complexMoleculeGroup.rotation.x = Math.PI * 0.15;
-    complexMoleculeGroup.rotation.y = Math.PI * 0.1;
+    // Initial placement of the complex - centered in view
+    complexMoleculeGroup.rotation.x = Math.PI * 0.1;
+    complexMoleculeGroup.rotation.y = Math.PI * 0.05;
+    complexMoleculeGroup.position.y = 0; // Center vertically
     
     // Animation loop
     const clock = new THREE.Clock();
@@ -229,9 +231,9 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       
       const elapsedTime = clock.getElapsedTime();
       
-      // Slow, smooth rotation of the entire structure
-      complexMoleculeGroup.rotation.y = Math.sin(elapsedTime * 0.05) * 0.2 + Math.PI * 0.1;
-      complexMoleculeGroup.rotation.x = Math.sin(elapsedTime * 0.04) * 0.15 + Math.PI * 0.15;
+      // Slow, gentler rotation of the entire structure
+      complexMoleculeGroup.rotation.y = Math.sin(elapsedTime * 0.04) * 0.15 + Math.PI * 0.05;
+      complexMoleculeGroup.rotation.x = Math.sin(elapsedTime * 0.03) * 0.1 + Math.PI * 0.1;
       
       // Animate individual atoms with subtle "breathing" movement
       atoms.forEach(atom => {

@@ -10,7 +10,10 @@ export default function HeroSection() {
       id="home" 
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      <ThreeJSBackground canvasId="molecule-animation" />
+      {/* Positioned in the center of the hero section */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <ThreeJSBackground canvasId="molecule-animation" />
+      </div>
       
       {/* Overlay gradient for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/30 z-[1]"></div>
