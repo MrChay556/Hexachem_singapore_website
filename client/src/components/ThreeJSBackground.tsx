@@ -145,15 +145,15 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       lines.push(line);
     }
     
-    // Function to create subtle dynamic connections from mouse to nearby particles
+    // Function to create more visible dynamic connections from mouse to nearby particles
     const createDynamicConnections = (mousePos: THREE.Vector3) => {
       // Clear previous dynamic connections
       dynamicLinesGroup.clear();
       dynamicLines.length = 0;
       
-      // Find particles within a certain range of the mouse
-      const maxConnectDistance = 5; // Shorter connection distance
-      const maxConnections = 5;     // Fewer connections for subtlety
+      // Find particles within a wider range of the mouse
+      const maxConnectDistance = 7; // Larger connection distance
+      const maxConnections = 8;     // More connections for better visibility
       
       const nearbyParticles = particles
         .map((particle, index) => ({
@@ -172,8 +172,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         const points = [mousePos, particle.position];
         const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
         
-        // Fade opacity based on distance
-        const opacity = 0.3 * (1 - nearby.distance / maxConnectDistance); // More subtle
+        // Fade opacity based on distance - more visible now
+        const opacity = 0.5 * (1 - nearby.distance / maxConnectDistance);
         
         const lineMaterial = new THREE.LineBasicMaterial({
           color: 0x60a5fa,
@@ -185,18 +185,40 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
         dynamicLinesGroup.add(line);
         dynamicLines.push(line);
         
-        // Subtle highlight for connected particles
+        // More noticeable highlight for connected particles
         const particleMaterial = particle.material as THREE.MeshBasicMaterial;
-        particleMaterial.opacity = 0.5;
-        particle.scale.set(1.2, 1.2, 1.2); // More subtle scale effect
+        particleMaterial.color.set(0x93c5fd); // Lighter blue
+        particleMaterial.opacity = 0.7;       // More visible
+        particle.scale.set(1.5, 1.5, 1.5);    // Larger scale effect
       });
+      
+      // Add a small pulsing effect to the mouse position
+      if (nearbyParticles.length > 0) {
+        const pulseGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+        const pulseMaterial = new THREE.MeshBasicMaterial({
+          color: 0x2563eb,
+          transparent: true,
+          opacity: 0.5
+        });
+        
+        const pulse = new THREE.Mesh(pulseGeometry, pulseMaterial);
+        pulse.position.copy(mousePos);
+        
+        dynamicLinesGroup.add(pulse);
+      }
     };
     
     // Mouse move event handler
     const onMouseMove = (event: MouseEvent) => {
-      // Calculate mouse position in normalized device coordinates
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      
+      // Calculate mouse position relative to the canvas
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      
+      mouse.x = (x / rect.width) * 2 - 1;
+      mouse.y = -(y / rect.height) * 2 + 1;
       
       // Update the picking ray with the camera and mouse position
       raycaster.setFromCamera(mouse, camera);
@@ -326,5 +348,10 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     };
   }, [canvasId]);
   
-  return <div id={canvasId} ref={containerRef} className="molecule-canvas absolute inset-0"></div>;
+  return <div 
+    id={canvasId} 
+    ref={containerRef} 
+    className="molecule-canvas absolute inset-0 cursor-help"
+    title="Move the mouse to interact with the particles"
+  ></div>;
 }
