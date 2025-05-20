@@ -68,6 +68,20 @@ export const translations = {
     
     // Product Descriptions
     'products.alcoholsDescription': 'Premium-grade alcohols for various industrial applications including cleaning, extraction, and synthesis processes.',
+    
+    // Product Details - Common Applications
+    'products.app.cleaning': 'Cleaning and disinfection',
+    'products.app.solvent': 'Industrial solvent',
+    'products.app.manufacturing': 'Manufacturing processes',
+    'products.app.personal': 'Personal care products',
+    'products.app.synthesis': 'Chemical synthesis',
+    'products.app.extraction': 'Extraction processes',
+    'products.app.pharmaceutical': 'Pharmaceutical applications',
+    'products.app.fuel': 'Fuel additive',
+    
+    // Product Details - UI Elements
+    'products.backToProducts': 'Back to Products',
+    'products.productDetails': 'Product Details',
     'products.aromaticsDescription': 'High-quality aromatic chemicals for coatings, plastics, and pharmaceutical applications.',
     'products.aliphaticsDescription': 'Premium aliphatic hydrocarbons for industrial applications and manufacturing processes.',
     'products.glycolsDescription': 'Industrial-grade glycols and glycol ethers for antifreeze, deicing, and solvent applications.',
@@ -155,6 +169,13 @@ export const translations = {
     'nav.industries': '行业',
     'nav.sustainability': '可持续发展',
     'nav.contact': '联系我们',
+    
+    // Product Modal
+    'applications': '应用',
+    'products.backToProducts': '返回产品',
+    'products.productDetails': '产品详情',
+    'products.casNumber': 'CAS 编号',
+    'products.specifications': '规格',
     
     // Hero Section
     'hero.title': '优质化学品分销',

@@ -313,7 +313,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
-              Back to Products
+              {t('products.backToProducts')}
             </button>
             
             <div className="flex items-center text-xs text-gray-500">
