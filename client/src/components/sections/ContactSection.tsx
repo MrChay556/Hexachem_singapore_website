@@ -7,8 +7,10 @@ import {
   MessageCircle
 } from "lucide-react";
 import whatsappQrCode from "../../assets/whatsapp-real-qr.png";
+import { useTranslation } from "../../contexts/TranslationContext";
 
 export default function ContactSection() {
+  const { t } = useTranslation();
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -20,12 +22,11 @@ export default function ContactSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get in <span className="text-primary">Touch</span>
+            {t('contact.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Have questions about our products or services? Reach out to our team for personalized assistance
-            or chat with our molecular assistant to get quick answers about our chemical solutions.
+            {t('contact.description')}
           </p>
         </motion.div>
         
@@ -46,8 +47,8 @@ export default function ContactSection() {
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Our Location</h4>
-                  <p className="text-gray-600">NO.3, SOON LEE STREET, PIONEER JUNCTION, #05-03, SINGAPORE - 627606</p>
+                  <h4 className="text-lg font-semibold">{t('contact.location')}</h4>
+                  <p className="text-gray-600">{t('contact.address')}</p>
                 </div>
               </div>
               
@@ -56,9 +57,8 @@ export default function ContactSection() {
                   <Phone className="h-5 w-5" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Phone Number</h4>
-                  <p className="text-gray-600">TEL: +65 6684 1780</p>
-                  <p className="text-gray-600">FAX: +65 6684 1781</p>
+                  <h4 className="text-lg font-semibold">{t('contact.phone')}</h4>
+                  <p className="text-gray-600">{t('contact.phoneNumber')}</p>
                 </div>
               </div>
               

@@ -4,8 +4,10 @@ import { productData } from "@/data/productData";
 import ProductDetailModal from "@/components/ProductDetailModal";
 import { ProductCategory } from "@/components/ProductDetailModal";
 import Interactive3DProductCard from "@/components/Interactive3DProductCard";
+import { useTranslation } from "../../contexts/TranslationContext";
 
 export default function ProductsSection() {
+  const { t } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState<ProductCategory | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -67,12 +69,11 @@ export default function ProductsSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Our <span className="text-primary">Products</span>
+            {t('products.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Hexachem offers high-quality chemical products including alcohols, aromatics, aliphatics, 
-            glycols, ketones, esters, and amines for various industrial applications.
+            {t('products.description')}
           </p>
         </motion.div>
         
