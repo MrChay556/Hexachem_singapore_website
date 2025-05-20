@@ -222,7 +222,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               aria-label="Back to products"
             >
               <ChevronLeft className="h-5 w-5 text-white" />
-              <span className="text-white text-sm ml-1 mr-1">{getUiText('back')}</span>
+              <span className="text-white text-sm ml-1 mr-1">{t('currentLanguage') === 'zh' ? '返回' : (t('currentLanguage') === 'ms' ? 'Kembali' : 'Back')}</span>
             </button>
           )}
           
@@ -345,21 +345,47 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                         {getUiText('applications')}
                       </h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
-                        {selectedProduct.applications.map((app, i) => (
-                          <motion.li 
-                            key={i}
-                            initial={{ opacity: 0, x: -5 }}
-                            animate={{ 
-                              opacity: 1, 
-                              x: 0,
-                              transition: { delay: 0.1 + i * 0.03 }
-                            }}
-                            className="flex items-start"
-                          >
-                            <span className="text-primary mr-2">•</span>
-                            <span>{app}</span>
-                          </motion.li>
-                        ))}
+                        {selectedProduct.applications.map((app, i) => {
+                          // Translate application names based on language
+                          let translatedApp = app;
+                          const lang = t('currentLanguage');
+                          
+                          if (lang === 'zh') {
+                            // Chinese translations for common applications
+                            if (app.includes('Cleaning and disinfection')) translatedApp = '清洁和消毒';
+                            else if (app.includes('Industrial solvent')) translatedApp = '工业溶剂';
+                            else if (app.includes('Pharmaceutical')) translatedApp = '制药加工';
+                            else if (app.includes('Personal care')) translatedApp = '个人护理产品';
+                            else if (app.includes('Manufacturing')) translatedApp = '制造工艺';
+                            else if (app.includes('Extraction')) translatedApp = '萃取过程';
+                            else if (app.includes('Synthesis')) translatedApp = '合成反应';
+                          } else if (lang === 'ms') {
+                            // Malay translations for common applications
+                            if (app.includes('Cleaning and disinfection')) translatedApp = 'Pembersihan dan pembasmian kuman';
+                            else if (app.includes('Industrial solvent')) translatedApp = 'Pelarut industri';
+                            else if (app.includes('Pharmaceutical')) translatedApp = 'Pemprosesan farmaseutikal';
+                            else if (app.includes('Personal care')) translatedApp = 'Produk penjagaan peribadi';
+                            else if (app.includes('Manufacturing')) translatedApp = 'Proses pembuatan';
+                            else if (app.includes('Extraction')) translatedApp = 'Proses pengekstrakan';
+                            else if (app.includes('Synthesis')) translatedApp = 'Tindak balas sintesis';
+                          }
+                          
+                          return (
+                            <motion.li 
+                              key={i}
+                              initial={{ opacity: 0, x: -5 }}
+                              animate={{ 
+                                opacity: 1, 
+                                x: 0,
+                                transition: { delay: 0.1 + i * 0.03 }
+                              }}
+                              className="flex items-start"
+                            >
+                              <span className="text-primary mr-2">•</span>
+                              <span>{translatedApp}</span>
+                            </motion.li>
+                          );
+                        })}
                       </ul>
                     </motion.div>
                   )}
@@ -388,7 +414,28 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                                   transition: { delay: 0.2 + i * 0.03 }
                                 }}
                               >
-                                <td className="px-4 py-3 text-sm font-medium text-gray-900 w-1/3">{key}</td>
+                                <td className="px-4 py-3 text-sm font-medium text-gray-900 w-1/3">
+                                  {t('currentLanguage') === 'zh' 
+                                    ? (key === 'Appearance' ? '外观' 
+                                      : key === 'Purity' ? '纯度'
+                                      : key === 'Water Content' ? '含水量'
+                                      : key === 'Acidity' ? '酸度'
+                                      : key === 'Density' ? '密度'
+                                      : key === 'Boiling Point' ? '沸点'
+                                      : key === 'Flashpoint' ? '闪点'
+                                      : key)
+                                    : (t('currentLanguage') === 'ms'
+                                      ? (key === 'Appearance' ? 'Rupa' 
+                                        : key === 'Purity' ? 'Ketulenan'
+                                        : key === 'Water Content' ? 'Kandungan Air'
+                                        : key === 'Acidity' ? 'Keasidan'
+                                        : key === 'Density' ? 'Ketumpatan'
+                                        : key === 'Boiling Point' ? 'Takat Didih'
+                                        : key === 'Flashpoint' ? 'Takat Kilat'
+                                        : key)
+                                      : key)
+                                  }
+                                </td>
                                 <td className="px-4 py-3 text-sm text-gray-700">{value}</td>
                               </motion.tr>
                             ))}
@@ -411,7 +458,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
-              {getUiText('backToProducts')}
+              {t('currentLanguage') === 'zh' ? '返回产品' : (t('currentLanguage') === 'ms' ? 'Kembali ke Produk' : 'Back to Products')}
             </button>
             
             <div className="flex items-center text-xs text-gray-500">
