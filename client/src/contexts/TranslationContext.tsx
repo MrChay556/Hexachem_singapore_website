@@ -58,6 +58,13 @@ export const translations = {
     'products.monomers': 'Specialized Monomers',
     'products.recycling': 'Chemical Recycling',
     'products.technical': 'Technical Consultation',
+    // Product Category Titles
+    'products.alcohols': 'Alcohols',
+    'products.aromatics': 'Aromatics',
+    'products.aliphatics': 'Aliphatics',
+    'products.glycols': 'Glycols',
+    'products.ketones': 'Ketones',
+    'products.amines': 'Amines',
     
     // Industries Section
     'industries.title': 'Industries We Serve',
@@ -174,6 +181,13 @@ export const translations = {
     'products.monomers': '专用单体',
     'products.recycling': '化学回收',
     'products.technical': '技术咨询',
+    // Product Category Titles
+    'products.alcohols': '醇类',
+    'products.aromatics': '芳香族化合物',
+    'products.aliphatics': '脂肪族化合物',
+    'products.glycols': '二醇类',
+    'products.ketones': '酮类',
+    'products.amines': '胺类',
     
     // Industries Section
     'industries.title': '我们服务的行业',
@@ -290,6 +304,13 @@ export const translations = {
     'products.monomers': 'Monomer Khusus',
     'products.recycling': 'Kitar Semula Kimia',
     'products.technical': 'Perundingan Teknikal',
+    // Product Category Titles
+    'products.alcohols': 'Alkohol',
+    'products.aromatics': 'Aromatik',
+    'products.aliphatics': 'Alifatik',
+    'products.glycols': 'Glikol',
+    'products.ketones': 'Keton',
+    'products.amines': 'Amina',
     
     // Industries Section
     'industries.title': 'Industri Yang Kami Layani',

@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { ProductCategory } from './ProductDetailModal';
+import { useTranslation } from '../contexts/TranslationContext';
 
 interface Interactive3DProductCardProps {
   product: ProductCategory;
