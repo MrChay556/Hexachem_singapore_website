@@ -12,6 +12,7 @@ interface Interactive3DProductCardProps {
 }
 
 export default function Interactive3DProductCard({ product, onClick, index }: Interactive3DProductCardProps) {
+  const { t } = useTranslation();
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -157,7 +158,7 @@ export default function Interactive3DProductCard({ product, onClick, index }: In
                 transform: isHovered ? `translateZ(5px)` : 'translateZ(0px)'
               }}
             >
-              {product.title}
+              {t(`products.${product.id}`)}
             </motion.h3>
           </motion.div>
         </div>
