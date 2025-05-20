@@ -3,8 +3,11 @@ import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
+import { useTranslation } from "../contexts/TranslationContext";
 
 export default function Footer() {
+  const { t } = useTranslation();
+  
   const handleNavClick = (href: string) => {
     scrollToSection(href);
   };
@@ -37,8 +40,7 @@ export default function Footer() {
             </div>
             
             <p className="text-gray-400 mb-6">
-              Innovating chemical sustainability since 2011. Leading the way in chemical 
-              recycling and trading solutions.
+              {t('footer.description')}
             </p>
             
             <div className="flex space-x-4">
@@ -72,7 +74,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h4 className="text-lg font-bold mb-6">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-6">{t('footer.quickLinks')}</h4>
             <ul className="space-y-3">
               {["home", "about", "products", "industries", "sustainability", "contact"].map((link) => (
                 <li key={link}>
@@ -97,7 +99,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h4 className="text-lg font-bold mb-6">Products</h4>
+            <h4 className="text-lg font-bold mb-6">{t('nav.products')}</h4>
             <ul className="space-y-3">
               <li>
                 <a 
@@ -168,16 +170,16 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h4 className="text-lg font-bold mb-6">Subscribe</h4>
+            <h4 className="text-lg font-bold mb-6">{t('footer.subscribe')}</h4>
             <p className="text-gray-400 mb-4">
-              Stay updated with our latest news and product announcements.
+              {t('footer.subscribeDesc')}
             </p>
             
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <Input 
                   type="email" 
-                  placeholder="Your email address" 
+                  placeholder={t('footer.emailPlaceholder')} 
                   required
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-white"
                 />
@@ -186,7 +188,7 @@ export default function Footer() {
                 type="submit"
                 className="w-full py-3 bg-primary hover:bg-primary-dark text-white font-semibold"
               >
-                Subscribe
+                {t('footer.subscribe')}
               </Button>
             </form>
           </motion.div>
@@ -196,7 +198,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
               <p className="text-gray-500 mb-4 md:mb-0">
-                &copy; {new Date().getFullYear()} Hexachem (S) Pte Ltd. All rights reserved.
+                &copy; {new Date().getFullYear()} Hexachem (S) Pte Ltd. {t('footer.copyright')}
               </p>
               <p className="text-gray-500 mb-4 md:mb-0">
                 Powered by <a href="https://myrsv.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light transition-all">RSV Infotech Pte. Ltd.</a>
