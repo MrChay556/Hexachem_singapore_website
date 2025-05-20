@@ -181,6 +181,20 @@ export const translations = {
     'products.noProductsFound': '未找到产品',
     'products.tryAdjusting': '请尝试调整搜索条件',
     
+    // Product Descriptions for Modal Cards
+    'products.alcoholsDescription': '高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。',
+    'products.aromaticsDescription': '用于涂料、塑料和制药应用的高质量芳香族化学品。',
+    'products.aliphaticsDescription': '适用于工业应用和制造工艺的优质脂肪族碳氢化合物。',
+    'products.glycolsDescription': '用于防冻、除冰和溶剂应用的工业级乙二醇和乙二醇醚。',
+    'products.ketonesDescription': '用于工业溶剂、涂料和制药中间体的特种酮类。',
+    'products.aminesDescription': '用于制药、农用化学品和聚合物行业的高纯度胺类。',
+    
+    // Product Detail Descriptions
+    'product.ipaDescription': '无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。',
+    'product.butanolDescription': '一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。',
+    'product.methanolDescription': '最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。',
+    'product.ethanolDescription': '一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。',
+    
     // Hero Section
     'hero.title': '优质化学品分销',
     'hero.subtitle': '领先的化学品分销公司，业务遍及东南亚，为各行各业提供创新解决方案和优质产品。',
