@@ -135,6 +135,30 @@
   }
 }
 
+/* 3D Effect Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.card-container {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .bg-gradient-primary {
   @apply bg-gradient-to-r from-[#1a4679] to-[#2a5188];
 }

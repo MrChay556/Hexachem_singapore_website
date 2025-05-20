@@ -1,15 +1,34 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { motion, useMotionValue } from "framer-motion";
 import { productData } from "@/data/productData";
 import ProductDetailModal from "@/components/ProductDetailModal";
 import { ProductCategory } from "@/components/ProductDetailModal";
+import Interactive3DProductCard from "@/components/Interactive3DProductCard";
 
 export default function ProductsSection() {
   const [selectedProduct, setSelectedProduct] = useState<ProductCategory | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Track mouse position for ambient light effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        mouseX.set(x);
+        mouseY.set(y);
+      }
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
   
   const handleOpenModal = (product: ProductCategory) => {
     setSelectedProduct(product);
@@ -21,8 +40,25 @@ export default function ProductsSection() {
   };
 
   return (
-    <section id="products" className="py-24 bg-background">
-      <div className="container mx-auto px-4">
+    <section 
+      id="products" 
+      className="py-24 bg-background relative overflow-hidden"
+      ref={sectionRef}
+    >
+      {/* Dynamic gradient background based on mouse position */}
+      <div 
+        className="absolute inset-0 opacity-15 pointer-events-none"
+        style={{
+          background: `radial-gradient(
+            600px circle at ${mouseX.get()}px ${mouseY.get()}px,
+            rgba(59, 130, 246, 0.15),
+            transparent 80%
+          )`,
+          transition: 'background 0.2s ease',
+        }}
+      />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -40,53 +76,24 @@ export default function ProductsSection() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {productData.map((product, index) => (
-            <motion.div
-              key={product.id}
-              id={product.id}
-              className="card-hover"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ 
-                duration: 0.5, 
-                delay: 0.1 * (index % 3) // Stagger animations by column
-              }}
-            >
-              <Card className="overflow-hidden h-full">
-                <img 
-                  src={product.image} 
-                  alt={product.title} 
-                  className="w-full h-48 object-cover"
+        <div className="relative">
+          {/* Product grid with 3D interactive cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
+            {productData.map((product, index) => (
+              <div key={product.id} id={product.id} className="h-[420px]">
+                <Interactive3DProductCard 
+                  product={product} 
+                  onClick={handleOpenModal} 
+                  index={index} 
                 />
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{product.title}</h3>
-                  <p className="text-gray-600 mb-4">
-                    {product.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {product.tags.map(tag => (
-                      <Badge key={tag} variant="outline" className="bg-primary/10 text-primary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => {
-                      console.log("Opening modal for:", product.title);
-                      handleOpenModal(product);
-                    }}
-                    className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark flex items-center cursor-pointer"
-                  >
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+      
+      {/* Product overlay effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 opacity-50 pointer-events-none" />
       
       {selectedProduct && (
         <ProductDetailModal
