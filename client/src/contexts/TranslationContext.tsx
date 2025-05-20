@@ -53,6 +53,11 @@ export const translations = {
     'products.specifications': 'Specifications',
     'products.moreInfo': 'For more information on our products, please contact our sales team.',
     'products.casNumber': 'CAS Number',
+    'products.industrial': 'Industrial Solvents',
+    'products.fuel': 'Fuel Oil Products',
+    'products.monomers': 'Specialized Monomers',
+    'products.recycling': 'Chemical Recycling',
+    'products.technical': 'Technical Consultation',
     
     // Industries Section
     'industries.title': 'Industries We Serve',
@@ -164,6 +169,11 @@ export const translations = {
     'products.specifications': '规格',
     'products.moreInfo': '有关我们产品的更多信息，请联系我们的销售团队。',
     'products.casNumber': 'CAS 编号',
+    'products.industrial': '工业溶剂',
+    'products.fuel': '燃料油产品',
+    'products.monomers': '专用单体',
+    'products.recycling': '化学回收',
+    'products.technical': '技术咨询',
     
     // Industries Section
     'industries.title': '我们服务的行业',
@@ -275,6 +285,11 @@ export const translations = {
     'products.specifications': 'Spesifikasi',
     'products.moreInfo': 'Untuk maklumat lanjut tentang produk kami, sila hubungi pasukan jualan kami.',
     'products.casNumber': 'Nombor CAS',
+    'products.industrial': 'Pelarut Industri',
+    'products.fuel': 'Produk Minyak Bahan Api',
+    'products.monomers': 'Monomer Khusus',
+    'products.recycling': 'Kitar Semula Kimia',
+    'products.technical': 'Perundingan Teknikal',
     
     // Industries Section
     'industries.title': 'Industri Yang Kami Layani',

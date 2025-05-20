@@ -86,7 +86,7 @@ export default function Footer() {
                     }}
                     className="text-gray-400 hover:text-white transition-all"
                   >
-                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                    {t(`nav.${link}`)}
                   </a>
                 </li>
               ))}
@@ -110,7 +110,7 @@ export default function Footer() {
                   }}
                   className="text-gray-400 hover:text-white transition-all"
                 >
-                  Industrial Solvents
+                  {t('products.industrial')}
                 </a>
               </li>
               <li>
@@ -122,7 +122,7 @@ export default function Footer() {
                   }}
                   className="text-gray-400 hover:text-white transition-all"
                 >
-                  Fuel Oil Products
+                  {t('products.fuel')}
                 </a>
               </li>
               <li>
@@ -134,7 +134,7 @@ export default function Footer() {
                   }}
                   className="text-gray-400 hover:text-white transition-all"
                 >
-                  Specialized Monomers
+                  {t('products.monomers')}
                 </a>
               </li>
               <li>
@@ -146,7 +146,7 @@ export default function Footer() {
                   }}
                   className="text-gray-400 hover:text-white transition-all"
                 >
-                  Chemical Recycling
+                  {t('products.recycling')}
                 </a>
               </li>
               <li>
@@ -158,7 +158,7 @@ export default function Footer() {
                   }}
                   className="text-gray-400 hover:text-white transition-all"
                 >
-                  Technical Consultation
+                  {t('products.technical')}
                 </a>
               </li>
             </ul>
