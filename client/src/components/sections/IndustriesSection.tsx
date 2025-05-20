@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PaintBucket, Utensils, Recycle, Building } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
+import Interactive3DIndustryCard from "@/components/Interactive3DIndustryCard";
 
 interface Industry {
   id: string;
@@ -58,30 +59,11 @@ export default function IndustriesSection() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 perspective-1000">
           {industries.map((industry, index) => (
-            <motion.div
-              key={industry.id}
-              className="bg-white p-8 rounded-xl shadow-lg text-center hover:bg-primary hover:text-white transition-all duration-300 card-hover group"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-            >
-              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white">
-                <div className="group-hover:text-primary">{industry.icon}</div>
-              </div>
-              <h3 className="text-xl font-bold mb-4">{industry.title}</h3>
-              <p className="text-gray-600 group-hover:text-white/90 mb-6">
-                {industry.description}
-              </p>
-              <button 
-                onClick={() => scrollToSection("contact")}
-                className="text-primary font-medium hover:text-primary-dark group-hover:text-white"
-              >
-                Learn More →
-              </button>
-            </motion.div>
+            <div key={industry.id} className="h-[300px]">
+              <Interactive3DIndustryCard industry={industry} index={index} />
+            </div>
           ))}
         </div>
         

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { X, ChevronRight, ChevronLeft, Search, LayoutGrid, Beaker, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Interactive3DProductModalCard from './Interactive3DProductModalCard';
 
 export interface ProductDetail {
   name: string;
@@ -189,7 +190,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 perspective-1000"
               >
                 {filteredProducts.length === 0 ? (
                   <div className="col-span-2 py-12 text-center">
@@ -201,47 +202,12 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                   </div>
                 ) : (
                   filteredProducts.map((detail, index) => (
-                    <motion.div
+                    <Interactive3DProductModalCard
                       key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
-                        opacity: 1, 
-                        y: 0,
-                        transition: { delay: index * 0.05 }
-                      }}
-                      whileHover={{ scale: 1.02 }}
-                      className="group cursor-pointer bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all"
-                      onClick={() => handleProductSelect(detail)}
-                    >
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-xl font-bold text-primary/90 group-hover:text-primary transition-colors">{detail.name}</h3>
-                          <p className="text-gray-600 mt-2 line-clamp-2 text-sm">{detail.description}</p>
-                        </div>
-                        <div className="bg-primary/10 rounded-full p-2 group-hover:bg-primary/20 transition-colors">
-                          <ChevronRight className="h-5 w-5 text-primary" />
-                        </div>
-                      </div>
-                      
-                      {/* Preview stats */}
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {detail.casNumber && (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            CAS: {detail.casNumber}
-                          </span>
-                        )}
-                        {detail.applications && (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            {detail.applications.length} Applications
-                          </span>
-                        )}
-                        {detail.specifications && (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                            {Object.keys(detail.specifications).length} Specifications
-                          </span>
-                        )}
-                      </div>
-                    </motion.div>
+                      detail={detail}
+                      onClick={handleProductSelect}
+                      index={index}
+                    />
                   ))
                 )}
               </motion.div>
