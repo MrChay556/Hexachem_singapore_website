@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 import { animateNumber } from "@/lib/utils";
+import { useTranslation } from "../../contexts/TranslationContext";
 
 interface Metric {
   id: string;
@@ -39,6 +40,7 @@ const metrics: Metric[] = [
 ];
 
 export default function SustainabilitySection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
@@ -66,12 +68,11 @@ export default function SustainabilitySection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Our Commitment to <span className="text-accent-light">Sustainability</span>
+            {t('sustainability.title')}
           </h2>
           <div className="w-24 h-1 bg-white mx-auto mb-6"></div>
           <p className="text-lg text-white/80 max-w-3xl mx-auto">
-            At Hexachem, we're dedicated to creating a more sustainable future through 
-            innovative chemical recycling processes and eco-friendly practices.
+            {t('sustainability.description')}
           </p>
         </motion.div>
         

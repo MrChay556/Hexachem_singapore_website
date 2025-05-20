@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, ChevronRight, ChevronLeft, Search, LayoutGrid, Beaker, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Interactive3DProductModalCard from './Interactive3DProductModalCard';
+import { useTranslation } from '../contexts/TranslationContext';
 
 export interface ProductDetail {
   name: string;
@@ -28,6 +29,7 @@ interface ProductDetailModalProps {
 }
 
 export default function ProductDetailModal({ isOpen, onClose, product }: ProductDetailModalProps) {
+  const { t } = useTranslation();
   // State for the selected product detail
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -148,7 +150,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search products..."
+                    placeholder={t('products.viewAll')}
                     className="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
@@ -242,7 +244,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        Applications
+                        {t('products.applications')}
                       </h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
                         {selectedProduct.applications.map((app, i) => (
@@ -272,7 +274,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        Specifications
+                        {t('products.specifications')}
                       </h4>
                       <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
                         <table className="min-w-full divide-y divide-gray-200">
