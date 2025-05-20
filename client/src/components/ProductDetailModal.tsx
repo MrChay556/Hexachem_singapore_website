@@ -230,7 +230,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                   
                   {selectedProduct.casNumber && (
                     <div className="mb-6 inline-block bg-blue-50 px-4 py-2 rounded-lg">
-                      <span className="font-semibold text-gray-800">{t('products.casNumber')}: </span>
+                      <span className="font-semibold text-gray-800">CAS {t('currentLanguage') === 'zh' ? '编号' : 'Number'}: </span>
                       <span className="text-gray-700">{selectedProduct.casNumber}</span>
                     </div>
                   )}
@@ -317,7 +317,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
             </button>
             
             <div className="flex items-center text-xs text-gray-500">
-              <span>Product {product.details.findIndex(p => p.name === selectedProduct.name) + 1} of {product.details.length}</span>
+              <span>{t('currentLanguage') === 'zh' ? '产品' : 'Product'} {product.details.findIndex(p => p.name === selectedProduct.name) + 1} {t('currentLanguage') === 'zh' ? '共' : 'of'} {product.details.length}</span>
             </div>
           </div>
         )}
