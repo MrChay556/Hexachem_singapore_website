@@ -286,7 +286,7 @@ export default function MolecularMascot() {
                     <MoleculeMascot />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">MolecuBuddy</h3>
+                    <h3 className="font-bold text-lg">MolecuEBuddy</h3>
                     <p className="text-xs text-blue-100">Hexachem's Assistant</p>
                   </div>
                 </div>
@@ -382,7 +382,7 @@ export default function MolecularMascot() {
                 </div>
                 
                 <div className="mt-2 text-xs text-gray-500 text-center">
-                  Powered by OpenAI | Ask about our products, services, or industry solutions
+                  Powered by RSV AI | Ask about products, services, or industry solutions
                 </div>
               </div>
             </motion.div>
