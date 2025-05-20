@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { PaintBucket, Utensils, Recycle, Building } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 import SimpleIndustryCard from "@/components/SimpleIndustryCard";
+import { useTranslation } from "../../contexts/TranslationContext";
 
 interface Industry {
   id: string;
@@ -39,6 +40,7 @@ const industries: Industry[] = [
 ];
 
 export default function IndustriesSection() {
+  const { t } = useTranslation();
   return (
     <section id="industries" className="py-24 bg-card/50">
       <div className="container mx-auto px-4">
@@ -50,12 +52,11 @@ export default function IndustriesSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Industries We <span className="text-primary">Serve</span>
+            {t('industries.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Our chemical solutions power a wide range of industries with tailored 
-            products that meet specific sector needs.
+            {t('industries.description')}
           </p>
         </motion.div>
         
