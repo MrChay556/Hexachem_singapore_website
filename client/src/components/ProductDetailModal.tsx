@@ -30,22 +30,102 @@ interface ProductDetailModalProps {
 
 export default function ProductDetailModal({ isOpen, onClose, product }: ProductDetailModalProps) {
   const { t } = useTranslation();
+  
   // State for the selected product detail
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Function to translate static text elements based on language
-  const getTranslatedUI = (key: string) => {
-    // Chinese translations
-    const zhTranslations: Record<string, string> = {
-      'applications': '应用',
-      'specifications': '规格',
-      'backToProducts': '返回产品',
-      'noProductsFound': '未找到产品',
-      'tryAdjusting': '请尝试调整搜索条件'
+  // Function to get translated UI text based on the current language
+  const getUiText = (key: string): string => {
+    const translations: Record<string, Record<string, string>> = {
+      en: {
+        'applications': 'Applications',
+        'specifications': 'Specifications',
+        'backToProducts': 'Back to Products',
+        'productDetails': 'Product Details',
+        'searchProducts': 'Search products...',
+        'noProductsFound': 'No products found',
+        'tryAdjusting': 'Try adjusting your search criteria',
+        'casNumber': 'CAS Number',
+        'products': 'Products',
+        'product': 'Product',
+        'of': 'of',
+        'back': 'Back'
+      },
+      zh: {
+        'applications': '应用',
+        'specifications': '规格',
+        'backToProducts': '返回产品',
+        'productDetails': '产品详情',
+        'searchProducts': '搜索产品...',
+        'noProductsFound': '未找到产品',
+        'tryAdjusting': '请尝试调整搜索条件',
+        'casNumber': '编号',
+        'products': '产品',
+        'product': '产品',
+        'of': '共',
+        'back': '返回'
+      },
+      ms: {
+        'applications': 'Aplikasi',
+        'specifications': 'Spesifikasi',
+        'backToProducts': 'Kembali ke Produk',
+        'productDetails': 'Butiran Produk',
+        'searchProducts': 'Cari produk...',
+        'noProductsFound': 'Tiada produk dijumpai',
+        'tryAdjusting': 'Cuba sesuaikan kriteria carian anda',
+        'casNumber': 'Nombor CAS',
+        'products': 'Produk',
+        'product': 'Produk',
+        'of': 'daripada',
+        'back': 'Kembali'
+      }
     };
     
-    return t('currentLanguage') === 'zh' ? zhTranslations[key] || key : key;
+    const lang = t('currentLanguage');
+    return translations[lang] && translations[lang][key] ? translations[lang][key] : translations['en'][key];
+  };
+  
+  // Get translated product description based on product name and language
+  const getTranslatedDescription = (product: ProductDetail): string => {
+    const lang = t('currentLanguage');
+    
+    if (lang === 'zh') {
+      if (product.name.includes("Isopropyl")) {
+        return "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。";
+      } else if (product.name.includes("n-Butanol")) {
+        return "一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。";
+      } else if (product.name.includes("Methanol")) {
+        return "最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。";
+      } else if (product.name.includes("Ethanol")) {
+        return "一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。";
+      }
+    } else if (lang === 'ms') {
+      if (product.name.includes("Isopropyl")) {
+        return "Sebatian kimia tidak berwarna, mudah terbakar dengan bau yang kuat. Ia adalah contoh paling mudah alkohol sekunder, di mana karbon alkohol dilampirkan pada dua karbon lain.";
+      } else if (product.name.includes("n-Butanol")) {
+        return "Alkohol primer dengan empat atom karbon. Ia adalah cecair tidak berwarna yang sukar larut dalam air tetapi boleh bercampur dengan kebanyakan pelarut organik.";
+      } else if (product.name.includes("Methanol")) {
+        return "Alkohol yang paling mudah, ia adalah cecair ringan, mudah meruap, tidak berwarna, mudah terbakar dengan bau yang tersendiri. Digunakan sebagai bahan makanan, pelarut, dan bahan api.";
+      } else if (product.name.includes("Ethanol")) {
+        return "Sebatian kimia tidak berwarna, sedikit toksik dengan bau yang tersendiri. Ia digunakan secara meluas dalam pembasmi kuman, pelarut, bahan api, dan industri minuman.";
+      }
+    }
+    
+    return product.description;
+  };
+  
+  // Get translated product category description
+  const getTranslatedCategoryDescription = (): string => {
+    const lang = t('currentLanguage');
+    
+    if (lang === 'zh' && product.id === 'alcohols') {
+      return '高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。';
+    } else if (lang === 'ms' && product.id === 'alcohols') {
+      return 'Produk alkohol premium untuk pelbagai aplikasi industri termasuk pembersihan, pengekstrakan, dan proses sintesis.';
+    }
+    
+    return product.description;
   };
   
   // Reset selected product when modal closes
@@ -142,7 +222,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               aria-label="Back to products"
             >
               <ChevronLeft className="h-5 w-5 text-white" />
-              <span className="text-white text-sm ml-1 mr-1">Back</span>
+              <span className="text-white text-sm ml-1 mr-1">{getUiText('back')}</span>
             </button>
           )}
           
@@ -151,7 +231,9 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
             <div className="container mx-auto px-4 py-3 flex items-center justify-between">
               <div className="flex items-center space-x-2 text-primary-600">
                 <Beaker className="h-5 w-5" />
-                <span className="text-sm font-medium">{selectedProduct ? selectedProduct.name : "Products"}</span>
+                <span className="text-sm font-medium">
+                  {selectedProduct ? selectedProduct.name : getUiText('products')}
+                </span>
               </div>
               
               {/* Search input - only shown on product list */}
@@ -164,7 +246,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder={t('products.viewAll')}
+                    placeholder={getUiText('searchProducts')}
                     className="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
@@ -174,12 +256,12 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                 {selectedProduct ? (
                   <div className="flex items-center">
                     <LayoutGrid className="h-4 w-4 mr-1" />
-                    <span>Product Details</span>
+                    <span>{getUiText('productDetails')}</span>
                   </div>
                 ) : (
                   <div className="flex items-center">
                     <Sparkles className="h-4 w-4 mr-1" />
-                    <span>{product.details.length} Products</span>
+                    <span>{product.details.length} {getUiText('products')}</span>
                   </div>
                 )}
               </div>
@@ -193,9 +275,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
           {!selectedProduct && (
             <div className="mb-6">
               <p className="text-gray-700 text-lg">
-                {t('currentLanguage') === 'zh' ? 
-                  (product.id === 'alcohols' ? '高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。' : product.description) : 
-                  product.description}
+                {getTranslatedCategoryDescription()}
               </p>
             </div>
           )}
@@ -215,8 +295,8 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
                       <Search className="h-8 w-8 text-gray-400" />
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900">{t('products.noProductsFound') || 'No products found'}</h3>
-                    <p className="mt-1 text-sm text-gray-500">{t('products.tryAdjusting') || 'Try adjusting your search terms'}</p>
+                    <h3 className="text-lg font-medium text-gray-900">{getUiText('noProductsFound')}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{getUiText('tryAdjusting')}</p>
                   </div>
                 ) : (
                   filteredProducts.map((detail, index) => (
@@ -242,21 +322,13 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               >
                 <div className="border border-gray-200 rounded-xl p-6 shadow-sm bg-white">
                   <h3 className="text-2xl font-bold text-primary mb-4">{selectedProduct.name}</h3>
-                  <p className="text-gray-700 mb-6 text-base">{t('currentLanguage') === 'zh' ? 
-                    (selectedProduct.name.includes("Isopropyl") ? 
-                      "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。" : 
-                     selectedProduct.name.includes("n-Butanol") ? 
-                      "一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。" :
-                     selectedProduct.name.includes("Methanol") ? 
-                      "最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。" :
-                     selectedProduct.name.includes("Ethanol") ? 
-                      "一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。" :
-                     selectedProduct.description) : 
-                    selectedProduct.description}</p>
+                  <p className="text-gray-700 mb-6 text-base">
+                    {getTranslatedDescription(selectedProduct)}
+                  </p>
                   
                   {selectedProduct.casNumber && (
                     <div className="mb-6 inline-block bg-blue-50 px-4 py-2 rounded-lg">
-                      <span className="font-semibold text-gray-800">CAS {t('currentLanguage') === 'zh' ? '编号' : 'Number'}: </span>
+                      <span className="font-semibold text-gray-800">CAS {getUiText('casNumber')}: </span>
                       <span className="text-gray-700">{selectedProduct.casNumber}</span>
                     </div>
                   )}
@@ -270,7 +342,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        {t('currentLanguage') === 'zh' ? '应用' : 'Applications'}
+                        {getUiText('applications')}
                       </h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
                         {selectedProduct.applications.map((app, i) => (
@@ -300,7 +372,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        规格
+                        {getUiText('specifications')}
                       </h4>
                       <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
                         <table className="min-w-full divide-y divide-gray-200">
@@ -339,11 +411,13 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
-              {t('products.backToProducts')}
+              {getUiText('backToProducts')}
             </button>
             
             <div className="flex items-center text-xs text-gray-500">
-              <span>{t('currentLanguage') === 'zh' ? '产品' : 'Product'} {product.details.findIndex(p => p.name === selectedProduct.name) + 1} {t('currentLanguage') === 'zh' ? '共' : 'of'} {product.details.length}</span>
+              <span>
+                {getUiText('product')} {product.details.findIndex(p => p.name === selectedProduct.name) + 1} {getUiText('of')} {product.details.length}
+              </span>
             </div>
           </div>
         )}
