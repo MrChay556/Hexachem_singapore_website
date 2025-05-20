@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Search, LayoutGrid, Beaker, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export interface ProductDetail {
   name: string;
@@ -26,6 +27,18 @@ interface ProductDetailModalProps {
 }
 
 export default function ProductDetailModal({ isOpen, onClose, product }: ProductDetailModalProps) {
+  // State for the selected product detail
+  const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  // Reset selected product when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedProduct(null);
+      setSearchTerm('');
+    }
+  }, [isOpen]);
+  
   useEffect(() => {
     // Disable body scroll when modal is open
     if (isOpen) {
@@ -41,30 +54,52 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
   
   if (!isOpen) return null;
   
+  // Filter products based on search term
+  const filteredProducts = searchTerm 
+    ? product.details.filter(detail => 
+        detail.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        detail.description.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : product.details;
+  
+  // Return to product list
+  const handleBack = () => {
+    setSelectedProduct(null);
+  };
+  
+  // Handle product selection
+  const handleProductSelect = (detail: ProductDetail) => {
+    setSelectedProduct(detail);
+  };
+  
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center" onClick={onClose}>
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
       
       {/* Modal */}
-      <div 
-        className="relative bg-white rounded-lg shadow-xl w-full max-w-[700px] mt-10 max-h-[85vh] flex flex-col overflow-hidden z-50"
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="relative bg-white rounded-xl shadow-2xl w-full max-w-[800px] mt-10 max-h-[85vh] flex flex-col overflow-hidden z-50"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Fixed Header with Close Button */}
         <div className="sticky top-0 z-50 w-full">
-          <div className="relative w-full h-48 bg-gradient-to-br from-primary/90 to-primary">
+          <div className="relative w-full h-48 bg-gradient-to-br from-primary to-blue-800">
             <img 
               src={product.image} 
               alt={product.title} 
-              className="w-full h-full object-cover mix-blend-overlay"
+              className="w-full h-full object-cover mix-blend-overlay opacity-60"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <h2 className="text-3xl font-bold text-white mb-2 drop-shadow-md">{product.title}</h2>
+              <div className="text-center px-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-md">{product.title}</h2>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {product.tags.map(tag => (
-                    <Badge key={tag} variant="outline" className="bg-white/20 text-white border-white/30">
+                    <Badge key={tag} variant="outline" className="bg-white/30 text-white border-white/40 backdrop-blur-sm">
                       {tag}
                     </Badge>
                   ))}
@@ -76,70 +111,249 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
           {/* Fixed close button */}
           <button 
             onClick={onClose}
-            className="absolute top-4 right-4 rounded-full p-2 bg-white/20 hover:bg-white/40 transition-colors shadow-md z-50"
+            className="absolute top-4 right-4 rounded-full p-2 bg-white/30 hover:bg-white/50 transition-all shadow-lg backdrop-blur-sm z-50"
+            aria-label="Close"
           >
             <X className="h-5 w-5 text-white" />
           </button>
-        </div>
-        
-        {/* Scrollable Content */}
-        <div className="p-6 overflow-y-auto" style={{maxHeight: 'calc(85vh - 12rem)'}}>
-          <p className="text-gray-700 mb-6 text-lg">
-            {product.description}
-          </p>
           
-          <div className="space-y-8 mt-6">
-            {product.details.map((detail, index) => (
-              <div key={index} className="border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
-                <h3 className="text-xl font-bold text-primary/90 mb-3">{detail.name}</h3>
-                <p className="text-gray-600 mb-4 text-base">{detail.description}</p>
-                
-                {detail.casNumber && (
-                  <div className="mb-4 inline-block bg-gray-100 px-3 py-1 rounded-full">
-                    <span className="font-semibold text-gray-700">CAS Number: </span>
-                    <span className="text-gray-600">{detail.casNumber}</span>
+          {/* Back button - only shown when a product is selected */}
+          {selectedProduct && (
+            <button 
+              onClick={handleBack}
+              className="absolute top-4 left-4 rounded-full p-2 bg-white/30 hover:bg-white/50 transition-all shadow-lg backdrop-blur-sm z-50 flex items-center"
+              aria-label="Back to products"
+            >
+              <ChevronLeft className="h-5 w-5 text-white" />
+              <span className="text-white text-sm ml-1 mr-1">Back</span>
+            </button>
+          )}
+          
+          {/* Navigation bar */}
+          <div className="bg-white border-b border-gray-100 shadow-sm">
+            <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2 text-primary-600">
+                <Beaker className="h-5 w-5" />
+                <span className="text-sm font-medium">{selectedProduct ? selectedProduct.name : "Products"}</span>
+              </div>
+              
+              {/* Search input - only shown on product list */}
+              {!selectedProduct && (
+                <div className="relative flex-1 max-w-xs mx-4">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Search className="h-4 w-4 text-gray-400" />
                   </div>
-                )}
-                
-                {detail.applications && detail.applications.length > 0 && (
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center">
-                      <span className="h-6 w-1 bg-primary/80 mr-2 rounded-full"></span>
-                      Applications
-                    </h4>
-                    <ul className="list-disc pl-5 text-gray-600 space-y-1">
-                      {detail.applications.map((app, i) => (
-                        <li key={i}>{app}</li>
-                      ))}
-                    </ul>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search products..."
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+              )}
+              
+              <div className="text-xs text-gray-500">
+                {selectedProduct ? (
+                  <div className="flex items-center">
+                    <LayoutGrid className="h-4 w-4 mr-1" />
+                    <span>Product Details</span>
                   </div>
-                )}
-                
-                {detail.specifications && Object.keys(detail.specifications).length > 0 && (
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center">
-                      <span className="h-6 w-1 bg-primary/80 mr-2 rounded-full"></span>
-                      Specifications
-                    </h4>
-                    <div className="bg-gray-50 rounded-md overflow-hidden border border-gray-100">
-                      <table className="min-w-full divide-y divide-gray-200">
-                        <tbody className="divide-y divide-gray-200">
-                          {Object.entries(detail.specifications).map(([key, value]) => (
-                            <tr key={key} className="hover:bg-gray-50">
-                              <td className="px-4 py-3 text-sm font-medium text-gray-700 w-1/3">{key}</td>
-                              <td className="px-4 py-3 text-sm text-gray-600">{value}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                ) : (
+                  <div className="flex items-center">
+                    <Sparkles className="h-4 w-4 mr-1" />
+                    <span>{product.details.length} Products</span>
                   </div>
                 )}
               </div>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
+        
+        {/* Scrollable Content */}
+        <div className="p-6 overflow-y-auto" style={{maxHeight: 'calc(85vh - 14rem)'}}>
+          {/* Product category description */}
+          {!selectedProduct && (
+            <div className="mb-6">
+              <p className="text-gray-700 text-lg">
+                {product.description}
+              </p>
+            </div>
+          )}
+          
+          <AnimatePresence mode="wait">
+            {/* Product List View */}
+            {!selectedProduct && (
+              <motion.div
+                key="product-list"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+                {filteredProducts.length === 0 ? (
+                  <div className="col-span-2 py-12 text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                      <Search className="h-8 w-8 text-gray-400" />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900">No products found</h3>
+                    <p className="mt-1 text-sm text-gray-500">Try adjusting your search terms</p>
+                  </div>
+                ) : (
+                  filteredProducts.map((detail, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { delay: index * 0.05 }
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                      className="group cursor-pointer bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all"
+                      onClick={() => handleProductSelect(detail)}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-xl font-bold text-primary/90 group-hover:text-primary transition-colors">{detail.name}</h3>
+                          <p className="text-gray-600 mt-2 line-clamp-2 text-sm">{detail.description}</p>
+                        </div>
+                        <div className="bg-primary/10 rounded-full p-2 group-hover:bg-primary/20 transition-colors">
+                          <ChevronRight className="h-5 w-5 text-primary" />
+                        </div>
+                      </div>
+                      
+                      {/* Preview stats */}
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {detail.casNumber && (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            CAS: {detail.casNumber}
+                          </span>
+                        )}
+                        {detail.applications && (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            {detail.applications.length} Applications
+                          </span>
+                        )}
+                        {detail.specifications && (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                            {Object.keys(detail.specifications).length} Specifications
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))
+                )}
+              </motion.div>
+            )}
+            
+            {/* Product Detail View */}
+            {selectedProduct && (
+              <motion.div
+                key="product-detail"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="bg-white"
+              >
+                <div className="border border-gray-200 rounded-xl p-6 shadow-sm bg-white">
+                  <h3 className="text-2xl font-bold text-primary mb-4">{selectedProduct.name}</h3>
+                  <p className="text-gray-700 mb-6 text-base">{selectedProduct.description}</p>
+                  
+                  {selectedProduct.casNumber && (
+                    <div className="mb-6 inline-block bg-blue-50 px-4 py-2 rounded-lg">
+                      <span className="font-semibold text-gray-800">CAS Number: </span>
+                      <span className="text-gray-700">{selectedProduct.casNumber}</span>
+                    </div>
+                  )}
+                  
+                  {selectedProduct.applications && selectedProduct.applications.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="mb-6 bg-white rounded-xl border border-gray-200 p-5"
+                    >
+                      <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
+                        <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
+                        Applications
+                      </h4>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                        {selectedProduct.applications.map((app, i) => (
+                          <motion.li 
+                            key={i}
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ 
+                              opacity: 1, 
+                              x: 0,
+                              transition: { delay: 0.1 + i * 0.03 }
+                            }}
+                            className="flex items-start"
+                          >
+                            <span className="text-primary mr-2">•</span>
+                            <span>{app}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                  
+                  {selectedProduct.specifications && Object.keys(selectedProduct.specifications).length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
+                        <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
+                        Specifications
+                      </h4>
+                      <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
+                        <table className="min-w-full divide-y divide-gray-200">
+                          <tbody className="divide-y divide-gray-200">
+                            {Object.entries(selectedProduct.specifications).map(([key, value], i) => (
+                              <motion.tr 
+                                key={key} 
+                                className="hover:bg-gray-100 transition-colors"
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ 
+                                  opacity: 1, 
+                                  y: 0,
+                                  transition: { delay: 0.2 + i * 0.03 }
+                                }}
+                              >
+                                <td className="px-4 py-3 text-sm font-medium text-gray-900 w-1/3">{key}</td>
+                                <td className="px-4 py-3 text-sm text-gray-700">{value}</td>
+                              </motion.tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        
+        {/* Footer with back button when viewing product details */}
+        {selectedProduct && (
+          <div className="bg-gray-50 p-4 border-t border-gray-200 flex justify-between">
+            <button
+              onClick={handleBack}
+              className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Back to Products
+            </button>
+            
+            <div className="flex items-center text-xs text-gray-500">
+              <span>Product {product.details.findIndex(p => p.name === selectedProduct.name) + 1} of {product.details.length}</span>
+            </div>
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 }
