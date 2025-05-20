@@ -56,13 +56,13 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
             
             {detail.applications && (
               <div className="inline-flex items-center px-2.5 py-1 bg-green-50 text-xs font-medium text-green-600 rounded-md">
-                {detail.applications.length} {currentLanguage === 'zh' ? '应用' : 'Applications'}
+                {detail.applications.length} {t('applications')}
               </div>
             )}
             
             {detail.specifications && (
               <div className="inline-flex items-center px-2.5 py-1 bg-purple-50 text-xs font-medium text-purple-600 rounded-md">
-                {Object.keys(detail.specifications).length} {currentLanguage === 'zh' ? '规格' : 'Specifications'}
+                {Object.keys(detail.specifications).length} {t('products.specifications')}
               </div>
             )}
           </div>
