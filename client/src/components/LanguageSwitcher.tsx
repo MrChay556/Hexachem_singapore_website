@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Globe, ChevronDown } from 'lucide-react';
 import { 
@@ -23,9 +23,24 @@ export default function LanguageSwitcher({ className = '' }: LanguageSwitcherPro
   const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
   const [isOpen, setIsOpen] = useState(false);
   
+  // Load saved language preference from localStorage
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+      const language = languages.find(lang => lang.code === savedLanguage);
+      if (language) {
+        setCurrentLanguage(language);
+      }
+    }
+  }, []);
+  
   const changeLanguage = (language: typeof languages[0]) => {
     setCurrentLanguage(language);
     localStorage.setItem('language', language.code);
+    
+    // This is just a visual demo of language switching
+    // In a full implementation, this would be connected to a translation system
+    
     setIsOpen(false);
   };
   
