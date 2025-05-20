@@ -34,23 +34,18 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Function to get translated description based on product ID and current language
-  const getTranslatedDescription = (description: string) => {
-    if (t('currentLanguage') === 'zh') {
-      // Translations for main product descriptions
-      if (product.id === 'alcohols') return '高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。';
-      
-      // Translations for product details
-      if (description.includes('Isopropyl Alcohol')) 
-        return '无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。';
-      if (description.includes('n-Butanol')) 
-        return '一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。';
-      if (description.includes('Methanol')) 
-        return '最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。';
-      if (description.includes('Ethanol')) 
-        return '一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。';
-    }
-    return description;
+  // Function to translate static text elements based on language
+  const getTranslatedUI = (key: string) => {
+    // Chinese translations
+    const zhTranslations: Record<string, string> = {
+      'applications': '应用',
+      'specifications': '规格',
+      'backToProducts': '返回产品',
+      'noProductsFound': '未找到产品',
+      'tryAdjusting': '请尝试调整搜索条件'
+    };
+    
+    return t('currentLanguage') === 'zh' ? zhTranslations[key] || key : key;
   };
   
   // Reset selected product when modal closes
@@ -247,7 +242,17 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
               >
                 <div className="border border-gray-200 rounded-xl p-6 shadow-sm bg-white">
                   <h3 className="text-2xl font-bold text-primary mb-4">{selectedProduct.name}</h3>
-                  <p className="text-gray-700 mb-6 text-base">{getTranslatedDescription(selectedProduct.description)}</p>
+                  <p className="text-gray-700 mb-6 text-base">{t('currentLanguage') === 'zh' ? 
+                    (selectedProduct.name.includes("Isopropyl") ? 
+                      "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。" : 
+                     selectedProduct.name.includes("n-Butanol") ? 
+                      "一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。" :
+                     selectedProduct.name.includes("Methanol") ? 
+                      "最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。" :
+                     selectedProduct.name.includes("Ethanol") ? 
+                      "一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。" :
+                     selectedProduct.description) : 
+                    selectedProduct.description}</p>
                   
                   {selectedProduct.casNumber && (
                     <div className="mb-6 inline-block bg-blue-50 px-4 py-2 rounded-lg">
@@ -265,7 +270,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        {t('applications')}
+                        {t('currentLanguage') === 'zh' ? '应用' : 'Applications'}
                       </h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
                         {selectedProduct.applications.map((app, i) => (

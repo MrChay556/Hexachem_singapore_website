@@ -1,5 +1,4 @@
-import { ProductCategory } from '@/components/ProductDetailModal';
-import { useTranslation } from '../contexts/TranslationContext';
+import { ProductCategory, ProductDetail } from '@/components/ProductDetailModal';
 
 // Import SVG images
 import alcoholImage from '@/assets/images/alcohol.svg';
@@ -8,6 +7,31 @@ import aliphaticsImage from '@/assets/images/aliphatics.svg';
 import glycolsImage from '@/assets/images/glycols.svg';
 import ketonesImage from '@/assets/images/ketones.svg';
 import aminesImage from '@/assets/images/amines.svg';
+
+// Multilingual product descriptions
+const productTranslations = {
+  en: {
+    alcohols: "Premium alcohol products for various industrial applications including cleaning, extraction, and synthesis processes.",
+    ipaDesc: "A colorless, flammable chemical compound with a strong odor. It is the simplest example of a secondary alcohol, where the alcohol carbon is attached to two other carbons.",
+    butanolDesc: "A primary alcohol with four carbon atoms. It is a colorless liquid that is poorly soluble in water but miscible with most organic solvents.",
+    methanolDesc: "The simplest alcohol, it is a light, volatile, colorless, flammable liquid with a distinctive odor. Used as a feedstock, solvent, and fuel.",
+    ethanolDesc: "A colorless, slightly toxic chemical compound with a distinctive smell. It is widely used in disinfectants, solvents, fuel, and the beverage industry."
+  },
+  zh: {
+    alcohols: "高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。",
+    ipaDesc: "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。",
+    butanolDesc: "一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。",
+    methanolDesc: "最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。",
+    ethanolDesc: "一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。"
+  },
+  ms: {
+    alcohols: "Produk alkohol premium untuk pelbagai aplikasi industri termasuk pembersihan, pengekstrakan, dan proses sintesis.",
+    ipaDesc: "Sebatian kimia tidak berwarna, mudah terbakar dengan bau yang kuat. Ia adalah contoh paling mudah alkohol sekunder, di mana karbon alkohol dilampirkan pada dua karbon lain.",
+    butanolDesc: "Alkohol primer dengan empat atom karbon. Ia adalah cecair tidak berwarna yang sukar larut dalam air tetapi boleh bercampur dengan kebanyakan pelarut organik.",
+    methanolDesc: "Alkohol yang paling mudah, ia adalah cecair ringan, mudah meruap, tidak berwarna, mudah terbakar dengan bau yang tersendiri. Digunakan sebagai bahan makanan, pelarut, dan bahan api.",
+    ethanolDesc: "Sebatian kimia tidak berwarna, sedikit toksik dengan bau yang tersendiri. Ia digunakan secara meluas dalam pembasmi kuman, pelarut, bahan api, dan industri minuman."
+  }
+};
 
 // Create translations for product descriptions
 const productDescriptions = {
