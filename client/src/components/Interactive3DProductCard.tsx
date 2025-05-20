@@ -22,9 +22,9 @@ export default function Interactive3DProductCard({ product, onClick, index }: In
   const springX = useSpring(x, { stiffness: 150, damping: 15 });
   const springY = useSpring(y, { stiffness: 150, damping: 15 });
   
-  // Transforms for rotation effect
-  const rotateX = useTransform(springY, [-100, 100], [10, -10]); // Inverted for correct rotation
-  const rotateY = useTransform(springX, [-100, 100], [-10, 10]);
+  // Transforms for rotation effect - reduced for less blur
+  const rotateX = useTransform(springY, [-100, 100], [3, -3]); // Inverted for correct rotation
+  const rotateY = useTransform(springX, [-100, 100], [-3, 3]);
   
   // Scale effect
   const scale = useSpring(1, { stiffness: 200, damping: 20 });

@@ -27,9 +27,9 @@ export default function Interactive3DIndustryCard({ industry, index }: Interacti
   const springX = useSpring(x, { stiffness: 150, damping: 15 });
   const springY = useSpring(y, { stiffness: 150, damping: 15 });
   
-  // Transforms for rotation effect
-  const rotateX = useTransform(springY, [-100, 100], [7, -7]); 
-  const rotateY = useTransform(springX, [-100, 100], [-7, 7]);
+  // Transforms for rotation effect - reduced for less blur
+  const rotateX = useTransform(springY, [-100, 100], [2, -2]); 
+  const rotateY = useTransform(springX, [-100, 100], [-2, 2]);
   
   // Scale effect
   const scale = useSpring(1, { stiffness: 300, damping: 25 });
@@ -117,14 +117,13 @@ export default function Interactive3DIndustryCard({ industry, index }: Interacti
       }}
     >
       <motion.div 
-        className="bg-white rounded-xl shadow-lg text-center h-full p-8 relative overflow-hidden"
+        className="bg-white rounded-xl shadow-sm text-center h-full p-8 relative overflow-hidden border border-gray-100"
         style={{
           rotateX,
           rotateY,
-          transformStyle: 'preserve-3d',
           boxShadow: isHovered ? 
-            '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 15px rgba(59, 130, 246, 0.5)' : 
-            '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04)' : 
+            '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03)',
           transition: 'box-shadow 0.3s ease',
         }}
       >
@@ -163,17 +162,17 @@ export default function Interactive3DIndustryCard({ industry, index }: Interacti
             {industry.icon}
           </motion.div>
           
-          {/* Icon glow effect */}
+          {/* Subtle icon highlight effect */}
           {isHovered && (
             <motion.div 
               className="absolute inset-0 rounded-full"
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1.2 }}
+              animate={{ opacity: 0.6, scale: 1.1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.5 }}
               style={{
-                background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
-                filter: 'blur(8px)',
+                background: 'radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)',
+                filter: 'blur(3px)',
               }}
             />
           )}

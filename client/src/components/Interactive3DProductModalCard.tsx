@@ -13,7 +13,7 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Motion values for the 3D effect
+  // Motion values for the 3D effect - reduced for more subtle effect
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   
@@ -21,11 +21,11 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
   const springX = useSpring(x, { stiffness: 150, damping: 15 });
   const springY = useSpring(y, { stiffness: 150, damping: 15 });
   
-  // Transforms for rotation effect - use more subtle rotation for modal cards
-  const rotateX = useTransform(springY, [-100, 100], [5, -5]); 
-  const rotateY = useTransform(springX, [-100, 100], [-5, 5]);
+  // Transforms for rotation effect - much more subtle rotation
+  const rotateX = useTransform(springY, [-100, 100], [2, -2]); 
+  const rotateY = useTransform(springX, [-100, 100], [-2, 2]);
   
-  // Scale effect
+  // Scale effect - reduced for subtlety
   const scale = useSpring(1, { stiffness: 300, damping: 25 });
   
   // Handle mouse movement for 3D effect
@@ -42,14 +42,14 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
     const relativeX = e.clientX - centerX;
     const relativeY = e.clientY - centerY;
     
-    // Map to a smaller range for subtle effect
-    x.set(relativeX / 8);
-    y.set(relativeY / 8);
+    // Map to a smaller range for more subtle effect
+    x.set(relativeX / 15);
+    y.set(relativeY / 15);
   };
   
   const handleMouseEnter = () => {
     setIsHovered(true);
-    scale.set(1.03);
+    scale.set(1.02);
   };
   
   const handleMouseLeave = () => {
@@ -78,7 +78,7 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
         transition: { delay: index * 0.05 }
       }}
       whileHover={{ scale: 1.02 }}
-      className="group cursor-pointer perspective-1000 card-container"
+      className="group cursor-pointer"
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -88,82 +88,55 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
       }}
     >
       <motion.div 
-        className="relative w-full h-full bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all overflow-hidden"
+        className="relative w-full h-full bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition-all overflow-hidden"
         style={{
           rotateX,
           rotateY,
-          transformStyle: 'preserve-3d',
           boxShadow: isHovered ? 
-            `0 10px 25px -5px rgba(59, 130, 246, 0.25), 0 5px 10px -5px rgba(59, 130, 246, 0.1)` : 
-            '0 1px 3px rgba(0, 0, 0, 0.1)',
+            '0 4px 12px rgba(0, 0, 0, 0.08)' : 
+            '0 1px 3px rgba(0, 0, 0, 0.05)',
         }}
       >
-        {/* Gradient background with animated rotation */}
+        {/* Subtle hover state background */}
         <motion.div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-10"
+          className="absolute inset-0 opacity-0 group-hover:opacity-5"
+          animate={{ 
+            opacity: isHovered ? 0.05 : 0 
+          }}
           style={{
-            background: `radial-gradient(circle at ${x.get() + 100}px ${y.get() + 100}px, rgba(59, 130, 246, 0.4), transparent 70%)`,
-            transition: 'opacity 0.3s ease',
+            background: isHovered ? 'linear-gradient(120deg, #f0f4ff, #ffffff)' : 'none',
           }}
         />
         
         {/* Content */}
         <div className="flex justify-between items-start">
-          <motion.div 
-            style={{
-              transformStyle: 'preserve-3d',
-              translateZ: isHovered ? '20px' : '0px',
-            }}
-            className="flex-1"
-          >
-            <motion.h3 
-              className="text-xl font-bold text-primary/90 group-hover:text-primary transition-colors"
-              initial={{ y: 0 }}
-              whileHover={{ y: -2 }}
-            >
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-blue-700 group-hover:text-blue-800 transition-colors">
               {detail.name}
-            </motion.h3>
-            <motion.p 
-              className="text-gray-600 mt-2 line-clamp-2 text-sm"
-              style={{
-                transformStyle: 'preserve-3d',
-                translateZ: isHovered ? '10px' : '0px',
-              }}
-            >
+            </h3>
+            <p className="text-gray-600 mt-2 line-clamp-2 text-sm">
               {detail.description}
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
           
           <motion.div 
-            className="bg-primary/10 rounded-full p-2 group-hover:bg-primary/20 transition-colors"
-            style={{
-              transformStyle: 'preserve-3d',
-              translateZ: isHovered ? '30px' : '0px',
-              rotate: isHovered ? 90 : 0,
+            className="bg-blue-50 rounded-full p-2 group-hover:bg-blue-100 transition-colors"
+            animate={{
+              x: isHovered ? 3 : 0,
             }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            transition={{ type: 'spring', stiffness: 200 }}
           >
-            <ChevronRight className="h-5 w-5 text-primary" />
+            <ChevronRight className="h-5 w-5 text-blue-600" />
           </motion.div>
         </div>
         
-        {/* Preview stats with animated appearance */}
-        <motion.div 
-          className="mt-4 flex flex-wrap gap-2"
-          style={{
-            transformStyle: 'preserve-3d',
-            translateZ: isHovered ? '15px' : '0px',
-          }}
-        >
+        {/* Preview stats with improved styling */}
+        <div className="mt-4 flex flex-wrap gap-2">
           {detail.casNumber && (
             <motion.span 
-              initial={{ opacity: 0.8, scale: 0.95 }}
-              animate={{ 
-                opacity: isHovered ? 1 : 0.8, 
-                scale: isHovered ? 1 : 0.95,
-                y: isHovered ? -2 : 0
-              }}
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+              className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-50 text-blue-600 border border-blue-100"
+              animate={{ y: isHovered ? -2 : 0 }}
+              transition={{ delay: 0.05 }}
             >
               CAS: {detail.casNumber}
             </motion.span>
@@ -171,14 +144,9 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
           
           {detail.applications && (
             <motion.span 
-              initial={{ opacity: 0.8, scale: 0.95 }}
-              animate={{ 
-                opacity: isHovered ? 1 : 0.8, 
-                scale: isHovered ? 1 : 0.95,
-                y: isHovered ? -2 : 0
-              }}
-              transition={{ delay: 0.05 }}
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
+              className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-green-50 text-green-600 border border-green-100"
+              animate={{ y: isHovered ? -2 : 0 }}
+              transition={{ delay: 0.1 }}
             >
               {detail.applications.length} Applications
             </motion.span>
@@ -186,31 +154,26 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
           
           {detail.specifications && (
             <motion.span 
-              initial={{ opacity: 0.8, scale: 0.95 }}
-              animate={{ 
-                opacity: isHovered ? 1 : 0.8, 
-                scale: isHovered ? 1 : 0.95,
-                y: isHovered ? -2 : 0
-              }}
-              transition={{ delay: 0.1 }}
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
+              className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-purple-50 text-purple-600 border border-purple-100"
+              animate={{ y: isHovered ? -2 : 0 }}
+              transition={{ delay: 0.15 }}
             >
               {Object.keys(detail.specifications).length} Specifications
             </motion.span>
           )}
-        </motion.div>
+        </div>
         
-        {/* Animated shine effect */}
+        {/* Subtle shine effect - reduced opacity */}
         {isHovered && (
           <motion.div 
             className="absolute inset-0 pointer-events-none"
             initial={{ opacity: 0, x: -200 }}
-            animate={{ opacity: 1, x: 400 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            animate={{ opacity: 0.3, x: 400 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             style={{
-              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)',
+              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
               width: '30%',
-              zIndex: 20,
+              zIndex: 1,
             }}
           />
         )}
