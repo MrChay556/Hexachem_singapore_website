@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PaintBucket, Utensils, Recycle, Building } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
-import Interactive3DIndustryCard from "@/components/Interactive3DIndustryCard";
+import SimpleIndustryCard from "@/components/SimpleIndustryCard";
 
 interface Industry {
   id: string;
@@ -59,10 +59,10 @@ export default function IndustriesSection() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 perspective-1000">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {industries.map((industry, index) => (
-            <div key={industry.id} className="h-[300px]">
-              <Interactive3DIndustryCard industry={industry} index={index} />
+            <div key={industry.id}>
+              <SimpleIndustryCard industry={industry} index={index} />
             </div>
           ))}
         </div>

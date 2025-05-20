@@ -100,22 +100,33 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-6">Products</h4>
             <ul className="space-y-3">
               {[
-                "Industrial Solvents",
-                "Fuel Oil Products",
-                "Specialized Monomers",
-                "Chemical Recycling",
-                "Technical Consultation"
+                {name: "Industrial Solvents", id: "solvents"},
+                {name: "Fuel Oil Products", id: "fuel-oil"},
+                {name: "Specialized Monomers", id: "monomers"},
+                {name: "Chemical Recycling", id: "recycling"},
+                {name: "Technical Consultation", id: "consultation"}
               ].map((product) => (
-                <li key={product}>
+                <li key={product.name}>
                   <a 
-                    href="#products"
+                    href={`#${product.id}`}
                     onClick={(e) => {
                       e.preventDefault();
+                      // First scroll to products section
                       handleNavClick("products");
+                      // Find the product element and simulate a click on it
+                      setTimeout(() => {
+                        const productElement = document.getElementById(product.id);
+                        if (productElement) {
+                          const learnMoreButton = productElement.querySelector('button');
+                          if (learnMoreButton) {
+                            learnMoreButton.click();
+                          }
+                        }
+                      }, 500); // Add a slight delay to allow for scrolling
                     }}
                     className="text-gray-400 hover:text-white transition-all"
                   >
-                    {product}
+                    {product.name}
                   </a>
                 </li>
               ))}
