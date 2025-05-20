@@ -99,37 +99,66 @@ export default function Footer() {
           >
             <h4 className="text-lg font-bold mb-6">Products</h4>
             <ul className="space-y-3">
-              {[
-                {name: "Industrial Solvents", id: "solvents"},
-                {name: "Fuel Oil Products", id: "fuel-oil"},
-                {name: "Specialized Monomers", id: "monomers"},
-                {name: "Chemical Recycling", id: "recycling"},
-                {name: "Technical Consultation", id: "consultation"}
-              ].map((product) => (
-                <li key={product.name}>
-                  <a 
-                    href={`#${product.id}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // First scroll to products section
-                      handleNavClick("products");
-                      // Find the product element and simulate a click on it
-                      setTimeout(() => {
-                        const productElement = document.getElementById(product.id);
-                        if (productElement) {
-                          const learnMoreButton = productElement.querySelector('button');
-                          if (learnMoreButton) {
-                            learnMoreButton.click();
-                          }
-                        }
-                      }, 500); // Add a slight delay to allow for scrolling
-                    }}
-                    className="text-gray-400 hover:text-white transition-all"
-                  >
-                    {product.name}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a 
+                  href="#alcohols"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("products");
+                  }}
+                  className="text-gray-400 hover:text-white transition-all"
+                >
+                  Industrial Solvents
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#aliphatics"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("products");
+                  }}
+                  className="text-gray-400 hover:text-white transition-all"
+                >
+                  Fuel Oil Products
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#aromatics"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("products");
+                  }}
+                  className="text-gray-400 hover:text-white transition-all"
+                >
+                  Specialized Monomers
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#glycols"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("products");
+                  }}
+                  className="text-gray-400 hover:text-white transition-all"
+                >
+                  Chemical Recycling
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#ketones"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("products");
+                  }}
+                  className="text-gray-400 hover:text-white transition-all"
+                >
+                  Technical Consultation
+                </a>
+              </li>
             </ul>
           </motion.div>
           
