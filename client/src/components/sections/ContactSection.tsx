@@ -67,8 +67,8 @@ export default function ContactSection() {
                   <Mail className="h-5 w-5" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Email Address</h4>
-                  <p className="text-gray-600">hexasales@hexachem.sg</p>
+                  <h4 className="text-lg font-semibold">{t('contact.email')}</h4>
+                  <p className="text-gray-600">{t('contact.emailAddress')}</p>
                 </div>
               </div>
               
@@ -77,8 +77,8 @@ export default function ContactSection() {
                   <Clock className="h-5 w-5" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold">Business Hours</h4>
-                  <p className="text-gray-600">Monday - Friday: 9am - 6pm</p>
+                  <h4 className="text-lg font-semibold">{t('contact.hours')}</h4>
+                  <p className="text-gray-600">{t('contact.businessHours')}</p>
                 </div>
               </div>
             </div>
@@ -92,8 +92,8 @@ export default function ContactSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center justify-center"
           >
-            <h3 className="text-2xl font-bold mb-4 text-gray-800">Connect on WhatsApp</h3>
-            <p className="text-gray-600 text-center mb-6">Scan the QR code to chat with us directly on WhatsApp</p>
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">{t('contact.whatsapp')}</h3>
+            <p className="text-gray-600 text-center mb-6">{t('contact.scan')}</p>
             
             {/* WhatsApp QR Code */}
             <div className="bg-white p-4 rounded-lg shadow-md mb-4">
@@ -116,7 +116,7 @@ export default function ContactSection() {
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M20.4539 3.54523C18.2166 1.30308 15.2128 0.0488281 12.0055 0.0488281C5.4457 0.0488281 0.102616 5.39069 0.102616 11.9526C0.102616 14.0618 0.662843 16.1213 1.7216 17.9379L0 24.0488L6.24766 22.3606C7.99672 23.3219 9.97889 23.8323 12.0012 23.8327H12.0055C18.5636 23.8327 23.9067 18.4909 23.9067 11.9288C23.9067 8.72305 22.6914 5.78738 20.4539 3.54523ZM12.0055 21.8202H12.002C10.2103 21.8197 8.45406 21.3309 6.92016 20.4126L6.56122 20.1975L2.842 21.1766L3.83772 17.5448L3.60154 17.1724C2.58868 15.5845 2.05232 13.7982 2.05275 11.9526C2.05275 6.49553 6.55 2.0014 12.009 2.0014C14.6631 2.0014 17.1567 3.03808 19.0162 4.90018C20.8758 6.76229 21.9069 9.25747 21.9065 11.9284C21.9065 17.3871 17.4611 21.8202 12.0055 21.8202ZM17.4464 14.4471C17.1432 14.2956 15.6873 13.5782 15.4082 13.4769C15.1293 13.3754 14.9262 13.3249 14.7233 13.6284C14.5203 13.9318 13.9522 14.5989 13.7734 14.8021C13.5945 15.0052 13.4157 15.0301 13.1127 14.8782C12.8096 14.7265 11.8568 14.4182 10.7381 13.4266C9.86322 12.6547 9.26531 11.7072 9.08646 11.4038C8.90761 11.1003 9.06666 10.9357 9.21962 10.7848C9.35716 10.6486 9.52446 10.433 9.67908 10.2542C9.8337 10.0754 9.88463 9.94874 9.98603 9.74575C10.0874 9.54275 10.0365 9.36405 9.96093 9.21244C9.88463 9.06084 9.29035 7.60303 9.03817 6.9956C8.79208 6.40473 8.54207 6.4869 8.35365 6.47879C8.17479 6.4711 8.00261 6.47131 7.8269 6.47131C7.68935 6.47131 7.46096 6.53744 7.18201 6.84077C6.90346 7.1441 6.13675 7.8614 6.13675 9.31922C6.13675 10.777 7.20727 12.1846 7.36189 12.3876C7.51651 12.5906 9.25885 15.2588 11.9011 16.5671C14.5433 17.8754 14.5433 17.427 15.1004 17.3764C15.6576 17.3257 16.8678 16.6589 17.1201 15.9499C17.3723 15.2411 17.3723 14.6337 17.296 14.5029C17.2198 14.3721 17.0166 14.299 16.7136 14.1471H17.4464V14.4471Z"/>
                 </svg>
-                Chat on WhatsApp
+                {t('contact.chat')}
               </a>
             </div>
           </motion.div>
