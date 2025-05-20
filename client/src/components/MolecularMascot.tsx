@@ -286,8 +286,8 @@ export default function MolecularMascot() {
                     <MoleculeMascot />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">MolecuEBuddy</h3>
-                    <p className="text-xs text-blue-100">Hexachem's Assistant</p>
+                    <h3 className="font-bold text-lg">MoleCueBuddy</h3>
+                    <p className="text-xs text-blue-100">Hexachem's AI Assistant</p>
                   </div>
                 </div>
                 <button
