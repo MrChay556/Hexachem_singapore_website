@@ -170,12 +170,10 @@ export const translations = {
     'nav.sustainability': '可持续发展',
     'nav.contact': '联系我们',
     
-    // Product Modal
+    // Product Modal Text
     'applications': '应用',
     'products.backToProducts': '返回产品',
     'products.productDetails': '产品详情',
-    'products.casNumber': 'CAS 编号',
-    'products.specifications': '规格',
     
     // Hero Section
     'hero.title': '优质化学品分销',
