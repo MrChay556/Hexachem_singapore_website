@@ -35,15 +35,19 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     const animationGroup = new THREE.Group();
     scene.add(animationGroup);
 
-    // Chemical-themed color scheme with blue tones
+    // Enhanced chemical-themed color scheme with sophisticated blue tones
     const moleculeColors = [
-      new THREE.Color(0x1d4ed8),  // Deep blue for water molecules
-      new THREE.Color(0x3b82f6),  // Blue for basic molecules
+      new THREE.Color(0x1a56db),  // Rich blue for primary molecules
+      new THREE.Color(0x3b82f6),  // Blue for secondary molecules
+      new THREE.Color(0x0c4a6e),  // Dark blue for tertiary molecules
+      new THREE.Color(0x0369a1),  // Deep cyan-blue for rare elements
     ];
     
     // Different colors for different chemical bonds
     const bondColors = [
+      new THREE.Color(0x38bdf8),  // Bright blue for active bonds
       new THREE.Color(0x60a5fa),  // Lighter blue for single bonds
+      new THREE.Color(0x7dd3fc),  // Sky blue for double bonds
       new THREE.Color(0x93c5fd),  // Very light blue for energized molecules
     ];
 
@@ -196,19 +200,34 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       return bond;
     }
     
-    // Create chemical compounds at random positions
-    for (let i = 0; i < compoundCount; i++) {
-      // Position randomly in 3D space with some separation
-      const x = (Math.random() - 0.5) * 30;
-      const y = (Math.random() - 0.5) * 15;
-      const z = (Math.random() - 0.5) * 10;
+    // Create chemical compounds in a more organized, visually pleasing arrangement
+    const compoundDistribution = [
+      // Center larger complex compounds
+      { x: -3, y: 1, z: -5, size: 2.5, complexity: 7 },
+      { x: 4, y: -2, z: 0, size: 2.2, complexity: 6 },
       
-      const position = new THREE.Vector3(x, y, z);
-      const size = 1 + Math.random() * 1.5;
-      const complexity = 3 + Math.floor(Math.random() * 5); // 3-7 atoms
+      // Smaller compounds around the edges
+      { x: -15, y: 8, z: -3, size: 1.5, complexity: 4 },
+      { x: 12, y: 6, z: -6, size: 1.2, complexity: 3 },
+      { x: -10, y: -7, z: -2, size: 1.7, complexity: 5 },
+      { x: 8, y: -5, z: -4, size: 1.3, complexity: 4 },
       
-      createChemicalCompound(position, size, complexity);
-    }
+      // Background elements
+      { x: -20, y: -3, z: -10, size: 2.0, complexity: 5 },
+      { x: 18, y: 4, z: -8, size: 1.8, complexity: 6 },
+      
+      // Additional compounds for a richer scene
+      { x: 5, y: 10, z: -7, size: 1.4, complexity: 4 },
+      { x: -7, y: -10, z: -3, size: 1.6, complexity: 5 },
+      { x: -18, y: 2, z: -9, size: 1.3, complexity: 3 },
+      { x: 15, y: -7, z: -5, size: 1.9, complexity: 6 }
+    ];
+    
+    // Create compounds based on the designed distribution
+    compoundDistribution.forEach(item => {
+      const position = new THREE.Vector3(item.x, item.y, item.z);
+      createChemicalCompound(position, item.size, item.complexity);
+    });
     
     // Mouse move event handler for highlighting nearest molecule
     const onMouseMove = (event: MouseEvent) => {

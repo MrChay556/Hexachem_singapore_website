@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToSection } from "@/lib/utils";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface NavLink {
   name: string;
@@ -57,20 +58,23 @@ export default function Navbar() {
           </a>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={`#${link.href}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
-                className="text-white hover:text-accent-light font-medium transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+          <div className="hidden md:flex items-center">
+            <div className="flex space-x-8 mr-6">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={`#${link.href}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
+                  className="text-white hover:text-accent-light font-medium transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+            <LanguageSwitcher className="text-white" />
           </div>
 
           {/* Mobile menu button */}
@@ -106,6 +110,12 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
+            <div className="px-4 py-2">
+              <div className="flex items-center">
+                <span className="text-primary font-medium mr-2">Language:</span>
+                <LanguageSwitcher />
+              </div>
+            </div>
           </div>
         </div>
       )}
