@@ -1,0 +1,343 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Send, Wand2 } from 'lucide-react';
+import moleculeMascot from '@/assets/images/molecule-mascot.svg';
+import { apiRequest } from '@/lib/queryClient';
+
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+export default function MolecularMascot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  
+  // Add a welcome message when the chat is first opened
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      // Add the initial greeting
+      setMessages([
+        {
+          id: generateId(),
+          role: 'assistant',
+          content: "👋 Hi there! I'm MolecuBuddy, your friendly molecular guide to Hexachem. Ask me anything about our products, services, or chemical solutions!",
+          timestamp: new Date()
+        }
+      ]);
+    }
+  }, [isOpen, messages.length]);
+  
+  // Scroll to bottom of chat when new messages are added
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [messages]);
+  
+  // Focus input when chat is opened
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+  
+  // Generate a random ID for messages
+  const generateId = () => {
+    return Math.random().toString(36).substring(2, 11);
+  };
+  
+  // Handle sending messages to the API
+  const handleSendMessage = async () => {
+    if (inputValue.trim() === '' || isSending) return;
+    
+    // Add user message to chat
+    const userMessage: Message = {
+      id: generateId(),
+      role: 'user',
+      content: inputValue,
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setInputValue('');
+    setIsSending(true);
+    
+    try {
+      // Prepare messages for API in the format OpenAI expects
+      const formattedMessages = messages
+        .concat(userMessage)
+        .map(msg => ({
+          role: msg.role,
+          content: msg.content
+        }));
+      
+      // Create assistant typing effect
+      setIsTyping(true);
+      
+      // Send the request to our API endpoint
+      const response = await apiRequest("POST", '/api/chat', { 
+        messages: formattedMessages 
+      });
+      
+      // Get the assistant's response
+      const assistantContent = response.choices[0].message.content;
+      
+      // Clear any existing typing timeout
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+      
+      // Add a delay before showing the response to simulate typing
+      const typingDelay = Math.min(1000 + assistantContent.length * 10, 3000);
+      
+      const timeout = setTimeout(() => {
+        setIsTyping(false);
+        
+        // Add assistant message to chat
+        setMessages(prev => [
+          ...prev,
+          {
+            id: generateId(),
+            role: 'assistant',
+            content: assistantContent,
+            timestamp: new Date()
+          }
+        ]);
+        
+        setIsSending(false);
+      }, typingDelay);
+      
+      setTypingTimeout(timeout);
+      
+    } catch (error) {
+      console.error('Error sending message:', error);
+      
+      // If there's an error, add an error message
+      setMessages(prev => [
+        ...prev,
+        {
+          id: generateId(),
+          role: 'assistant',
+          content: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later or contact our team directly at sales@hexachem.sg.",
+          timestamp: new Date()
+        }
+      ]);
+      
+      setIsTyping(false);
+      setIsSending(false);
+    }
+  };
+  
+  // Handle pressing Enter to send a message
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+  
+  // Detect when user stops typing
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(e.target.value);
+  };
+  
+  // Helper to format message content with line breaks
+  const formatMessageContent = (content: string) => {
+    return content.split('\n').map((line, i) => (
+      <React.Fragment key={i}>
+        {line}
+        {i < content.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
+  return (
+    <>
+      {/* Molecule mascot button */}
+      <motion.div
+        className="fixed bottom-6 right-6 z-50"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', damping: 15, stiffness: 300 }}
+      >
+        <motion.div
+          className="relative cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsOpen(true)}
+          animate={{ rotate: isOpen ? [0, -10, 10, -5, 5, 0] : 0 }}
+          transition={{ duration: 1, repeat: Infinity, repeatType: 'loop', repeatDelay: 3 }}
+        >
+          <div className="absolute -top-12 right-0 bg-white shadow-md rounded-full px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
+            Click to chat with me!
+            <div className="absolute -bottom-2 right-6 w-3 h-3 bg-white transform rotate-45"></div>
+          </div>
+          
+          <div className="w-16 h-16 rounded-full bg-white p-1 shadow-lg">
+            <motion.img
+              src={moleculeMascot}
+              alt="MolecuBuddy"
+              className="w-full h-full"
+              animate={{ 
+                scale: [1, 1.05, 1],
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                repeatType: 'loop' 
+              }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+      
+      {/* Chat modal */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Backdrop */}
+            <motion.div 
+              className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Chat container */}
+            <motion.div
+              className="relative bg-white rounded-xl shadow-xl w-full max-w-md sm:max-w-lg h-[600px] max-h-[90vh] flex flex-col overflow-hidden z-50"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="bg-primary p-4 text-white flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full bg-white p-1">
+                    <img src={moleculeMascot} alt="MolecuBuddy" className="w-full h-full" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg">MolecuBuddy</h3>
+                    <p className="text-xs text-blue-100">Hexachem's Assistant</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full p-1 hover:bg-blue-600 transition-colors"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              
+              {/* Chat messages */}
+              <div 
+                ref={chatRef}
+                className="flex-1 p-4 overflow-y-auto" 
+                style={{ scrollBehavior: 'smooth' }}
+              >
+                {messages.map((message) => (
+                  <div 
+                    key={message.id}
+                    className={`flex mb-4 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className={`max-w-[80%] p-3 rounded-lg ${
+                        message.role === 'user' 
+                          ? 'bg-primary text-white rounded-tr-none' 
+                          : 'bg-gray-100 text-gray-800 rounded-tl-none'
+                      }`}
+                    >
+                      {formatMessageContent(message.content)}
+                    </motion.div>
+                  </div>
+                ))}
+                
+                {/* Typing indicator */}
+                {isTyping && (
+                  <div className="flex mb-4 justify-start">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-gray-100 text-gray-800 p-3 rounded-lg rounded-tl-none"
+                    >
+                      <div className="flex space-x-1 items-center">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      </div>
+                    </motion.div>
+                  </div>
+                )}
+              </div>
+              
+              {/* Input area */}
+              <div className="p-4 border-t border-gray-200">
+                <div className="flex space-x-2">
+                  <div className="relative flex-1">
+                    <textarea
+                      ref={inputRef}
+                      value={inputValue}
+                      onChange={handleInputChange}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Ask MolecuBuddy something..."
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                      rows={1}
+                      disabled={isSending}
+                      style={{ minHeight: '44px', maxHeight: '100px' }}
+                    />
+                    {inputValue.trim() !== '' && (
+                      <button
+                        onClick={handleSendMessage}
+                        disabled={isSending}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary-dark"
+                      >
+                        <Send className="h-5 w-5" />
+                      </button>
+                    )}
+                  </div>
+                  
+                  {inputValue.trim() === '' && (
+                    <button
+                      className="bg-primary text-white p-2 rounded-lg hover:bg-primary-dark flex-shrink-0"
+                      title="Suggest topics"
+                      onClick={() => {
+                        setInputValue("What products does Hexachem offer?");
+                      }}
+                    >
+                      <Wand2 className="h-5 w-5" />
+                    </button>
+                  )}
+                </div>
+                
+                <div className="mt-2 text-xs text-gray-500 text-center">
+                  Powered by OpenAI | Ask about our products, services, or industry solutions
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
