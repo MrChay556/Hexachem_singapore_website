@@ -67,7 +67,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Email Address</h4>
-                  <p className="text-gray-600">sales@hexachem.sg</p>
+                  <p className="text-gray-600">hexasales@hexachem.sg</p>
                 </div>
               </div>
               

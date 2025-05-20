@@ -137,7 +137,7 @@ export default function MolecularMascot() {
         {
           id: generateId(),
           role: 'assistant',
-          content: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later or contact our team directly at sales@hexachem.sg.",
+          content: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later or contact our team directly at hexasales@hexachem.sg.",
           timestamp: new Date()
         }
       ]);
