@@ -6,6 +6,7 @@ import {
   Clock,
   MessageCircle
 } from "lucide-react";
+import whatsappQrCode from "../../assets/whatsapp-qr.svg";
 
 export default function ContactSection() {
   return (
