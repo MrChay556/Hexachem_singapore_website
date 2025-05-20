@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { ProductDetail } from './ProductDetailModal';
+import { useTranslation } from '../contexts/TranslationContext';
 
 interface Interactive3DProductModalCardProps {
   detail: ProductDetail;
@@ -10,6 +11,7 @@ interface Interactive3DProductModalCardProps {
 }
 
 export default function Interactive3DProductModalCard({ detail, onClick, index }: Interactive3DProductModalCardProps) {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -48,19 +50,19 @@ export default function Interactive3DProductModalCard({ detail, onClick, index }
           <div className="flex flex-wrap gap-2">
             {detail.casNumber && (
               <div className="inline-flex items-center px-2.5 py-1 bg-blue-50 text-xs font-medium text-blue-600 rounded-md">
-                CAS: {detail.casNumber}
+                {t('currentLanguage') === 'zh' ? 'CAS 编号:' : 'CAS:'} {detail.casNumber}
               </div>
             )}
             
             {detail.applications && (
               <div className="inline-flex items-center px-2.5 py-1 bg-green-50 text-xs font-medium text-green-600 rounded-md">
-                {detail.applications.length} Applications
+                {detail.applications.length} {currentLanguage === 'zh' ? '应用' : 'Applications'}
               </div>
             )}
             
             {detail.specifications && (
               <div className="inline-flex items-center px-2.5 py-1 bg-purple-50 text-xs font-medium text-purple-600 rounded-md">
-                {Object.keys(detail.specifications).length} Specifications
+                {Object.keys(detail.specifications).length} {currentLanguage === 'zh' ? '规格' : 'Specifications'}
               </div>
             )}
           </div>
