@@ -178,7 +178,7 @@ export default function Interactive3DProductCard({ product, onClick, index }: In
               translateZ: isHovered ? '5px' : '0px',
             }}
           >
-            {product.description}
+            {t(`products.${product.id}Description`)}
           </motion.p>
           
           <motion.div 
@@ -196,7 +196,7 @@ export default function Interactive3DProductCard({ product, onClick, index }: In
                 transition={{ delay: Math.random() * 0.2, type: 'spring', stiffness: 300 }}
               >
                 <Badge variant="outline" className="bg-primary/10 text-primary transform-gpu">
-                  {tag}
+                  {t(`products.${tag.toLowerCase()}Tag`)}
                 </Badge>
               </motion.div>
             ))}
@@ -211,7 +211,7 @@ export default function Interactive3DProductCard({ product, onClick, index }: In
               translateZ: isHovered ? '15px' : '0px',
             }}
           >
-            <span>Learn More</span>
+            <span>{t('products.learnMore')}</span>
             <motion.div
               initial={{ x: 0 }}
               animate={{ x: isHovered ? 4 : 0 }}

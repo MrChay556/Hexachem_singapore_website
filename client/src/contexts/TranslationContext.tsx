@@ -66,6 +66,21 @@ export const translations = {
     'products.ketones': 'Ketones',
     'products.amines': 'Amines',
     
+    // Product Descriptions
+    'products.alcoholsDescription': 'Premium-grade alcohols for various industrial applications including cleaning, extraction, and synthesis processes.',
+    'products.aromaticsDescription': 'High-quality aromatic chemicals for coatings, plastics, and pharmaceutical applications.',
+    'products.aliphaticsDescription': 'Premium aliphatic hydrocarbons for industrial applications and manufacturing processes.',
+    'products.glycolsDescription': 'Industrial-grade glycols and glycol ethers for antifreeze, deicing, and solvent applications.',
+    'products.ketonesDescription': 'Specialized ketones for industrial solvents, coatings, and pharmaceutical intermediates.',
+    'products.aminesDescription': 'High-purity amines for pharmaceutical, agrochemical, and polymer industries.',
+    
+    // UI Elements
+    'products.learnMore': 'Learn More',
+    'products.chemical': 'Chemical',
+    'products.industrialTag': 'Industrial',
+    'products.aromaticsTag': 'Aromatics',
+    'products.aliphaticsTag': 'Aliphatics',
+    
     // Industries Section
     'industries.title': 'Industries We Serve',
     'industries.subtitle': 'Customized solutions for diverse sectors',
@@ -189,6 +204,21 @@ export const translations = {
     'products.ketones': '酮类',
     'products.amines': '胺类',
     
+    // Product Descriptions
+    'products.alcoholsDescription': '用于各种工业应用的优质醇类，包括清洁、提取和合成工艺。',
+    'products.aromaticsDescription': '用于涂料、塑料和制药应用的高品质芳香族化学品。',
+    'products.aliphaticsDescription': '用于工业应用和制造工艺的优质脂肪族碳氢化合物。',
+    'products.glycolsDescription': '用于防冻剂、除冰和溶剂应用的工业级二醇和二醇醚。',
+    'products.ketonesDescription': '用于工业溶剂、涂料和制药中间体的专用酮类。',
+    'products.aminesDescription': '用于制药、农用化学品和聚合物行业的高纯度胺类。',
+    
+    // UI Elements
+    'products.learnMore': '了解更多',
+    'products.chemical': '化学',
+    'products.industrialTag': '工业',
+    'products.aromaticsTag': '芳香族',
+    'products.aliphaticsTag': '脂肪族',
+    
     // Industries Section
     'industries.title': '我们服务的行业',
     'industries.subtitle': '为各行业量身定制的解决方案',
@@ -311,6 +341,21 @@ export const translations = {
     'products.glycols': 'Glikol',
     'products.ketones': 'Keton',
     'products.amines': 'Amina',
+    
+    // Product Descriptions
+    'products.alcoholsDescription': 'Alkohol gred premium untuk pelbagai aplikasi industri termasuk pembersihan, pengekstrakan, dan proses sintesis.',
+    'products.aromaticsDescription': 'Bahan kimia aromatik berkualiti tinggi untuk salutan, plastik, dan aplikasi farmaseutikal.',
+    'products.aliphaticsDescription': 'Hidrokarbon alifatik premium untuk aplikasi industri dan proses pembuatan.',
+    'products.glycolsDescription': 'Glikol dan eter glikol gred industri untuk aplikasi antibeku, penyahfrost, dan pelarut.',
+    'products.ketonesDescription': 'Keton khusus untuk pelarut industri, salutan, dan perantara farmaseutikal.',
+    'products.aminesDescription': 'Amina berkepekatan tinggi untuk industri farmaseutikal, agrokimia, dan polimer.',
+    
+    // UI Elements
+    'products.learnMore': 'Ketahui Lebih Lanjut',
+    'products.chemical': 'Kimia',
+    'products.industrialTag': 'Industri',
+    'products.aromaticsTag': 'Aromatik',
+    'products.aliphaticsTag': 'Alifatik',
     
     // Industries Section
     'industries.title': 'Industri Yang Kami Layani',
