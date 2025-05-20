@@ -3,24 +3,26 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToSection } from "@/lib/utils";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "../contexts/TranslationContext";
 
 interface NavLink {
-  name: string;
+  key: string;
   href: string;
 }
 
 const navLinks: NavLink[] = [
-  { name: "Home", href: "home" },
-  { name: "About", href: "about" },
-  { name: "Products", href: "products" },
-  { name: "Industries", href: "industries" },
-  { name: "Sustainability", href: "sustainability" },
-  { name: "Contact", href: "contact" },
+  { key: "nav.home", href: "home" },
+  { key: "nav.about", href: "about" },
+  { key: "nav.products", href: "products" },
+  { key: "nav.industries", href: "industries" },
+  { key: "nav.sustainability", href: "sustainability" },
+  { key: "nav.contact", href: "contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +72,7 @@ export default function Navbar() {
                   }}
                   className="text-white hover:text-accent-light font-medium transition-colors"
                 >
-                  {link.name}
+                  {t(link.key)}
                 </a>
               ))}
             </div>

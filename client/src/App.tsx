@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import NotFound from "@/pages/not-found";
 import MolecularMascot from "./components/MolecularMascot";
 import { Toaster } from "@/components/ui/toaster";
+import { TranslationProvider } from "./contexts/TranslationContext";
 
 function Router() {
   return (
@@ -15,11 +16,11 @@ function Router() {
 
 function App() {
   return (
-    <>
+    <TranslationProvider>
       <Router />
       <MolecularMascot />
       <Toaster />
-    </>
+    </TranslationProvider>
   );
 }
 

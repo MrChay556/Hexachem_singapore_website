@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Globe, ChevronDown } from 'lucide-react';
 import { 
@@ -7,40 +7,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
-
-// Available languages (simplified implementation)
-const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' },
-  { code: 'ms', name: 'Bahasa Melayu', flag: '🇲🇾' },
-];
+import { useTranslation } from '../contexts/TranslationContext';
 
 interface LanguageSwitcherProps {
   className?: string;
 }
 
 export default function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
-  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+  const { currentLanguage, setLanguage, availableLanguages } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   
-  // Load saved language preference from localStorage
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage) {
-      const language = languages.find(lang => lang.code === savedLanguage);
-      if (language) {
-        setCurrentLanguage(language);
-      }
-    }
-  }, []);
-  
-  const changeLanguage = (language: typeof languages[0]) => {
-    setCurrentLanguage(language);
-    localStorage.setItem('language', language.code);
-    
-    // This is just a visual demo of language switching
-    // In a full implementation, this would be connected to a translation system
-    
+  const changeLanguage = (language: typeof availableLanguages[0]) => {
+    setLanguage(language);
     setIsOpen(false);
   };
   
@@ -59,7 +37,7 @@ export default function LanguageSwitcher({ className = '' }: LanguageSwitcherPro
           </motion.button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="mt-1 p-1 w-36">
-          {languages.map((language) => (
+          {availableLanguages.map((language) => (
             <DropdownMenuItem 
               key={language.code}
               className="flex items-center justify-between px-2 py-1.5 cursor-pointer"
