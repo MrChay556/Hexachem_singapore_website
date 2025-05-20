@@ -154,9 +154,14 @@ export default function Footer() {
         
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} Hexachem (S) Pte Ltd. All rights reserved.
-            </p>
+            <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
+              <p className="text-gray-500 mb-4 md:mb-0">
+                &copy; {new Date().getFullYear()} Hexachem (S) Pte Ltd. All rights reserved.
+              </p>
+              <p className="text-gray-500 mb-4 md:mb-0">
+                Powered by <a href="https://myrsv.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light transition-all">RSV Infotech Pte. Ltd.</a>
+              </p>
+            </div>
             <div className="flex space-x-6">
               <a href="#" className="text-gray-500 hover:text-white transition-all">Privacy Policy</a>
               <a href="#" className="text-gray-500 hover:text-white transition-all">Terms of Service</a>
