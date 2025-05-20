@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="white"/>
+  <path d="M30 30h30v30h-30z M60 30h30v30h-30z M90 30h30v30h-30z M120 30h30v30h-30z M180 30h30v30h-30z M210 30h30v30h-30z M240 30h30v30h-30z
+  M30 60h30v30h-30z M240 60h30v30h-30z
+  M30 90h30v30h-30z M90 90h30v30h-30z M120 90h30v30h-30z M150 90h30v30h-30z M240 90h30v30h-30z
+  M30 120h30v30h-30z M240 120h30v30h-30z
+  M30 150h30v30h-30z M90 150h30v30h-30z M150 150h30v30h-30z M180 150h30v30h-30z M210 150h30v30h-30z M240 150h30v30h-30z
+  M30 180h30v30h-30z
+  M30 210h30v30h-30z M60 210h30v30h-30z M90 210h30v30h-30z M120 210h30v30h-30z M150 210h30v30h-30z M180 210h30v30h-30z M210 210h30v30h-30z M240 210h30v30h-30z" 
+  fill="#1a56db"/>
+  <rect x="75" y="75" width="150" height="150" fill="white"/>
+  <path d="M90 90h30v30h-30z M150 90h30v30h-30z
+  M120 120h30v30h-30z
+  M90 150h30v30h-30z M150 150h30v30h-30z" 
+  fill="#1a56db"/>
+  <rect x="130" y="130" width="30" height="30" fill="#1a56db"/>
+</svg>

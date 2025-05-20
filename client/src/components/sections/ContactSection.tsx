@@ -6,7 +6,7 @@ import {
   Clock,
   MessageCircle
 } from "lucide-react";
-import whatsappQrCode from "../../assets/whatsapp-qr.svg";
+import whatsappQrCode from "../../assets/whatsapp-qr-code.svg";
 
 export default function ContactSection() {
   return (
@@ -109,7 +109,7 @@ export default function ContactSection() {
               </svg>
             </div>
             
-            <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex justify-center">
               <a 
                 href="https://wa.me/6583063522" 
                 target="_blank" 
@@ -122,9 +122,6 @@ export default function ContactSection() {
                 </svg>
                 Chat on WhatsApp
               </a>
-              <p className="text-center text-gray-600 text-sm sm:text-left">
-                Direct Line: <span className="font-medium">+65 8306 3522</span>
-              </p>
             </div>
           </motion.div>
         </div>
