@@ -250,7 +250,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Email Address</h4>
-                  <p className="text-gray-600">hexachem.sales@gmail.com / sales@hexachem.sg</p>
+                  <p className="text-gray-600">sales@hexachem.sg</p>
                 </div>
               </div>
               
@@ -266,14 +266,14 @@ export default function ContactSection() {
             </div>
             
             <div className="relative w-full h-64 rounded-lg overflow-hidden">
-              <iframe
+              <iframe 
                 title="Hexachem Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8153654019876!2d103.8512!3d1.2966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTcnNDcuOCJOIDEwM8KwNTEnMDQuMyJF!5e0!3m2!1sen!2sus!4v1625124887169!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={false}
-                loading="lazy"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2043.5111530592844!2d103.69622065741115!3d1.3338924179783453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19b6b0fb2997%3A0x5670a3a787c39050!2sHexachem%20(S)%20Pte.%20Ltd.!5e1!3m2!1sen!2ssg!4v1747724909503!5m2!1sen!2ssg" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={false} 
+                loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
