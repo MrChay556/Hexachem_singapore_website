@@ -6,7 +6,7 @@ import {
   Clock,
   MessageCircle
 } from "lucide-react";
-import whatsappQrCode from "../../assets/whatsapp-qr-code.svg";
+import whatsappQrCode from "../../assets/whatsapp-qr-hexachem.svg";
 
 export default function ContactSection() {
   return (
@@ -95,18 +95,15 @@ export default function ContactSection() {
             <h3 className="text-2xl font-bold mb-4 text-gray-800">Connect on WhatsApp</h3>
             <p className="text-gray-600 text-center mb-6">Scan the QR code to chat with us directly on WhatsApp</p>
             
-            {/* WhatsApp QR Code - Using SVG for a placeholder QR code */}
+            {/* WhatsApp QR Code */}
             <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="200" fill="white"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M40 40H60V60H40V40ZM60 60H80V80H60V60ZM40 80H60V100H40V80ZM60 100H80V120H60V100ZM40 120H60V140H40V120ZM60 140H80V160H60V140ZM80 40H100V60H80V40ZM120 40H140V60H120V40ZM140 60H160V80H140V60ZM80 80H100V100H80V80ZM120 80H140V100H120V80ZM80 120H100V140H80V120ZM120 120H140V140H120V120ZM80 140H100V160H80V140ZM120 140H140V160H120V140ZM140 140H160V160H140V140Z" fill="#1A56DB"/>
-                <rect x="90" y="90" width="20" height="20" fill="#1A56DB"/>
-                <path d="M90 40H120V60H90V40Z" fill="#1A56DB"/>
-                <path d="M40 160H80V180H40V160Z" fill="#1A56DB"/>
-                <path d="M120 160H160V180H120V160Z" fill="#1A56DB"/>
-                <path d="M160 40H180V80H160V40Z" fill="#1A56DB"/>
-                <path d="M160 120H180V160H160V120Z" fill="#1A56DB"/>
-              </svg>
+              <img 
+                src={whatsappQrCode} 
+                alt="WhatsApp QR Code" 
+                width="200" 
+                height="200"
+                className="mx-auto"
+              />
             </div>
             
             <div className="flex justify-center">

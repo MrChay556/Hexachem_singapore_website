@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Globe, ChevronDown } from 'lucide-react';
 import { 
@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 
-// Available languages
+// Available languages (simplified implementation)
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'zh', name: '中文', flag: '🇨🇳' },
@@ -23,24 +23,9 @@ export default function LanguageSwitcher({ className = '' }: LanguageSwitcherPro
   const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
   const [isOpen, setIsOpen] = useState(false);
   
-  // Load saved language preference from localStorage
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage) {
-      const language = languages.find(lang => lang.code === savedLanguage);
-      if (language) {
-        setCurrentLanguage(language);
-      }
-    }
-  }, []);
-  
   const changeLanguage = (language: typeof languages[0]) => {
     setCurrentLanguage(language);
     localStorage.setItem('language', language.code);
-    
-    // In a real implementation, this would trigger language change across the app
-    // For this demo, we'll just change the selected language in the dropdown
-    
     setIsOpen(false);
   };
   
