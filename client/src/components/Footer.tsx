@@ -201,13 +201,13 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} Hexachem (S) Pte Ltd. {t('footer.copyright')}
               </p>
               <p className="text-gray-500 mb-4 md:mb-0">
-                Powered by <a href="https://myrsv.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light transition-all">RSV Infotech Pte. Ltd.</a>
+                {t('footer.powered')} <a href="https://myrsv.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light transition-all">RSV Infotech Pte. Ltd.</a>
               </p>
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-500 hover:text-white transition-all">Privacy Policy</a>
-              <a href="#" className="text-gray-500 hover:text-white transition-all">Terms of Service</a>
-              <a href="#" className="text-gray-500 hover:text-white transition-all">Sitemap</a>
+              <a href="#" className="text-gray-500 hover:text-white transition-all">{t('footer.privacy')}</a>
+              <a href="#" className="text-gray-500 hover:text-white transition-all">{t('footer.terms')}</a>
+              <a href="#" className="text-gray-500 hover:text-white transition-all">{t('footer.sitemap')}</a>
             </div>
           </div>
         </div>

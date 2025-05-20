@@ -102,8 +102,16 @@ export const translations = {
     'contact.businessHours': 'Monday - Friday: 9:00 AM - 6:00 PM',
     
     // Footer
+    'footer.description': 'Innovating chemical sustainability since 2011. Leading the way in chemical recycling and trading solutions.',
+    'footer.quickLinks': 'Quick Links',
+    'footer.subscribe': 'Subscribe',
+    'footer.subscribeDesc': 'Stay updated with our latest news and product announcements.',
+    'footer.emailPlaceholder': 'Your email address',
     'footer.copyright': 'All rights reserved',
     'footer.powered': 'Powered by',
+    'footer.privacy': 'Privacy Policy',
+    'footer.terms': 'Terms of Service',
+    'footer.sitemap': 'Sitemap',
     
     // Molecular Mascot
     'mascot.welcome': 'Hi there! I\'m MoleCueBuddy, Hexachem\'s virtual assistant. How can I help you today?',
@@ -205,8 +213,16 @@ export const translations = {
     'contact.businessHours': '周一至周五：上午9:00 - 下午6:00',
     
     // Footer
+    'footer.description': '自2011年以来创新化学可持续性。引领化学回收和贸易解决方案。',
+    'footer.quickLinks': '快速链接',
+    'footer.subscribe': '订阅',
+    'footer.subscribeDesc': '随时了解我们的最新消息和产品公告。',
+    'footer.emailPlaceholder': '您的电子邮件地址',
     'footer.copyright': '版权所有',
     'footer.powered': '技术支持',
+    'footer.privacy': '隐私政策',
+    'footer.terms': '服务条款',
+    'footer.sitemap': '网站地图',
     
     // Molecular Mascot
     'mascot.welcome': '您好！我是 MoleCueBuddy，Hexachem 的虚拟助手。今天我能为您提供什么帮助？',
@@ -308,8 +324,16 @@ export const translations = {
     'contact.businessHours': 'Isnin - Jumaat: 9:00 Pagi - 6:00 Petang',
     
     // Footer
+    'footer.description': 'Berinovasi dalam kelestarian kimia sejak 2011. Memimpin dalam penyelesaian kitar semula dan perdagangan kimia.',
+    'footer.quickLinks': 'Pautan Pantas',
+    'footer.subscribe': 'Langganan',
+    'footer.subscribeDesc': 'Dapatkan maklumat terkini tentang berita dan pengumuman produk terbaru kami.',
+    'footer.emailPlaceholder': 'Alamat e-mel anda',
     'footer.copyright': 'Hak cipta terpelihara',
     'footer.powered': 'Dikuasakan oleh',
+    'footer.privacy': 'Dasar Privasi',
+    'footer.terms': 'Terma Perkhidmatan',
+    'footer.sitemap': 'Peta Laman',
     
     // Molecular Mascot
     'mascot.welcome': 'Hai! Saya MoleCueBuddy, pembantu maya Hexachem. Bagaimana saya boleh membantu anda hari ini?',
