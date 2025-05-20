@@ -95,11 +95,9 @@ export default function SustainabilitySection() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h3 className="text-2xl font-bold mb-6">Eco-Conscious Processes</h3>
+              <h3 className="text-2xl font-bold mb-6">{t('sustainability.environmental')}</h3>
               <p className="text-white/80 mb-8">
-                Hexachem has developed innovative chemical recycling technology that significantly
-                reduces waste, minimizes energy consumption, and leverages sustainable practices
-                to create a positive environmental impact.
+                {t('sustainability.environmentalDesc')}
               </p>
             </motion.div>
             
@@ -119,7 +117,11 @@ export default function SustainabilitySection() {
                     0{metric.suffix}
                   </div>
                   <p className="text-white/80">
-                    {metric.description}
+                    {metric.id === "recycled-metric" ? t('sustainability.recycled') :
+                     metric.id === "energy-metric" ? t('sustainability.emissions') :
+                     metric.id === "carbon-metric" ? t('sustainability.renewable') :
+                     metric.id === "projects-metric" ? t('sustainability.community') :
+                     metric.description}
                   </p>
                 </motion.div>
               ))}
@@ -134,7 +136,7 @@ export default function SustainabilitySection() {
                 className="bg-white text-primary hover:bg-gray-100 font-semibold"
                 onClick={() => scrollToSection("contact")}
               >
-                Learn About Our Sustainable Initiatives
+                {t('sustainability.responsible')}
               </Button>
             </motion.div>
           </div>

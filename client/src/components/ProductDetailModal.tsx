@@ -230,7 +230,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                   
                   {selectedProduct.casNumber && (
                     <div className="mb-6 inline-block bg-blue-50 px-4 py-2 rounded-lg">
-                      <span className="font-semibold text-gray-800">CAS Number: </span>
+                      <span className="font-semibold text-gray-800">{t('products.casNumber')}: </span>
                       <span className="text-gray-700">{selectedProduct.casNumber}</span>
                     </div>
                   )}
