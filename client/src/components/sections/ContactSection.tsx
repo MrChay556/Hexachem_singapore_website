@@ -230,7 +230,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Our Location</h4>
-                  <p className="text-gray-600">PIONEER JUNCTION, #03-35, 3 SOON LEE STREET, SINGAPORE 627606</p>
+                  <p className="text-gray-600">HEXACHEM(S)PTE LTD, NO.3, SOON LEE STREET, PIONEER JUNCTION, #05-03, SINGAPORE - 627606</p>
                 </div>
               </div>
               
@@ -240,7 +240,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Phone Number</h4>
-                  <p className="text-gray-600">+65 6684 1780</p>
+                  <p className="text-gray-600">TEL: +65 6684 1780 / FAX: +65 6684 1781</p>
                 </div>
               </div>
               
@@ -250,7 +250,7 @@ export default function ContactSection() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold">Email Address</h4>
-                  <p className="text-gray-600">enquiry@hexachem.com.sg</p>
+                  <p className="text-gray-600">hexachem.sales@gmail.com / sales@hexachem.sg</p>
                 </div>
               </div>
               
