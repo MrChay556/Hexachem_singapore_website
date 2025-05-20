@@ -196,7 +196,11 @@ export default function Interactive3DProductCard({ product, onClick, index }: In
                 transition={{ delay: Math.random() * 0.2, type: 'spring', stiffness: 300 }}
               >
                 <Badge variant="outline" className="bg-primary/10 text-primary transform-gpu">
-                  {t(`products.${tag.toLowerCase()}Tag`)}
+                  {tag === 'Chemical' ? t('products.chemical') : 
+                   tag === 'Industrial' ? t('products.industrialTag') :
+                   tag === 'Aromatics' ? t('products.aromaticsTag') :
+                   tag === 'Aliphatics' ? t('products.aliphaticsTag') :
+                   tag}
                 </Badge>
               </motion.div>
             ))}
