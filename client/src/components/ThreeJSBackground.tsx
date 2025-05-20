@@ -41,6 +41,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       new THREE.Color(0x3b82f6),  // Blue for secondary molecules
       new THREE.Color(0x0c4a6e),  // Dark blue for tertiary molecules
       new THREE.Color(0x0369a1),  // Deep cyan-blue for rare elements
+      new THREE.Color(0x0284c7),  // Sky blue
+      new THREE.Color(0x0ea5e9),  // Bright sky blue
     ];
     
     // Different colors for different chemical bonds
@@ -49,6 +51,8 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       new THREE.Color(0x60a5fa),  // Lighter blue for single bonds
       new THREE.Color(0x7dd3fc),  // Sky blue for double bonds
       new THREE.Color(0x93c5fd),  // Very light blue for energized molecules
+      new THREE.Color(0xbae6fd),  // Very bright blue
+      new THREE.Color(0xdbeafe),  // Light pale blue
     ];
 
     // Mouse interaction variables
@@ -203,24 +207,29 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
     // Create chemical compounds in a more organized, visually pleasing arrangement
     const compoundDistribution = [
       // Center larger complex compounds
-      { x: -3, y: 1, z: -5, size: 2.5, complexity: 7 },
-      { x: 4, y: -2, z: 0, size: 2.2, complexity: 6 },
+      { x: -3, y: 1, z: -5, size: 3.5, complexity: 7 },
+      { x: 4, y: -2, z: 0, size: 3.2, complexity: 6 },
       
       // Smaller compounds around the edges
-      { x: -15, y: 8, z: -3, size: 1.5, complexity: 4 },
-      { x: 12, y: 6, z: -6, size: 1.2, complexity: 3 },
-      { x: -10, y: -7, z: -2, size: 1.7, complexity: 5 },
-      { x: 8, y: -5, z: -4, size: 1.3, complexity: 4 },
+      { x: -15, y: 8, z: -3, size: 2.5, complexity: 5 },
+      { x: 12, y: 6, z: -6, size: 2.2, complexity: 4 },
+      { x: -10, y: -7, z: -2, size: 2.7, complexity: 5 },
+      { x: 8, y: -5, z: -4, size: 2.3, complexity: 4 },
       
       // Background elements
-      { x: -20, y: -3, z: -10, size: 2.0, complexity: 5 },
-      { x: 18, y: 4, z: -8, size: 1.8, complexity: 6 },
+      { x: -20, y: -3, z: -10, size: 3.0, complexity: 5 },
+      { x: 18, y: 4, z: -8, size: 2.8, complexity: 6 },
       
       // Additional compounds for a richer scene
-      { x: 5, y: 10, z: -7, size: 1.4, complexity: 4 },
-      { x: -7, y: -10, z: -3, size: 1.6, complexity: 5 },
-      { x: -18, y: 2, z: -9, size: 1.3, complexity: 3 },
-      { x: 15, y: -7, z: -5, size: 1.9, complexity: 6 }
+      { x: 5, y: 10, z: -7, size: 2.4, complexity: 5 },
+      { x: -7, y: -10, z: -3, size: 2.6, complexity: 6 },
+      { x: -18, y: 2, z: -9, size: 2.3, complexity: 5 },
+      { x: 15, y: -7, z: -5, size: 2.9, complexity: 6 },
+      
+      // Foreground elements for better visibility and interaction
+      { x: 0, y: 0, z: -2, size: 4.0, complexity: 7 },
+      { x: -5, y: 5, z: -1, size: 3.8, complexity: 7 },
+      { x: 5, y: -5, z: -1, size: 3.7, complexity: 7 }
     ];
     
     // Create compounds based on the designed distribution
@@ -293,7 +302,7 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       
       const time = clock.getElapsedTime();
       
-      // Animate each molecular compound
+      // Animate each molecular compound with enhanced effects
       molecules.forEach(molecule => {
         const { 
           rotationAxis, 
@@ -304,18 +313,20 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
           driftAmplitude
         } = molecule.userData;
         
-        // Rotate the molecule around its axis
-        molecule.rotateOnAxis(rotationAxis, rotationSpeed * 0.01);
+        // Enhanced rotation with varying speeds
+        molecule.rotateOnAxis(rotationAxis, rotationSpeed * 0.015);
         
-        // Gentle floating motion
-        const driftX = Math.sin(time * driftSpeed + driftPhase) * driftAmplitude;
-        const driftY = Math.cos(time * driftSpeed + driftPhase * 2) * driftAmplitude;
+        // More pronounced floating motion for better visibility
+        const driftX = Math.sin(time * driftSpeed + driftPhase) * driftAmplitude * 1.5;
+        const driftY = Math.cos(time * driftSpeed + driftPhase * 2) * driftAmplitude * 1.5;
+        const driftZ = Math.sin(time * driftSpeed * 0.7 + driftPhase * 0.5) * driftAmplitude * 0.5;
         
         molecule.position.x = originalPosition.x + driftX;
         molecule.position.y = originalPosition.y + driftY;
+        molecule.position.z = originalPosition.z + driftZ;
         
-        // Animate individual atoms within each molecule
-        molecule.children.forEach(child => {
+        // Animate individual atoms with more vibrant motions
+        molecule.children.forEach((child: any) => {
           if (child instanceof THREE.Mesh) {
             const { 
               originalPosition, 
@@ -324,20 +335,25 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
               amplitude 
             } = child.userData;
             
-            // Vibration effect for atoms (subtle)
-            const vibrationX = Math.sin(time * frequency + phase) * amplitude;
-            const vibrationY = Math.cos(time * frequency + phase * 2) * amplitude;
-            const vibrationZ = Math.sin(time * frequency * 1.5 + phase) * amplitude;
+            // More pronounced vibration effect for atoms
+            const vibrationX = Math.sin(time * frequency + phase) * amplitude * 1.8;
+            const vibrationY = Math.cos(time * frequency + phase * 2) * amplitude * 1.8;
+            const vibrationZ = Math.sin(time * frequency * 1.5 + phase) * amplitude * 1.8;
             
             child.position.x = originalPosition.x + vibrationX;
             child.position.y = originalPosition.y + vibrationY;
             child.position.z = originalPosition.z + vibrationZ;
+            
+            // Pulsating size effect for more visual appeal
+            const pulseFactor = 1 + Math.sin(time * 0.5 + phase) * 0.1;
+            child.scale.set(pulseFactor, pulseFactor, pulseFactor);
           }
         });
       });
       
-      // Very subtle overall animation effect
-      animationGroup.rotation.y = Math.sin(time * 0.05) * 0.05;
+      // More pronounced overall animation effect
+      animationGroup.rotation.y = Math.sin(time * 0.08) * 0.1;
+      animationGroup.rotation.x = Math.cos(time * 0.05) * 0.05;
       
       // Render scene
       renderer.render(scene, camera);

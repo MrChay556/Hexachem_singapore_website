@@ -6,7 +6,7 @@ import {
   Clock,
   MessageCircle
 } from "lucide-react";
-import whatsappQrCode from "../../assets/whatsapp-qr-hexachem.svg";
+import whatsappQrCode from "../../assets/whatsapp-real-qr.png";
 
 export default function ContactSection() {
   return (
@@ -123,36 +123,7 @@ export default function ContactSection() {
           </motion.div>
         </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="bg-white p-8 rounded-xl shadow-lg mb-12"
-        >
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <MessageCircle className="h-8 w-8 text-primary" />
-            <h3 className="text-2xl font-bold">Chat With Our AI Assistant</h3>
-          </div>
-          
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            Look for our molecular mascot in the corner! Our AI-powered assistant can help answer your
-            questions about our products, services, and chemical solutions. Try asking about our
-            different chemical categories, applications, or sustainability initiatives.
-          </p>
-          
-          <div className="flex justify-center">
-            <div className="max-w-md bg-primary/5 p-6 rounded-lg">
-              <p className="text-primary font-medium mb-2">Try asking questions like:</p>
-              <ul className="space-y-2 text-gray-700">
-                <li>• "What types of chemicals does Hexachem offer?"</li>
-                <li>• "Tell me about your solvent recycling capabilities."</li>
-                <li>• "What industries do you work with?"</li>
-                <li>• "What makes Hexachem unique in the market?"</li>
-              </ul>
-            </div>
-          </div>
-        </motion.div>
+
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
