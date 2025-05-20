@@ -204,12 +204,18 @@ export default function ThreeJSBackground({ canvasId }: ThreeJSBackgroundProps) 
       return bond;
     }
     
-    // Create a minimal, elegant arrangement with just a few molecules
+    // Create a balanced arrangement with just the right number of molecules
     const compoundDistribution = [
-      // Three carefully placed compounds to create an elegant, uncluttered scene
-      { x: 12, y: 4, z: -5, size: 1.5, complexity: 3 },
-      { x: -8, y: -2, z: -3, size: 1.6, complexity: 3 },
-      { x: 3, y: -6, z: -4, size: 1.4, complexity: 3 }
+      // Main visible compounds - positioned strategically
+      { x: 12, y: 4, z: -5, size: 2.0, complexity: 4 },
+      { x: -10, y: -3, z: -4, size: 2.2, complexity: 5 },
+      { x: 3, y: -8, z: -3, size: 1.8, complexity: 4 },
+      { x: -5, y: 7, z: -4, size: 2.0, complexity: 5 },
+      { x: 8, y: -5, z: -3, size: 1.9, complexity: 4 },
+      
+      // Some background elements to add depth
+      { x: 15, y: 8, z: -8, size: 1.7, complexity: 3 },
+      { x: -15, y: 12, z: -10, size: 1.8, complexity: 4 }
     ];
     
     // Create compounds based on the designed distribution
