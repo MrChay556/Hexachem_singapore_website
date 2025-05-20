@@ -17,6 +17,7 @@ interface SimpleIndustryCardProps {
 }
 
 export default function SimpleIndustryCard({ industry, index }: SimpleIndustryCardProps) {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -48,12 +49,20 @@ export default function SimpleIndustryCard({ industry, index }: SimpleIndustryCa
         
         {/* Title */}
         <h3 className="text-xl font-semibold text-center text-gray-800 mb-3">
-          {industry.title}
+          {industry.id === "coatings" ? t('industries.paint') : 
+           industry.id === "adhesives" ? t('industries.food') : 
+           industry.id === "plastics" ? t('industries.pharma') : 
+           industry.id === "construction" ? t('industries.textile') : 
+           industry.title}
         </h3>
         
         {/* Description */}
         <p className="text-gray-600 text-center mb-6 text-sm">
-          {industry.description}
+          {industry.id === "coatings" ? t('industries.paintDesc') : 
+           industry.id === "adhesives" ? t('industries.foodDesc') : 
+           industry.id === "plastics" ? t('industries.pharmaDesc') : 
+           industry.id === "construction" ? t('industries.textileDesc') : 
+           industry.description}
         </p>
         
         {/* Action Button */}
@@ -67,7 +76,7 @@ export default function SimpleIndustryCard({ industry, index }: SimpleIndustryCa
             onClick={() => scrollToSection("contact")}
             className="inline-flex items-center text-primary-600 font-medium"
           >
-            Learn More
+            {t('products.viewDetails')}
             <ArrowRight className="ml-1 h-4 w-4" />
           </motion.button>
         </div>

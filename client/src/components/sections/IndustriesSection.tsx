@@ -80,7 +80,7 @@ export default function IndustriesSection() {
             className="bg-primary hover:bg-primary-dark text-white font-bold px-8 py-6 text-base"
             onClick={() => scrollToSection("contact")}
           >
-            Talk to Our Industry Experts
+            {t('products.viewAll')}
           </Button>
         </motion.div>
       </div>
