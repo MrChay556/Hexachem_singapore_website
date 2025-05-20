@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { FlaskRound, Droplets, Atom } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
+import { useTranslation } from "../../contexts/TranslationContext";
 
 export default function AboutSection() {
+  const { t } = useTranslation();
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
@@ -21,12 +23,11 @@ export default function AboutSection() {
           variants={fadeIn}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            About <span className="text-primary">Hexachem</span>
+            {t('about.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Established in 2011, we've been pioneering chemical recycling and trading 
-            solutions across Asia and beyond.
+            {t('about.subtitle')}
           </p>
         </motion.div>
         

@@ -69,7 +69,7 @@ export default function HeroSection() {
                 className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium px-10 py-7 text-lg tracking-wide shadow-lg shadow-blue-700/20 transition-all duration-300 rounded-md"
                 onClick={() => scrollToSection("products")}
               >
-                <span>LEARN MORE</span>
+                <span>{t('hero.learnMore')}</span>
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
               
@@ -79,7 +79,7 @@ export default function HeroSection() {
                 className="border-2 border-blue-400/50 bg-blue-900/20 backdrop-blur-sm text-blue-100 hover:bg-blue-800/40 hover:border-blue-400/80 font-medium px-10 py-7 text-lg tracking-wide transition-all duration-300 rounded-md"
                 onClick={() => scrollToSection("contact")}
               >
-                CONTACT US
+                {t('hero.contactUs')}
               </Button>
             </motion.div>
           </motion.div>
