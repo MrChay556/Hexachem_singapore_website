@@ -18,6 +18,10 @@ export const translations = {
     'nav.sustainability': 'Sustainability',
     'nav.contact': 'Contact',
     
+    // Product Modal
+    'products.noProductsFound': 'No products found',
+    'products.tryAdjusting': 'Try adjusting your search terms',
+    
     // Hero Section
     'hero.title': 'Quality Chemical Distribution',
     'hero.subtitle': 'Leading chemical distribution company with operations across Southeast Asia, providing innovative solutions and quality products to diverse industries.',
@@ -174,6 +178,8 @@ export const translations = {
     'applications': '应用',
     'products.backToProducts': '返回产品',
     'products.productDetails': '产品详情',
+    'products.noProductsFound': '未找到产品',
+    'products.tryAdjusting': '请尝试调整搜索条件',
     
     // Hero Section
     'hero.title': '优质化学品分销',

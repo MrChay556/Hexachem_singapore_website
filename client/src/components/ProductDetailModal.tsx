@@ -199,8 +199,8 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
                       <Search className="h-8 w-8 text-gray-400" />
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900">No products found</h3>
-                    <p className="mt-1 text-sm text-gray-500">Try adjusting your search terms</p>
+                    <h3 className="text-lg font-medium text-gray-900">{t('products.noProductsFound') || 'No products found'}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{t('products.tryAdjusting') || 'Try adjusting your search terms'}</p>
                   </div>
                 ) : (
                   filteredProducts.map((detail, index) => (
@@ -244,7 +244,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        {t('products.applications')}
+                        {t('applications')}
                       </h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
                         {selectedProduct.applications.map((app, i) => (
@@ -274,7 +274,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
                     >
                       <h4 className="font-semibold text-gray-800 mb-3 flex items-center text-lg">
                         <span className="w-1.5 h-6 bg-primary rounded-full mr-2"></span>
-                        {t('products.specifications')}
+                        规格
                       </h4>
                       <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
                         <table className="min-w-full divide-y divide-gray-200">
