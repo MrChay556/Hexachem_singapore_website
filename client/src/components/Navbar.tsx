@@ -109,7 +109,7 @@ export default function Navbar() {
                 }}
                 className="text-primary hover:text-white font-medium px-4 py-2 rounded-md hover:bg-primary transition-colors"
               >
-                {link.name}
+                {t(link.key)}
               </a>
             ))}
             <div className="px-4 py-2">

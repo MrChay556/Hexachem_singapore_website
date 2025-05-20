@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import ThreeJSBackground from "../ThreeJSBackground";
 import { scrollToSection } from "@/lib/utils";
 import { ArrowRight, Sparkles, FlaskRound, Droplets, Beaker, Atom, ArrowDown, ChevronRight } from "lucide-react";
+import { useTranslation } from "../../contexts/TranslationContext";
 
 export default function HeroSection() {
+  const { t } = useTranslation();
   return (
     <section 
       id="home" 
@@ -44,7 +46,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              Quality Chemical Distribution
+              {t('hero.title')}
             </motion.p>
             
             <motion.p 
@@ -53,9 +55,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              Leading chemical distribution company with operations across 
-              <span className="text-blue-100 font-semibold"> Southeast Asia</span>, 
-              providing innovative solutions and quality products to diverse industries.
+              {t('hero.subtitle')}
             </motion.p>
             
             <motion.div 
