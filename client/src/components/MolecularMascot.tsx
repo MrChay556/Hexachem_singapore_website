@@ -30,7 +30,7 @@ export default function MolecularMascot() {
         {
           id: generateId(),
           role: 'assistant',
-          content: "👋 Hi there! I'm MolecuBuddy, your friendly molecular guide to Hexachem. Ask me anything about our products, services, or chemical solutions!",
+          content: "👋 Hi there! I'm MoleCueBuddy, your friendly molecular guide to Hexachem. Ask me anything about our products, services, or chemical solutions!",
           timestamp: new Date()
         }
       ]);
@@ -220,19 +220,22 @@ export default function MolecularMascot() {
           className="relative cursor-pointer"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(true)}
-          animate={{ rotate: isOpen ? [0, -10, 10, -5, 5, 0] : 0 }}
+          onClick={() => setIsOpen(!isOpen)}
+          animate={{ rotate: isOpen ? 0 : [0, -10, 10, -5, 5, 0] }}
           transition={{ duration: 1, repeat: Infinity, repeatType: 'loop', repeatDelay: 3 }}
         >
-          <motion.div 
-            className="absolute -top-12 right-0 bg-white shadow-md rounded-full px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap"
-            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 1 }}
-          >
-            Click to chat with me!
-            <div className="absolute -bottom-2 right-6 w-3 h-3 bg-white transform rotate-45"></div>
-          </motion.div>
+          {/* Speech bubble shown when chatbot is closed */}
+          {!isOpen && (
+            <motion.div 
+              className="absolute -top-12 right-0 bg-white shadow-md rounded-full px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap"
+              initial={{ opacity: 0, scale: 0.8, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 1 }}
+            >
+              Click to chat with me!
+              <div className="absolute -bottom-2 right-6 w-3 h-3 bg-white transform rotate-45"></div>
+            </motion.div>
+          )}
           
           <div className="w-16 h-16 rounded-full bg-white p-1 shadow-lg">
             <motion.div
@@ -249,146 +252,129 @@ export default function MolecularMascot() {
             </motion.div>
           </div>
         </motion.div>
-      </motion.div>
-      
-      {/* Chat modal */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {/* Backdrop */}
-            <motion.div 
-              className="absolute inset-0 bg-black/30 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
-            
-            {/* Chat container */}
+        
+        {/* Chat window - positioned to the left of the mascot */}
+        <AnimatePresence>
+          {isOpen && (
             <motion.div
-              className="relative bg-white rounded-xl shadow-xl w-full max-w-md sm:max-w-lg h-[600px] max-h-[90vh] flex flex-col overflow-hidden z-50"
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              onClick={(e) => e.stopPropagation()}
+              className="absolute bottom-0 right-20 mb-[4px]"
+              initial={{ opacity: 0, scale: 0.9, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.9, x: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             >
-              {/* Header */}
-              <div className="bg-primary p-4 text-white flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-white p-1">
-                    <MoleculeMascot />
+              <div className="bg-white rounded-lg shadow-xl w-[320px] sm:w-[350px] h-[400px] flex flex-col overflow-hidden">
+                {/* Header */}
+                <div className="bg-primary p-3 text-white flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 rounded-full bg-white p-1">
+                      <MoleculeMascot />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-sm">MoleCueBuddy</h3>
+                      <p className="text-xs text-blue-100">Hexachem's AI Assistant</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg">MoleCueBuddy</h3>
-                    <p className="text-xs text-blue-100">Hexachem's AI Assistant</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="rounded-full p-1 hover:bg-blue-600 transition-colors"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              
-              {/* Chat messages */}
-              <div 
-                ref={chatRef}
-                className="flex-1 p-4 overflow-y-auto" 
-                style={{ scrollBehavior: 'smooth' }}
-              >
-                {messages.map((message) => (
-                  <div 
-                    key={message.id}
-                    className={`flex mb-4 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-full p-1 hover:bg-blue-600 transition-colors"
                   >
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className={`max-w-[80%] p-3 rounded-lg ${
-                        message.role === 'user' 
-                          ? 'bg-primary text-white rounded-tr-none' 
-                          : 'bg-gray-100 text-gray-800 rounded-tl-none'
-                      }`}
-                    >
-                      {formatMessageContent(message.content)}
-                    </motion.div>
-                  </div>
-                ))}
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
                 
-                {/* Typing indicator */}
-                {isTyping && (
-                  <div className="flex mb-4 justify-start">
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-gray-100 text-gray-800 p-3 rounded-lg rounded-tl-none"
+                {/* Chat messages */}
+                <div 
+                  ref={chatRef}
+                  className="flex-1 p-3 overflow-y-auto" 
+                  style={{ scrollBehavior: 'smooth' }}
+                >
+                  {messages.map((message) => (
+                    <div 
+                      key={message.id}
+                      className={`flex mb-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div className="flex space-x-1 items-center">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                      </div>
-                    </motion.div>
-                  </div>
-                )}
-              </div>
-              
-              {/* Input area */}
-              <div className="p-4 border-t border-gray-200">
-                <div className="flex space-x-2">
-                  <div className="relative flex-1">
-                    <textarea
-                      ref={inputRef}
-                      value={inputValue}
-                      onChange={handleInputChange}
-                      onKeyDown={handleKeyDown}
-                      placeholder="Ask MolecuBuddy something..."
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                      rows={1}
-                      disabled={isSending}
-                      style={{ minHeight: '44px', maxHeight: '100px' }}
-                    />
-                    {inputValue.trim() !== '' && (
-                      <button
-                        onClick={handleSendMessage}
-                        disabled={isSending}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary-dark"
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`max-w-[85%] p-2 text-sm rounded-lg ${
+                          message.role === 'user' 
+                            ? 'bg-primary text-white rounded-tr-none' 
+                            : 'bg-gray-100 text-gray-800 rounded-tl-none'
+                        }`}
                       >
-                        <Send className="h-5 w-5" />
+                        {formatMessageContent(message.content)}
+                      </motion.div>
+                    </div>
+                  ))}
+                  
+                  {/* Typing indicator */}
+                  {isTyping && (
+                    <div className="flex mb-3 justify-start">
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-gray-100 text-gray-800 p-2 rounded-lg rounded-tl-none"
+                      >
+                        <div className="flex space-x-1 items-center">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                        </div>
+                      </motion.div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Input area */}
+                <div className="p-3 border-t border-gray-200">
+                  <div className="flex space-x-2">
+                    <div className="relative flex-1">
+                      <textarea
+                        ref={inputRef}
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Ask about Hexachem..."
+                        className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                        rows={1}
+                        disabled={isSending}
+                        style={{ minHeight: '38px', maxHeight: '80px' }}
+                      />
+                      {inputValue.trim() !== '' && (
+                        <button
+                          onClick={handleSendMessage}
+                          disabled={isSending}
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary-dark"
+                        >
+                          <Send className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                    
+                    {inputValue.trim() === '' && (
+                      <button
+                        className="bg-primary text-white p-2 rounded-lg hover:bg-primary-dark flex-shrink-0"
+                        title="Suggest topics"
+                        onClick={() => {
+                          setInputValue("What products does Hexachem offer?");
+                        }}
+                      >
+                        <Wand2 className="h-4 w-4" />
                       </button>
                     )}
                   </div>
                   
-                  {inputValue.trim() === '' && (
-                    <button
-                      className="bg-primary text-white p-2 rounded-lg hover:bg-primary-dark flex-shrink-0"
-                      title="Suggest topics"
-                      onClick={() => {
-                        setInputValue("What products does Hexachem offer?");
-                      }}
-                    >
-                      <Wand2 className="h-5 w-5" />
-                    </button>
-                  )}
-                </div>
-                
-                <div className="mt-2 text-xs text-gray-500 text-center">
-                  Powered by RSV AI | Ask about products, services, or industry solutions
+                  <div className="mt-1 text-xs text-gray-500 text-center">
+                    Powered by RSV AI | Ask about products, services, or industry solutions
+                  </div>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 }

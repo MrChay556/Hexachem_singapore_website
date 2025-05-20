@@ -28,63 +28,98 @@ export default function ContactSection() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+          {/* Left Side: Contact Information */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center"
+            className="bg-white p-8 rounded-xl shadow-lg"
           >
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <MapPin className="h-7 w-7 text-primary" />
+            <h3 className="text-2xl font-bold mb-6 text-gray-800">Contact Information</h3>
+            
+            <div className="space-y-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                  <MapPin className="h-5 w-5" />
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-semibold">Our Location</h4>
+                  <p className="text-gray-600">NO.3, SOON LEE STREET, PIONEER JUNCTION, #05-03, SINGAPORE - 627606</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-semibold">Phone Number</h4>
+                  <p className="text-gray-600">TEL: +65 6684 1780</p>
+                  <p className="text-gray-600">FAX: +65 6684 1781</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                  <Mail className="h-5 w-5" />
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-semibold">Email Address</h4>
+                  <p className="text-gray-600">sales@hexachem.sg</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                  <Clock className="h-5 w-5" />
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-semibold">Business Hours</h4>
+                  <p className="text-gray-600">Monday - Friday: 9am - 6pm</p>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-bold mb-2">Our Location</h3>
-            <p className="text-gray-600">NO.3, SOON LEE STREET, PIONEER JUNCTION, #05-03, SINGAPORE - 627606</p>
           </motion.div>
           
+          {/* Right Side: WhatsApp QR Code */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center"
+            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center justify-center"
           >
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Phone className="h-7 w-7 text-primary" />
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">Connect on WhatsApp</h3>
+            <p className="text-gray-600 text-center mb-6">Scan the QR code to chat with us directly on WhatsApp</p>
+            
+            {/* WhatsApp QR Code - Using SVG for a placeholder QR code */}
+            <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="white"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M40 40H60V60H40V40ZM60 60H80V80H60V60ZM40 80H60V100H40V80ZM60 100H80V120H60V100ZM40 120H60V140H40V120ZM60 140H80V160H60V140ZM80 40H100V60H80V40ZM120 40H140V60H120V40ZM140 60H160V80H140V60ZM80 80H100V100H80V80ZM120 80H140V100H120V80ZM80 120H100V140H80V120ZM120 120H140V140H120V120ZM80 140H100V160H80V140ZM120 140H140V160H120V140ZM140 140H160V160H140V140Z" fill="#1A56DB"/>
+                <rect x="90" y="90" width="20" height="20" fill="#1A56DB"/>
+                <path d="M90 40H120V60H90V40Z" fill="#1A56DB"/>
+                <path d="M40 160H80V180H40V160Z" fill="#1A56DB"/>
+                <path d="M120 160H160V180H120V160Z" fill="#1A56DB"/>
+                <path d="M160 40H180V80H160V40Z" fill="#1A56DB"/>
+                <path d="M160 120H180V160H160V120Z" fill="#1A56DB"/>
+              </svg>
             </div>
-            <h3 className="text-xl font-bold mb-2">Phone Number</h3>
-            <p className="text-gray-600">TEL: +65 6684 1780</p>
-            <p className="text-gray-600">FAX: +65 6684 1781</p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center"
-          >
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Mail className="h-7 w-7 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Email Address</h3>
-            <p className="text-gray-600">sales@hexachem.sg</p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center"
-          >
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Clock className="h-7 w-7 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Business Hours</h3>
-            <p className="text-gray-600">Monday - Friday:</p>
-            <p className="text-gray-600">9am - 6pm</p>
+            
+            <a 
+              href="https://wa.me/6566841780" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="py-3 px-6 bg-green-500 hover:bg-green-600 text-white rounded-full font-semibold flex items-center transition-colors"
+            >
+              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 6.628 5.373 12 12 12 6.628 0 12-5.373 12-12 0-6.628-5.373-12-12-12zm6.262 17.577c-.276.782-.782 1.462-1.372 1.958-.59.495-1.289.777-2.064.852-.729.067-1.43.034-2.113-.252-3.35-1.43-5.512-4.777-5.682-5.005-.166-.223-1.348-1.791-1.348-3.415 0-1.625.85-2.423 1.15-2.756.298-.333.645-.382.865-.382.22 0 .442 0 .635.015.207.008.488-.058.765.584.293.675 1 2.344 1.084 2.516.083.17.139.378.021.596-.118.218-.177.338-.346.532-.17.195-.361.437-.52.588-.173.168-.354.348-.151.683.202.336.899 1.436 1.932 2.328 1.324 1.142 2.444 1.494 2.794 1.659.347.166.55.151.753-.042.205-.195.877-.932 1.114-1.252.236-.32.472-.264.795-.158.323.106 2.051.967 2.405 1.143.354.176.59.26.678.408.083.151.083.872-.197 1.715z"/>
+              </svg>
+              Chat on WhatsApp
+            </a>
           </motion.div>
         </div>
         
