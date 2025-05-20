@@ -1,4 +1,5 @@
 import { ProductCategory } from '@/components/ProductDetailModal';
+import { useTranslation } from '../contexts/TranslationContext';
 
 // Import SVG images
 import alcoholImage from '@/assets/images/alcohol.svg';
@@ -8,17 +9,62 @@ import glycolsImage from '@/assets/images/glycols.svg';
 import ketonesImage from '@/assets/images/ketones.svg';
 import aminesImage from '@/assets/images/amines.svg';
 
+// Create translations for product descriptions
+const productDescriptions = {
+  en: {
+    alcohols: "Premium-grade alcohols for various industrial applications including cleaning, extraction, and synthesis processes.",
+    ipaDesc: "A colorless, flammable chemical compound with a strong odor. It is the simplest example of a secondary alcohol, where the alcohol carbon atom is attached to two other carbon atoms.",
+    butanolDesc: "A primary alcohol with a 4-carbon structure. It is a colorless liquid that is poorly soluble in water but miscible with most organic solvents.",
+    methanolDesc: "The simplest alcohol, a light, volatile, colorless, flammable liquid with a distinctive odor. It is used as a feedstock, solvent, and fuel.",
+    ethanolDesc: "A primary alcohol that is a colorless, slightly toxic chemical compound with a distinctive odor. It is widely used in disinfectants, solvents, fuels, and the beverage industry."
+  },
+  zh: {
+    alcohols: "高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。",
+    ipaDesc: "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。",
+    butanolDesc: "一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。",
+    methanolDesc: "最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。",
+    ethanolDesc: "一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。"
+  },
+  ms: {
+    alcohols: "Alkohol gred premium untuk pelbagai aplikasi industri termasuk pembersihan, pengekstrakan, dan proses sintesis.",
+    ipaDesc: "Sebatian kimia tidak berwarna, mudah terbakar dengan bau yang kuat. Ia adalah contoh paling mudah alkohol sekunder, di mana atom karbon alkohol melekat pada dua atom karbon lain.",
+    butanolDesc: "Alkohol primer dengan struktur 4-karbon. Ia adalah cecair tidak berwarna yang kurang larut dalam air tetapi boleh bercampur dengan kebanyakan pelarut organik.",
+    methanolDesc: "Alkohol paling ringkas, cecair yang ringan, mudah meruap, tidak berwarna, mudah terbakar dengan bau yang khas. Ia digunakan sebagai bahan mentah, pelarut, dan bahan api.",
+    ethanolDesc: "Alkohol primer yang merupakan sebatian kimia tidak berwarna, sedikit toksik dengan bau yang khas. Ia digunakan secara meluas dalam disinfektan, pelarut, bahan api, dan industri minuman."
+  }
+};
+
+// Helper function to get the current language
+const getCurrentLanguage = () => {
+  // Get the language from localStorage
+  const storedLanguage = localStorage.getItem('selectedLanguage');
+  return storedLanguage ? JSON.parse(storedLanguage).code : 'en';
+};
+
+// Function to get translated text
+const getTranslatedText = (textKey) => {
+  const language = getCurrentLanguage();
+  const availableLanguages = ['en', 'zh', 'ms'];
+  const lang = availableLanguages.includes(language) ? language : 'en';
+  
+  return productDescriptions[lang][textKey] || productDescriptions.en[textKey];
+};
+
 export const productData: ProductCategory[] = [
   {
     id: "alcohols",
     title: "Alcohols",
-    description: "Premium-grade alcohols for various industrial applications including cleaning, extraction, and synthesis processes.",
+    description: getCurrentLanguage() === 'zh' ? "高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。" : 
+                 getCurrentLanguage() === 'ms' ? "Alkohol gred premium untuk pelbagai aplikasi industri termasuk pembersihan, pengekstrakan, dan proses sintesis." :
+                 "Premium-grade alcohols for various industrial applications including cleaning, extraction, and synthesis processes.",
     image: alcoholImage,
     tags: ["Chemical", "Industrial"],
     details: [
       {
         name: "Isopropyl Alcohol (IPA)",
-        description: "A colorless, flammable chemical compound with a strong odor. It is the simplest example of a secondary alcohol, where the alcohol carbon atom is attached to two other carbon atoms.",
+        description: getCurrentLanguage() === 'zh' ? "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。" : 
+                     getCurrentLanguage() === 'ms' ? "Sebatian kimia tidak berwarna, mudah terbakar dengan bau yang kuat. Ia adalah contoh paling mudah alkohol sekunder, di mana atom karbon alkohol melekat pada dua atom karbon lain." :
+                     "A colorless, flammable chemical compound with a strong odor. It is the simplest example of a secondary alcohol, where the alcohol carbon atom is attached to two other carbon atoms.",
         casNumber: "67-63-0",
         applications: [
           "Cleaning and disinfection",

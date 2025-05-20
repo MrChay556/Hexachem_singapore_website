@@ -30,22 +30,6 @@ interface ProductDetailModalProps {
 
 export default function ProductDetailModal({ isOpen, onClose, product }: ProductDetailModalProps) {
   const { t } = useTranslation();
-  
-  const getTranslatedDescription = (description: string, lang: string) => {
-    if (lang === 'zh') {
-      if (description.includes("Isopropyl Alcohol")) return "无色、易燃的化学化合物，具有强烈的气味。它是仅次于乙醇的简单的醇，其中醇碳原子连接到两个其他碳原子。";
-      if (description.includes("n-Butanol")) return "一种含有4个碳原子的初级醇。它是一种无色液体，在水中溶解度较差，但可与大多数有机溶剂混溶。";
-      if (description.includes("Methanol")) return "最简单的醇，是一种轻、挥发性、无色、易燃的液体，有特殊的气味。用作原料、溶剂和燃料。";
-      if (description.includes("Ethanol")) return "一种是无色、微毒的化学化合物，有特殊的气味。它广泛用于消毒、溶剂、燃料和饮料工业。";
-      if (product.id === "alcohols") return "高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。";
-      if (product.id === "aromatics") return "用于涂料、塑料和制药应用的高质量芳香族化学品。";
-      if (product.id === "aliphatics") return "适用于工业应用和制造工艺的优质脂肪族碳氢化合物。";
-      if (product.id === "glycols") return "用于防冻、除冰和溶剂应用的工业级乙二醇和乙二醇醚。";
-      if (product.id === "ketones") return "用于工业溶剂、涂料和制药中间体的特种酮类。";
-      if (product.id === "amines") return "用于制药、农用化学品和聚合物行业的高纯度胺类。";
-    }
-    return description;
-  };
   // State for the selected product detail
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -195,7 +179,9 @@ export default function ProductDetailModal({ isOpen, onClose, product }: Product
           {!selectedProduct && (
             <div className="mb-6">
               <p className="text-gray-700 text-lg">
-                {product.description}
+                {t('currentLanguage') === 'zh' ? 
+                  (product.id === 'alcohols' ? '高级醇类产品，适用于各种工业应用，包括清洁、提取和合成工艺。' : product.description) : 
+                  product.description}
               </p>
             </div>
           )}
