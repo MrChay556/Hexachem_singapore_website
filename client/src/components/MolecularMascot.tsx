@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Wand2 } from 'lucide-react';
-import moleculeMascot from '@/assets/images/molecule-mascot.svg';
 import { apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   id: string;
@@ -18,6 +18,7 @@ export default function MolecularMascot() {
   const [isTyping, setIsTyping] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+  const { toast } = useToast();
   const chatRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   
@@ -88,8 +89,11 @@ export default function MolecularMascot() {
         messages: formattedMessages 
       });
       
+      // Parse the response JSON
+      const responseData = await response.json();
+      
       // Get the assistant's response
-      const assistantContent = response.choices[0].message.content;
+      const assistantContent = responseData.choices[0].message.content;
       
       // Clear any existing typing timeout
       if (typingTimeout) {
@@ -120,6 +124,12 @@ export default function MolecularMascot() {
       
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      toast({
+        title: "Connection Error",
+        description: "Couldn't connect to the AI assistant. Please try again later.",
+        variant: "destructive"
+      });
       
       // If there's an error, add an error message
       setMessages(prev => [
@@ -159,6 +169,43 @@ export default function MolecularMascot() {
       </React.Fragment>
     ));
   };
+  
+  // Molecule mascot SVG
+  const MoleculeMascot = () => (
+    <svg width="100%" height="100%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        {/* Main molecule body - center circle */}
+        <circle cx="60" cy="60" r="25" fill="#1a56db" className="main-atom" />
+        
+        {/* Eyes */}
+        <circle cx="52" cy="52" r="5" fill="white" className="eye" />
+        <circle cx="68" cy="52" r="5" fill="white" className="eye" />
+        <circle cx="52" cy="52" r="2.5" fill="#000" className="pupil" />
+        <circle cx="68" cy="52" r="2.5" fill="#000" className="pupil" />
+        
+        {/* Smile */}
+        <path d="M50,65 Q60,75 70,65" stroke="white" strokeWidth="2.5" fill="none" className="smile" />
+        
+        {/* Atoms connected to main body */}
+        <circle cx="30" cy="40" r="10" fill="#4299e1" className="atom-1" />
+        <circle cx="90" cy="40" r="10" fill="#4299e1" className="atom-2" />
+        <circle cx="40" cy="90" r="10" fill="#4299e1" className="atom-3" />
+        <circle cx="80" cy="90" r="10" fill="#4299e1" className="atom-4" />
+        
+        {/* Bonds connecting atoms */}
+        <line x1="49" y1="49" x2="36" y2="46" stroke="#4299e1" strokeWidth="3" className="bond" />
+        <line x1="71" y1="49" x2="84" y2="46" stroke="#4299e1" strokeWidth="3" className="bond" />
+        <line x1="49" y1="71" x2="46" y2="84" stroke="#4299e1" strokeWidth="3" className="bond" />
+        <line x1="71" y1="71" x2="74" y2="84" stroke="#4299e1" strokeWidth="3" className="bond" />
+        
+        {/* Small accent atoms */}
+        <circle cx="20" cy="20" r="5" fill="#90cdf4" className="accent-atom" />
+        <circle cx="100" cy="20" r="5" fill="#90cdf4" className="accent-atom" />
+        <circle cx="20" cy="100" r="5" fill="#90cdf4" className="accent-atom" />
+        <circle cx="100" cy="100" r="5" fill="#90cdf4" className="accent-atom" />
+      </g>
+    </svg>
+  );
 
   return (
     <>
@@ -177,16 +224,18 @@ export default function MolecularMascot() {
           animate={{ rotate: isOpen ? [0, -10, 10, -5, 5, 0] : 0 }}
           transition={{ duration: 1, repeat: Infinity, repeatType: 'loop', repeatDelay: 3 }}
         >
-          <div className="absolute -top-12 right-0 bg-white shadow-md rounded-full px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
+          <motion.div 
+            className="absolute -top-12 right-0 bg-white shadow-md rounded-full px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap"
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 1 }}
+          >
             Click to chat with me!
             <div className="absolute -bottom-2 right-6 w-3 h-3 bg-white transform rotate-45"></div>
-          </div>
+          </motion.div>
           
           <div className="w-16 h-16 rounded-full bg-white p-1 shadow-lg">
-            <motion.img
-              src={moleculeMascot}
-              alt="MolecuBuddy"
-              className="w-full h-full"
+            <motion.div
               animate={{ 
                 scale: [1, 1.05, 1],
               }}
@@ -195,7 +244,9 @@ export default function MolecularMascot() {
                 repeat: Infinity, 
                 repeatType: 'loop' 
               }}
-            />
+            >
+              <MoleculeMascot />
+            </motion.div>
           </div>
         </motion.div>
       </motion.div>
@@ -232,7 +283,7 @@ export default function MolecularMascot() {
               <div className="bg-primary p-4 text-white flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 rounded-full bg-white p-1">
-                    <img src={moleculeMascot} alt="MolecuBuddy" className="w-full h-full" />
+                    <MoleculeMascot />
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">MolecuBuddy</h3>

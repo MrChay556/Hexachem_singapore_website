@@ -1,6 +1,8 @@
 import { Switch, Route } from "wouter";
 import HomePage from "./pages/HomePage";
 import NotFound from "@/pages/not-found";
+import MolecularMascot from "./components/MolecularMascot";
+import { Toaster } from "@/components/ui/toaster";
 
 function Router() {
   return (
@@ -12,7 +14,13 @@ function Router() {
 }
 
 function App() {
-  return <Router />;
+  return (
+    <>
+      <Router />
+      <MolecularMascot />
+      <Toaster />
+    </>
+  );
 }
 
 export default App;
