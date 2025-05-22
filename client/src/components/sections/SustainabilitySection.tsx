@@ -85,8 +85,8 @@ export default function SustainabilitySection() {
           >
             <div className="relative overflow-hidden rounded-xl shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1614308346025-3976d82b3475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450&q=80" 
-                alt="Chemical recycling laboratory" 
+                src="https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450&q=80" 
+                alt="Chemical laboratory with test tubes" 
                 className="w-full h-auto transition-transform duration-500 hover:scale-105" 
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-4">
@@ -97,8 +97,8 @@ export default function SustainabilitySection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="relative overflow-hidden rounded-xl shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1629797485500-19425156f412?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
-                  alt="Sustainable chemical processing" 
+                  src="https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                  alt="Solvent recovery equipment" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-2">
@@ -108,8 +108,8 @@ export default function SustainabilitySection() {
               
               <div className="relative overflow-hidden rounded-xl shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
-                  alt="Chemical analysis laboratory" 
+                  src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                  alt="Eco-friendly chemical processing" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-2">
