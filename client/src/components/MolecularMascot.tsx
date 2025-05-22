@@ -30,7 +30,7 @@ export default function MolecularMascot() {
         {
           id: generateId(),
           role: 'assistant',
-          content: "👋 Hi there! I'm MoleCueBuddy, your friendly molecular guide to Hexachem. Ask me anything about our products, services, or chemical solutions!",
+          content: "👋 Hello there! I'm MoleCueBuddy, your friendly molecular guide from Hexachem. I'd be delighted to help you learn about our specialty chemicals, applications, or sustainability initiatives. What can I help you with today?",
           timestamp: new Date()
         }
       ]);
