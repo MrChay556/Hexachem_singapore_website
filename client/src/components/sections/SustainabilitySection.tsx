@@ -81,12 +81,42 @@ export default function SustainabilitySection() {
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-              alt="Sustainable chemical processing facility" 
-              className="rounded-xl shadow-xl w-full h-auto" 
-            />
+            <div className="relative overflow-hidden rounded-xl shadow-xl">
+              <img 
+                src="https://images.unsplash.com/photo-1614308346025-3976d82b3475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450&q=80" 
+                alt="Chemical recycling laboratory" 
+                className="w-full h-auto transition-transform duration-500 hover:scale-105" 
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-4">
+                <span className="text-white text-sm font-medium">Chemical Recycling Technology</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="relative overflow-hidden rounded-xl shadow-xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1629797485500-19425156f412?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                  alt="Sustainable chemical processing" 
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-2">
+                  <span className="text-white text-xs font-medium">Solvent Recovery</span>
+                </div>
+              </div>
+              
+              <div className="relative overflow-hidden rounded-xl shadow-xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                  alt="Chemical analysis laboratory" 
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-2">
+                  <span className="text-white text-xs font-medium">Eco-Friendly Processing</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
           
           <div>
