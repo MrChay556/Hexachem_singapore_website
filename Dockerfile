@@ -24,10 +24,10 @@ WORKDIR /app
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/server ./server
-COPY --from=builder /app/shared ./shared
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
+
+# Install only production dependencies for runtime
+RUN npm ci --only=production
 
 # Expose the port your app runs on
 EXPOSE 5000
